@@ -20,6 +20,8 @@ var collected_experience = 0
 var playerHitstop = 0.3
 var timeFreeze = 0.07
 
+#Random bullshit
+
 @onready var sprite = $CharacterSprite
 @onready var walkTimer = get_node("walkTimer")
 

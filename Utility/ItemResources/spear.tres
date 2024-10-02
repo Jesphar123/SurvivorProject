@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c7hoxj5qtu6ou"]
+
+[ext_resource type="Texture2D" uid="uid://fpfuywet1bho" path="res://Textures/Items/Weapons/spear_45_ph.png" id="1_s7pnr"]
+[ext_resource type="Script" path="res://item.gd" id="2_mgfka"]
+
+[resource]
+script = ExtResource("2_mgfka")
+title = "Spear"
+icon = ExtResource("1_s7pnr")
+description = "A large spear that pierces through multiple enemies in a random direction."

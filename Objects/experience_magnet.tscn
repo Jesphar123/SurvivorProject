@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://ce6rh1r71yttu"]
+
+[ext_resource type="Script" path="res://experience_magnet.gd" id="1_t1i84"]
+[ext_resource type="AudioStream" uid="uid://332e7y55lyrl" path="res://Audio/SoundEffect/collectgem.mp3" id="2_605ml"]
+[ext_resource type="Texture2D" uid="uid://dnfafwcfhm54i" path="res://Textures/Items/Upgrades/orb_ph.png" id="2_x8tyu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uf8u4"]
+radius = 4.0
+
+[node name="ExperienceMagnet" type="Area2D" groups=["loot"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_t1i84")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_x8tyu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uf8u4")
+
+[node name="snd_collected" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_605ml")
+pitch_scale = 0.75
+
+[connection signal="finished" from="snd_collected" to="." method="_on_snd_collected_finished"]

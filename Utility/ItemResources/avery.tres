@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CharacterMenu" load_steps=4 format=3 uid="uid://dktamldgy821"]
+
+[ext_resource type="Texture2D" uid="uid://bty2cad6q0xyd" path="res://Textures/Player/avery_icon.png" id="1_srgxx"]
+[ext_resource type="Script" path="res://characters_menu.gd" id="2_fheg6"]
+[ext_resource type="Texture2D" uid="uid://bpcqqx3hqpwe3" path="res://Textures/Player/avery.png" id="3_82w6h"]
+
+[resource]
+script = ExtResource("2_fheg6")
+title = "Avery"
+icon = ExtResource("1_srgxx")
+texture = ExtResource("3_82w6h")
+description = "Totally not a vampire."

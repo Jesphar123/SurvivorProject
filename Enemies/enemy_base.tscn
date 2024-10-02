@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwpdh1m5qq0hj"]
+
+[ext_resource type="PackedScene" uid="uid://dtbv2h63hij6" path="res://Utility/hurt_box.tscn" id="2_vdb5f"]
+[ext_resource type="PackedScene" uid="uid://olluckrijwkt" path="res://Utility/hit_box.tscn" id="3_2s1cn"]
+[ext_resource type="AudioStream" uid="uid://dc4c87bp0l2px" path="res://Audio/SoundEffect/enemy_hit_2.ogg" id="3_wt2fh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wkckk"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dm3ur"]
+radius = 5.0
+
+[node name="EnemyBase" type="CharacterBody2D" groups=["enemy"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+
+[node name="HurtBox" parent="." instance=ExtResource("2_vdb5f")]
+collision_mask = 4
+HurtBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape2D_wkckk")
+debug_color = Color(0.993532, 0, 0.236171, 0.42)
+
+[node name="HitBox" parent="." instance=ExtResource("3_2s1cn")]
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource("CircleShape2D_dm3ur")
+debug_color = Color(0.266019, 0.633341, 5.77569e-07, 0.42)
+
+[node name="snd_enemy_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wt2fh")
+pitch_scale = 2.0
+
+[node name="HideTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

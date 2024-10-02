@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CharacterMenu" load_steps=4 format=3 uid="uid://bfx1d6lavye2o"]
+
+[ext_resource type="Texture2D" uid="uid://dopb3sncyeabn" path="res://Textures/Player/player_test_icon.png" id="1_hs62i"]
+[ext_resource type="Script" path="res://characters_menu.gd" id="2_g6m45"]
+[ext_resource type="Texture2D" uid="uid://dtd88lxo33ju8" path="res://Textures/Player/player_test.png" id="3_lr0da"]
+
+[resource]
+script = ExtResource("2_g6m45")
+title = "Maeve"
+icon = ExtResource("1_hs62i")
+texture = ExtResource("3_lr0da")
+description = "Totally not Black Widow."

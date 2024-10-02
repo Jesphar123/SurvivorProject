@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnv0mtpkeouh"]
+
+[ext_resource type="Script" path="res://Enemies/enemy_1.gd" id="1_4teyk"]
+[ext_resource type="PackedScene" uid="uid://bwpdh1m5qq0hj" path="res://Enemies/enemy_base.tscn" id="2_q0a2s"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_22o1o"]
+radius = 12.0
+height = 24.0
+
+[node name="enemy_1" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_4teyk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_22o1o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="EnemyBase" parent="." instance=ExtResource("2_q0a2s")]
+
+[editable path="EnemyBase"]
+[editable path="EnemyBase/HurtBox"]
+[editable path="EnemyBase/HitBox"]

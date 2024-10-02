@@ -1,0 +1,305 @@
+[gd_scene load_steps=49 format=3 uid="uid://do2ojtsgra3ro"]
+
+[ext_resource type="Script" path="res://TitleScreen/character_select.gd" id="1_kukjp"]
+[ext_resource type="Texture2D" uid="uid://mb3qmua47u0c" path="res://Textures/GUI/spr_menu_clean_thick.png" id="1_na0t6"]
+[ext_resource type="PackedScene" uid="uid://dgy2cmecso72k" path="res://TitleScreen/character_slot.tscn" id="2_l3a75"]
+[ext_resource type="Resource" uid="uid://bfx1d6lavye2o" path="res://Utility/ItemResources/maeve.tres" id="3_4kj11"]
+[ext_resource type="Resource" uid="uid://dvdls05t8dlks" path="res://Utility/ItemResources/princess.tres" id="5_hok4h"]
+[ext_resource type="Resource" uid="uid://dktamldgy821" path="res://Utility/ItemResources/avery.tres" id="6_huedh"]
+[ext_resource type="Resource" uid="uid://1uk6glsr64dh" path="res://Utility/ItemResources/augbert.tres" id="7_rp3th"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8m2m1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dsrcf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ruw1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bjtsj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1d6at"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1u66m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1ej5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fmie"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ux15o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cj6uv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_24qwm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_131yb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_owl57"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x1biv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8iclh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uc51b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g16x5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cvyw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_punqm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bjiab"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vvmwo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsmjn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n14h3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ii787"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4qca5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hd4fa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kphqk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7sgyd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_en8w0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ovujr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a467o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gej0p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1362o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5rp8d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gx7n0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_quihj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nld68"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ujliv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2vpus"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p6qso"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d1hpv"]
+
+[node name="CharacterSelect" type="Control" node_paths=PackedStringArray("character_description")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kukjp")
+character_description = NodePath("Characters/CharacterDescription")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.14902, 0.168627, 0.266667, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 24.0
+offset_right = 240.0
+offset_bottom = 104.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Select your character"
+
+[node name="Characters" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -100.0
+offset_right = 240.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_na0t6")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Characters"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 36.0
+offset_top = -60.0
+offset_right = 156.0
+offset_bottom = 60.0
+grow_vertical = 2
+
+[node name="CharacterSlot" parent="Characters/VBoxContainer" instance=ExtResource("2_l3a75")]
+layout_mode = 2
+texture = ExtResource("1_na0t6")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+character = ExtResource("3_4kj11")
+
+[node name="CharacterSlot2" parent="Characters/VBoxContainer" instance=ExtResource("2_l3a75")]
+layout_mode = 2
+texture = ExtResource("1_na0t6")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+character = ExtResource("5_hok4h")
+
+[node name="CharacterSlot3" parent="Characters/VBoxContainer" instance=ExtResource("2_l3a75")]
+layout_mode = 2
+texture = ExtResource("1_na0t6")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+character = ExtResource("6_huedh")
+
+[node name="CharacterSlot4" parent="Characters/VBoxContainer" instance=ExtResource("2_l3a75")]
+layout_mode = 2
+texture = ExtResource("1_na0t6")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+character = ExtResource("7_rp3th")
+
+[node name="CharacterDescription" type="NinePatchRect" parent="Characters"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -100.0
+offset_right = -36.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="CharacterIcon" type="TextureRect" parent="Characters/CharacterDescription"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -85.0
+offset_right = 65.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterDescription" type="RichTextLabel" parent="Characters/CharacterDescription"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -48.0
+offset_right = 73.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Button_1" type="Button" parent="Characters"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 18.0
+offset_right = 191.0
+offset_bottom = 59.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8m2m1")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_dsrcf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1ruw1")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_bjtsj")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_1d6at")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_1u66m")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_w1ej5")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_2fmie")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ux15o")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_cj6uv")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_24qwm")
+
+[node name="Button_2" type="Button" parent="Characters"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 73.0
+offset_right = 191.0
+offset_bottom = 114.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_131yb")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_owl57")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_x1biv")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_8iclh")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_uc51b")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_g16x5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1cvyw")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_punqm")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bjiab")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_vvmwo")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_24qwm")
+
+[node name="Button_3" type="Button" parent="Characters"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 127.0
+offset_right = 191.0
+offset_bottom = 168.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vsmjn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_n14h3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ii787")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_4qca5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_hd4fa")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_kphqk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7sgyd")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_en8w0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ovujr")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_a467o")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_24qwm")
+
+[node name="Button_4" type="Button" parent="Characters"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 181.0
+offset_right = 191.0
+offset_bottom = 222.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gej0p")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_1362o")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5rp8d")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_gx7n0")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_quihj")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_nld68")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ujliv")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_2vpus")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_p6qso")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_d1hpv")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_24qwm")
+
+[connection signal="pressed" from="Characters/Button_1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="Characters/Button_2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Characters/Button_3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Characters/Button_4" to="." method="_on_button_4_pressed"]

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CharacterMenu" load_steps=4 format=3 uid="uid://dvdls05t8dlks"]
+
+[ext_resource type="Texture2D" uid="uid://dk0nvryw3nv43" path="res://Textures/Player/princess_icon.png" id="1_blu4j"]
+[ext_resource type="Script" path="res://characters_menu.gd" id="2_pm8bs"]
+[ext_resource type="Texture2D" uid="uid://k3b18wis46jn" path="res://Textures/Player/princess.png" id="3_rld0d"]
+
+[resource]
+script = ExtResource("2_pm8bs")
+title = "Princess"
+icon = ExtResource("1_blu4j")
+texture = ExtResource("3_rld0d")
+description = "Totally not Princess Peach."

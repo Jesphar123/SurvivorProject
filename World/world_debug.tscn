@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgdgufuwyvx6j"]
+
+[ext_resource type="PackedScene" uid="uid://cj8kgdhobdeem" path="res://Player/player.tscn" id="1_btokp"]
+[ext_resource type="PackedScene" uid="uid://ueq3n0v7x54w" path="res://Utility/enemy_spawner.tscn" id="2_6wgb2"]
+[ext_resource type="Script" path="res://Utility/spawn_info.gd" id="3_hfoli"]
+[ext_resource type="PackedScene" uid="uid://bnv0mtpkeouh" path="res://Enemies/enemy_test.tscn" id="4_m5eh8"]
+[ext_resource type="AudioStream" uid="uid://ck6hxmmragp5s" path="res://Audio/Music/battleThemeA.mp3" id="9_ebsji"]
+[ext_resource type="Script" path="res://Audio/Music/snd_music.gd" id="10_p6w5b"]
+
+[sub_resource type="Curve2D" id="Curve2D_v5v6t"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -426, -266, 0, 0, 0, 0, 414, -266, 0, 0, 0, 0, 416, 265, 0, 0, 0, 0, -425, 266, 0, 0, 0, 0, -425, -265)
+}
+point_count = 5
+
+[sub_resource type="Resource" id="Resource_paqho"]
+script = ExtResource("3_hfoli")
+time_start = 1
+time_end = 1
+enemy = ExtResource("4_m5eh8")
+enemy_num = 1
+enemy_spawn_delay = 0
+
+[node name="World" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-47, -3.5)
+scale = Vector2(4.95787, 3.90782)
+region_enabled = true
+region_rect = Rect2(-223, -173, 451, 358)
+
+[node name="Player" parent="." instance=ExtResource("1_btokp")]
+
+[node name="Path2D" type="Path2D" parent="Player"]
+position = Vector2(-0.0594248, 0)
+scale = Vector2(0.988124, 0.962406)
+curve = SubResource("Curve2D_v5v6t")
+
+[node name="SpawnPoints" type="PathFollow2D" parent="Player/Path2D"]
+unique_name_in_owner = true
+position = Vector2(-426, -266)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("2_6wgb2")]
+spawns = Array[ExtResource("3_hfoli")]([SubResource("Resource_paqho")])
+
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]
+
+[node name="snd_music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("9_ebsji")
+volume_db = -15.0
+autoplay = true
+script = ExtResource("10_p6w5b")
+
+[connection signal="playerdeath" from="Player" to="snd_music" method="_on_player_playerdeath"]

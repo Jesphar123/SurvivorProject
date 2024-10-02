@@ -263,10 +263,6 @@ func _on_grenade_attack_timer_timeout() -> void:
 		else:
 			grenadeAttackTimer.stop()
 
-
-
-
-
 func _on_sword_timer_timeout() -> void:
 	sword_ammo += sword_base_ammo + additional_attacks
 	swordAttackTimer.start()

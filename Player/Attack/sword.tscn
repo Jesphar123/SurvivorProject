@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dvo4g2vin0hgi"]
 
 [ext_resource type="Script" path="res://Player/Attack/sword.gd" id="1_2s034"]
-[ext_resource type="Texture2D" uid="uid://dsq5px0xi8kv3" path="res://Textures/Items/Weapons/sword_slash_large_ph.png" id="2_fsh2n"]
+[ext_resource type="Texture2D" uid="uid://dggd2ohs0nq4f" path="res://Textures/Items/Weapons/sword_slash_large_anim.png" id="2_5e8wk"]
 [ext_resource type="AudioStream" uid="uid://c1mn0658e1t38" path="res://Audio/SoundEffect/sword_swing.wav" id="3_pq8tm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_buo8g"]
@@ -13,7 +13,8 @@ radius = 6.0
 height = 42.0
 
 [sub_resource type="Animation" id="Animation_v4uul"]
-length = 0.001
+length = 0.2
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -21,10 +22,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -36,7 +37,31 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D2:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
 "values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D3:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_8v32o"]
@@ -62,10 +87,34 @@ tracks/1/path = NodePath("CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D2:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D3:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hy2dr"]
@@ -82,10 +131,12 @@ script = ExtResource("1_2s034")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_fsh2n")
+texture = ExtResource("2_5e8wk")
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_buo8g")
+disabled = true
 debug_color = Color(1, 0, 0.141176, 0.52549)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
@@ -98,6 +149,7 @@ debug_color = Color(1, 0, 0.141176, 0.52549)
 position = Vector2(-15, 26)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ea8t6")
+disabled = true
 debug_color = Color(1, 0, 0.141176, 0.52549)
 
 [node name="snd_sword_swing" type="AudioStreamPlayer" parent="."]

@@ -202,6 +202,8 @@ func _ready():
 	set_exp_bar(experience, calculate_experience_cap())
 	_on_hurt_box_hurt(0,0,0)
 	GlobalSignals.change_character.connect(change_character)
+	z_index = 2
+	print("player z_index: ", z_index)
 	
 func change_character(character):
 	if character == "maeve":
@@ -209,12 +211,12 @@ func change_character(character):
 		upgrade_character("sword1")
 	if character == "princess":
 		$CharacterSprite.texture = load("res://Textures/Player/princess_anim.png")
-		upgrade_character("icespear1")
+		upgrade_character("flail1")
 	if character == "avery":
 		$CharacterSprite.texture = load("res://Textures/Player/avery_anim.png")
-		upgrade_character("grenade1")
+		upgrade_character("icespear1")
 	if character == "augbert":
-		upgrade_character("flail1")
+		upgrade_character("grenade1")
 		$CharacterSprite.texture = load("res://Textures/Player/augbert_anim.png")
 
 func attack():
@@ -223,13 +225,13 @@ func attack():
 		if iceSpearTimer.is_stopped():
 			iceSpearTimer.start()
 			
-	if tornado_level > 0:
-		tornadoTimer.wait_time = tornado_attackspeed * (1 - spell_cooldown)
-		if tornadoTimer.is_stopped():
-			tornadoTimer.start()
+#	if tornado_level > 0:
+#		tornadoTimer.wait_time = tornado_attackspeed * (1 - spell_cooldown)
+#		if tornadoTimer.is_stopped():
+#			tornadoTimer.start()
 			
-	if javelin_level > 0:
-		spawn_javelin()
+#	if javelin_level > 0:
+#		spawn_javelin()
 		
 	if sword_level > 0:
 		swordTimer.wait_time = sword_attackspeed * (1 - spell_cooldown)
@@ -271,7 +273,7 @@ func _on_sword_attack_timer_timeout() -> void:
 	if sword_ammo > 0:
 		var sword_attack = sword.instantiate()
 		sword_attack.set_rotation_degrees(last_direction)
-		sword_attack.position = $CharacterSprite/SwordAttach.position
+		sword_attack.position = $CharacterSprite/SwordAttach.global_position
 		sword_attack.level = sword_level
 		$CharacterSprite/SwordAttach.add_child(sword_attack)
 		sword_ammo -= 1
@@ -444,26 +446,26 @@ func upgrade_character(upgrade):
 		"icespear4":
 			ice_spear_level = 4
 			ice_spear_base_ammo += 2
-		"tornado1":
+#		"tornado1":
 			tornado_level = 1
 			tornado_base_ammo += 1
-		"tornado2":
+#		"tornado2":
 			tornado_level = 2
 			tornado_base_ammo += 1
-		"tornado3":
+#		"tornado3":
 			tornado_level = 3
 			tornado_attackspeed -= 0.5
-		"tornado4":
+#		"tornado4":
 			tornado_level = 4
 			tornado_base_ammo += 1
-		"javelin1":
+#		"javelin1":
 			javelin_level = 1
 			javelin_ammo = 1
-		"javelin2":
+#		"javelin2":
 			javelin_level = 2
-		"javelin3":
+#		"javelin3":
 			javelin_level = 3
-		"javelin4":
+#		"javelin4":
 			javelin_level = 4
 		"armor1","armor2","armor3","armor4":
 			armor += 1

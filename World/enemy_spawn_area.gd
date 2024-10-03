@@ -1,6 +1,7 @@
 extends Node2D
 
-var enemy_cap = 300
+var enemy_cap = 500
+var enemy_softcap = 600
 var enemies_to_spawn = []
 
 @export var spawns: Array[Spawn_info] = []
@@ -36,6 +37,8 @@ func _on_timer_timeout() -> void:
 				var new_enemy = i.enemy
 				var counter = 0
 				while counter < i.enemy_num:
+					if my_children.size() > enemy_softcap:
+						GlobalSignals.enemy_softcap.emit()
 					if my_children.size() < enemy_cap:
 						var enemy_spawn = new_enemy.instantiate()
 						enemy_spawn.global_position = get_random_pos()

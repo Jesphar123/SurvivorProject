@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://b72xn6jrea6d3"]
+[gd_scene load_steps=16 format=4 uid="uid://b72xn6jrea6d3"]
 
 [ext_resource type="PackedScene" uid="uid://cj8kgdhobdeem" path="res://Player/player.tscn" id="1_kpha1"]
 [ext_resource type="Script" path="res://World/world_box.gd" id="1_p6xtg"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dopd1015neqmq" path="res://Textures/border_ph.png" id="3_a3gf2"]
 [ext_resource type="Script" path="res://World/enemy_spawn_area.gd" id="5_nnwrn"]
 [ext_resource type="Script" path="res://Utility/spawn_info.gd" id="6_1tgxi"]
-[ext_resource type="PackedScene" uid="uid://dcswch0f7ylco" path="res://Enemies/enemy_1.tscn" id="7_1qx1y"]
+[ext_resource type="PackedScene" uid="uid://dcswch0f7ylco" path="res://Enemies/enemy_1.tscn" id="7_ocwfn"]
 [ext_resource type="AudioStream" uid="uid://ck6hxmmragp5s" path="res://Audio/Music/battleThemeA.mp3" id="8_00rl2"]
 [ext_resource type="Script" path="res://Audio/Music/snd_music.gd" id="9_gg42c"]
 [ext_resource type="PackedScene" uid="uid://c4gaqjwe3xi88" path="res://Objects/experience_gem.tscn" id="10_djr4n"]
@@ -37,74 +37,12 @@ size = Vector2(639, 719)
 script = ExtResource("6_1tgxi")
 time_start = 0
 time_end = 60
-enemy = ExtResource("7_1qx1y")
-enemy_num = 10
-enemy_spawn_delay = 0
-
-[sub_resource type="Resource" id="Resource_vn5ux"]
-script = ExtResource("6_1tgxi")
-time_start = 0
-time_end = 0
-enemy_num = 0
-enemy_spawn_delay = 0
-
-[sub_resource type="Resource" id="Resource_3l0qk"]
-script = ExtResource("6_1tgxi")
-time_start = 0
-time_end = 0
-enemy_num = 0
-enemy_spawn_delay = 0
-
-[sub_resource type="Resource" id="Resource_68yl1"]
-script = ExtResource("6_1tgxi")
-time_start = 0
-time_end = 0
-enemy_num = 0
-enemy_spawn_delay = 0
-
-[sub_resource type="Resource" id="Resource_xabdv"]
-script = ExtResource("6_1tgxi")
-time_start = 0
-time_end = 0
-enemy_num = 0
-enemy_spawn_delay = 0
-
-[sub_resource type="Resource" id="Resource_qh2p5"]
-script = ExtResource("6_1tgxi")
-time_start = 0
-time_end = 0
-enemy_num = 0
-enemy_spawn_delay = 0
-
-[sub_resource type="Resource" id="Resource_lmlh8"]
-script = ExtResource("6_1tgxi")
-time_start = 0
-time_end = 0
-enemy_num = 0
-enemy_spawn_delay = 0
-
-[sub_resource type="Resource" id="Resource_ow1vj"]
-script = ExtResource("6_1tgxi")
-time_start = 0
-time_end = 0
-enemy_num = 0
-enemy_spawn_delay = 0
-
-[sub_resource type="Resource" id="Resource_m3xrl"]
-script = ExtResource("6_1tgxi")
-time_start = 0
-time_end = 0
-enemy_num = 0
-enemy_spawn_delay = 0
-
-[sub_resource type="Resource" id="Resource_g7n4q"]
-script = ExtResource("6_1tgxi")
-time_start = 0
-time_end = 0
-enemy_num = 0
+enemy = ExtResource("7_ocwfn")
+enemy_num = 4
 enemy_spawn_delay = 0
 
 [node name="WorldBox" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_p6xtg")
 
 [node name="Player" parent="." instance=ExtResource("1_kpha1")]
@@ -121,7 +59,7 @@ shape = SubResource("RectangleShape2D_gt05u")
 
 [node name="EnemySpawnArea" type="Node2D" parent="."]
 script = ExtResource("5_nnwrn")
-spawns = Array[ExtResource("6_1tgxi")]([SubResource("Resource_ssjru"), SubResource("Resource_vn5ux"), SubResource("Resource_3l0qk"), SubResource("Resource_68yl1"), SubResource("Resource_xabdv"), SubResource("Resource_qh2p5"), SubResource("Resource_lmlh8"), SubResource("Resource_ow1vj"), SubResource("Resource_m3xrl"), SubResource("Resource_g7n4q")])
+spawns = Array[ExtResource("6_1tgxi")]([SubResource("Resource_ssjru")])
 
 [node name="Timer" type="Timer" parent="EnemySpawnArea"]
 autostart = true

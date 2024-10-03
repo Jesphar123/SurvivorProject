@@ -11,11 +11,15 @@ radius = 6.0
 radius = 5.0
 
 [node name="EnemyBase" type="CharacterBody2D" groups=["enemy"]]
+y_sort_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 
+[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+
 [node name="HurtBox" parent="." instance=ExtResource("2_vdb5f")]
+z_as_relative = false
 collision_mask = 4
 HurtBoxType = 1
 

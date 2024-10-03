@@ -1,13 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcswch0f7ylco"]
+[gd_scene load_steps=9 format=3 uid="uid://dcswch0f7ylco"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_1.gd" id="1_ng38a"]
 [ext_resource type="PackedScene" uid="uid://bwpdh1m5qq0hj" path="res://Enemies/enemy_base.tscn" id="2_7fno2"]
 [ext_resource type="Texture2D" uid="uid://bsnli5qvktoeq" path="res://Textures/Enemy/enemy_1_test_anim.png" id="3_su74q"]
+[ext_resource type="Texture2D" uid="uid://ysqs7b3kkmu0" path="res://Textures/Player/player_shadow_ph.png" id="4_gmw41"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1redc"]
 radius = 5.0
 
-[sub_resource type="Animation" id="Animation_fdyda"]
+[sub_resource type="Animation" id="Animation_qq3tt"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -22,7 +23,7 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_x5ohg"]
+[sub_resource type="Animation" id="Animation_pm5h1"]
 resource_name = "walk"
 length = 0.6
 loop_mode = 1
@@ -42,11 +43,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n00o0"]
 _data = {
-"RESET": SubResource("Animation_fdyda"),
-"walk": SubResource("Animation_x5ohg")
+"RESET": SubResource("Animation_qq3tt"),
+"walk": SubResource("Animation_pm5h1")
 }
 
 [node name="enemy_1" type="CharacterBody2D" groups=["enemy"]]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
 collision_layer = 5
 collision_mask = 5
 motion_mode = 1
@@ -63,10 +67,15 @@ libraries = {
 }
 
 [node name="EnemyBase" parent="." instance=ExtResource("2_7fno2")]
+y_sort_enabled = false
 
 [node name="Sprite2D" parent="EnemyBase" index="0"]
 texture = ExtResource("3_su74q")
 hframes = 2
+
+[node name="Shadow" parent="EnemyBase/Sprite2D" index="0"]
+position = Vector2(0, 6.66667)
+texture = ExtResource("4_gmw41")
 
 [node name="CollisionShape2D" parent="EnemyBase/HitBox" index="0"]
 position = Vector2(0, 1)

@@ -10,7 +10,12 @@ var attack_size = 1.0
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
+var snd_may_play: bool = true
+
 @onready var player = get_tree().get_first_node_in_group("player")
+@onready var snd_attack = get_node("snd_ice_spear_attack_play")
+@onready var iceSpear = get_node("Sprite2D")
+@onready var iceSpearCol = get_node("CollisionShape2D")
 
 signal remove_from_array(object)
 
@@ -50,13 +55,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	position += angle * speed * delta
 	
-	
 func enemy_hit(charge = 1):
 	hp -= charge
 	if hp <= 0:
 		emit_signal("remove_from_array", self)
-		queue_free()
-		
+		iceSpear.set_deferred("visible", false)
+		iceSpearCol.set_deferred("disabled", true)
 
 func _on_timer_timeout() -> void:
 	emit_signal("remove_from_array", self)

@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://dij2mmssff4f6"]
+
+[ext_resource type="PackedScene" uid="uid://brl0g3pkohtks" path="res://Enemies/enemy_base_area.tscn" id="2_j3wdn"]
+[ext_resource type="Texture2D" uid="uid://bsnli5qvktoeq" path="res://Textures/Enemy/enemy_1_test_anim.png" id="3_ksu33"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nxnsq"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_qq3tt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyBaseArea/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pm5h1"]
+resource_name = "walk"
+length = 0.6
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyBaseArea/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n00o0"]
+_data = {
+"RESET": SubResource("Animation_qq3tt"),
+"walk": SubResource("Animation_pm5h1")
+}
+
+[node name="Area2D" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_nxnsq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n00o0")
+}
+
+[node name="EnemyBaseArea" parent="." instance=ExtResource("2_j3wdn")]
+
+[node name="Sprite2D" parent="EnemyBaseArea" index="0"]
+texture = ExtResource("3_ksu33")
+hframes = 2
+
+[editable path="EnemyBaseArea"]
+[editable path="EnemyBaseArea/HurtBox"]
+[editable path="EnemyBaseArea/HitBox"]

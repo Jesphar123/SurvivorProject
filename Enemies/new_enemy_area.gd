@@ -1,24 +1,24 @@
-extends CharacterBody2D
+extends Area2D
 
-class_name EnemyBody
+class_name NewEnemyArea
 
 @export var movement_speed: float = 20.0
 @export var hp: int = 10
-@export var knockback_recovery: float = 3.5
+@export var knockback_recovery: float = 1
 @export var experience: int = 1
 @export var enemy_damage: int = 1
-var knockback: Vector2 = Vector2.ZERO
+@export var knockback: Vector2 = Vector2.ZERO
 
 var enemyHitstop: float = 0.3
 var timeFreeze: float = 0.07
 
-@onready var sprite: Sprite2D = $EnemyBase/Sprite2D
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var anim: AnimationPlayer = $AnimationPlayer
-@onready var snd_enemy_hit: AudioStreamPlayer2D = $EnemyBase/snd_enemy_hit
-@onready var hitBox: Area2D = $EnemyBase/HitBox
-@onready var hurtBox: Area2D = $EnemyBase/HurtBox
-@onready var collision: CollisionShape2D = $CollisionShape2D
-@onready var hideTimer: Timer = $EnemyBase/HideTimer
+@onready var snd_enemy_hit: AudioStreamPlayer2D = $snd_enemy_hit
+@onready var hitBox: Area2D = $HitBox
+@onready var hurtBox: Area2D = $HurtBox
+#@onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var hideTimer: Timer = $HideTimer
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
@@ -26,6 +26,8 @@ var timeFreeze: float = 0.07
 var death_anim = preload("res://Enemies/death_explosion.tscn")
 var exp_gem = preload("res://Objects/experience_gem.tscn")
 var exp_magnet = preload("res://Objects/experience_magnet.tscn")
+
+@onready var softCollision: Area2D = $SoftCollision
 
 signal remove_from_array(object)
 
@@ -42,20 +44,31 @@ func _ready():
 	hurtBox.connect("hurt", Callable(self, "_on_hurt_box_hurt"))
 	hideTimer.connect("timeout", Callable(self, "_on_hide_timer_timeout"))
 	
+	GlobalSignals.enemy_softcap.connect(disable_collisions)
+	
 	movement_speed = randf_range(movement_speed - 5.0, movement_speed + 5.0)
+
+#gets triggered when EnemySpawner Node reaches enemy softcap (currently 600)
+func disable_collisions():
+	softCollision.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * movement_speed
-	velocity += knockback
 	
-	var collider = move_and_collide(velocity * delta)
-	if collider:
-		if collider.get_collider() is TileMapLayer:
-			return
-		else:
-			collider.get_collider().knockback = (collider.get_collider().global_position - global_position).normalized() * 25
+	#Soft Collision
+	if softCollision.is_colliding():
+		position += softCollision.get_push_vector() * get_physics_process_delta_time() * 50
+	
+	position += direction * movement_speed * 0.05
+	position += knockback
+	
+#	var collider = move_and_collide(velocity * delta)
+#	if collider:
+#		if collider.get_collider() is TileMapLayer:
+#			return
+#		else:
+#			collider.get_collider().knockback = (collider.get_collider().global_position - global_position).normalized() * 25
 	
 	if direction.x > 0.1:
 		sprite.flip_h = false

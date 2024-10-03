@@ -12,7 +12,11 @@ var angle = Vector2.ZERO
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var snd_explosion = get_node("snd_explosion")
-var spr_explosion = preload("res://Enemies/death_explosion.tscn")
+#var spr_explosion = preload("res://Enemies/death_explosion.tscn")
+@onready var spr_explosion = get_node("spr_explosion")
+@onready var anim_explosion = get_node("spr_explosion/AnimationPlayer")
+@onready var grenade = get_node("CollisionShape2D")
+@onready var grenade_particles = get_node("ExplosionParticles")
 
 signal remove_from_array(object)
 
@@ -20,7 +24,7 @@ var snd_may_play = true
 var anim_may_play = true
 
 func _ready() -> void:
-	$spr_explosion.visible = false
+	spr_explosion.visible = false
 	angle = global_position.direction_to(target)
 	rotation = angle.angle() + deg_to_rad(135)
 	match level:
@@ -56,19 +60,21 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	position =  global_position.move_toward(target, speed * delta)
 	if position == target:
-		$CollisionShape2D.set_deferred("disabled", false)
+		grenade.set_deferred("disabled", false)
 		await get_tree().create_timer(0.1).timeout
-		$CollisionShape2D.set_deferred("disabled", true)
+		grenade.set_deferred("disabled", true)
 		if !snd_explosion.is_playing() and snd_may_play:
 			snd_explosion.play()
+			grenade_particles.emitting = true
 			snd_may_play = false
+			
 			#Screenshake signal
 			GlobalSignals.grenade_explosion.emit()
 			
-		if !$spr_explosion/AnimationPlayer.is_playing() and anim_may_play:
-			$spr_explosion.visible = true
-			$spr_explosion/AnimationPlayer.play("anim_explosion")
-			anim_may_play = false
+		#if !anim_explosion.is_playing() and anim_may_play:
+		#	spr_explosion.visible = true
+		#	anim_explosion.play("anim_explosion")
+		#	anim_may_play = false
 			
 	#var enemy_death = death_anim.instantiate()
 	#enemy_death.scale = sprite.scale

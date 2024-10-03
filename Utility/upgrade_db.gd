@@ -36,70 +36,6 @@ const UPGRADES = {
 		"prerequisite": ["icespear3"],
 		"type": "weapon"
 	},
-	"javelin1": {
-		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
-		"displayname": "Javelin",
-		"details": "A magical javelin will follow you attacking enemies in a straight line",
-		"level": "Level: 1",
-		"prerequisite": [],
-		"type": "weapon"
-	},
-	"javelin2": {
-		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
-		"displayname": "Javelin",
-		"details": "The javelin will now attack an additional enemy per attack",
-		"level": "Level: 2",
-		"prerequisite": ["javelin1"],
-		"type": "weapon"
-	},
-	"javelin3": {
-		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
-		"displayname": "Javelin",
-		"details": "The javelin will attack another additional enemy per attack",
-		"level": "Level: 3",
-		"prerequisite": ["javelin2"],
-		"type": "weapon"
-	},
-	"javelin4": {
-		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
-		"displayname": "Javelin",
-		"details": "The javelin now does + 5 damage per attack and causes 20% additional knockback",
-		"level": "Level: 4",
-		"prerequisite": ["javelin3"],
-		"type": "weapon"
-	},
-	"tornado1": {
-		"icon": WEAPON_PATH + "tornado.png",
-		"displayname": "Tornado",
-		"details": "A tornado is created and random heads somewhere in the players direction",
-		"level": "Level: 1",
-		"prerequisite": [],
-		"type": "weapon"
-	},
-	"tornado2": {
-		"icon": WEAPON_PATH + "tornado.png",
-		"displayname": "Tornado",
-		"details": "An additional Tornado is created",
-		"level": "Level: 2",
-		"prerequisite": ["tornado1"],
-		"type": "weapon"
-	},
-	"tornado3": {
-		"icon": WEAPON_PATH + "tornado.png",
-		"displayname": "Tornado",
-		"details": "The Tornado cooldown is reduced by 0.5 seconds",
-		"level": "Level: 3",
-		"prerequisite": ["tornado2"],
-		"type": "weapon"
-	},
-	"tornado4": {
-		"icon": WEAPON_PATH + "tornado.png",
-		"displayname": "Tornado",
-		"details": "An additional tornado is created and the knockback is increased by 25%",
-		"level": "Level: 4",
-		"prerequisite": ["tornado3"],
-		"type": "weapon"
-	},
 	"armor1": {
 		"icon": ICON_PATH + "helmet_1.png",
 		"displayname": "Armor",
@@ -381,5 +317,68 @@ const UPGRADES = {
 		"level": "Level: 4",
 		"prerequisite": ["grenade3"],
 		"type": "weapon"
-}
+},
+#	"javelin1": {
+#		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
+#		"displayname": "Javelin",
+#		"details": "A magical javelin will follow you attacking enemies in a straight line",
+#		"level": "Level: 1",
+#		"prerequisite": [],
+#		"type": "weapon"
+#	},
+#	"javelin2": {
+#		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
+#		"displayname": "Javelin",
+#		"details": "The javelin will now attack an additional enemy per attack",
+#		"level": "Level: 2",
+#		"prerequisite": ["javelin1"],
+#		"type": "weapon"
+#	},
+#	"javelin3": {
+#		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
+#		"displayname": "Javelin",
+#		"details": "The javelin will attack another additional enemy per attack",
+#		"level": "Level: 3",
+#		"prerequisite": ["javelin2"],
+#		"type": "weapon"
+#	},
+#	"javelin4": {
+#		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
+#		"displayname": "Javelin",
+#		"details": "The javelin now does + 5 damage per attack and causes 20% additional knockback",
+#		"level": "Level: 4",
+#		"prerequisite": ["javelin3"],
+#		"type": "weapon"
+#	},
+#	"tornado1": {
+#		"icon": WEAPON_PATH + "tornado.png",
+#		"displayname": "Tornado",
+#		"details": "A tornado is created and random heads somewhere in the players direction",
+#		"level": "Level: 1",
+#		"prerequisite": [],
+#		"type": "weapon"
+#	},
+#	"tornado2": {
+#		"icon": WEAPON_PATH + "tornado.png",
+#		"displayname": "Tornado",
+#		"details": "An additional Tornado is created",
+#		"level": "Level: 2",
+#		"prerequisite": ["tornado1"],
+#		"type": "weapon"
+#	},
+#	"tornado3": {
+#		"icon": WEAPON_PATH + "tornado.png",
+#		"displayname": "Tornado",
+#		"details": "The Tornado cooldown is reduced by 0.5 seconds",
+#		"level": "Level: 3",
+#		"prerequisite": ["tornado2"],
+#		"type": "weapon"
+#	},
+#	"tornado4": {
+#		"icon": WEAPON_PATH + "tornado.png",
+#		"displayname": "Tornado",
+#		"details": "An additional tornado is created and the knockback is increased by 25%",
+#		"level": "Level: 4",
+#		"prerequisite": ["tornado3"],
+#		"type": "weapon"
 }

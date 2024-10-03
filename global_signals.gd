@@ -5,6 +5,7 @@ signal character_princess
 signal character_avery
 signal character_augbert
 signal change_character(character)
+signal enemy_softcap
 
 #Screenshake Player Hit
 signal playerHit

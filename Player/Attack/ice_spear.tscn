@@ -36,3 +36,4 @@ pitch_scale = 2.0
 autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="snd_ice_spear_attack_play" to="." method="_on_snd_ice_spear_attack_play_finished"]

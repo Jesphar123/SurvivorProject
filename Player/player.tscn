@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cj8kgdhobdeem"]
+[gd_scene load_steps=22 format=3 uid="uid://cj8kgdhobdeem"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_bwmke"]
 [ext_resource type="Texture2D" uid="uid://k00a21oo548h" path="res://Textures/Player/player_test_anim_2.png" id="2_xbjqd"]
 [ext_resource type="PackedScene" uid="uid://dtbv2h63hij6" path="res://Utility/hurt_box.tscn" id="3_lx4er"]
+[ext_resource type="Texture2D" uid="uid://ysqs7b3kkmu0" path="res://Textures/Player/player_shadow_ph.png" id="3_y4byv"]
 [ext_resource type="Texture2D" uid="uid://pd3nbwxg0nb1" path="res://Textures/GUI/exp_background-ph.png" id="5_aq5a5"]
 [ext_resource type="FontFile" uid="uid://cwe8jnjf3hsna" path="res://Font/MinimalPixel v2.ttf" id="6_koqwi"]
 [ext_resource type="FontFile" uid="uid://blcib142glkuk" path="res://Font/tenderness.otf" id="6_t10r3"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cit578se8tcuh" path="res://Utility/basic_button.tscn" id="12_xxg8r"]
 [ext_resource type="Texture2D" uid="uid://dtm7x4pk5wa6a" path="res://Textures/GUI/spr_inventory.png" id="13_fu75y"]
 [ext_resource type="AudioStream" uid="uid://0mjm53885al" path="res://Audio/SoundEffect/player_hit.mp3" id="13_tlus2"]
+[ext_resource type="Texture2D" uid="uid://c8x64t6nwjohj" path="res://Textures/Lights/2d_lights_and_shadows_neutral_point_light.webp" id="15_max4b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nlf4"]
 radius = 5.0
@@ -32,6 +34,9 @@ radius = 16.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b2lj5"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 2
 motion_mode = 1
@@ -43,7 +48,11 @@ texture = ExtResource("2_xbjqd")
 hframes = 2
 
 [node name="SwordAttach" type="Area2D" parent="CharacterSprite" groups=["sword_position"]]
-position = Vector2(17, 0)
+
+[node name="Shadow" type="Sprite2D" parent="CharacterSprite"]
+show_behind_parent = true
+position = Vector2(0, 6)
+texture = ExtResource("3_y4byv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -54,7 +63,6 @@ wait_time = 0.2
 one_shot = true
 
 [node name="HurtBox" parent="." instance=ExtResource("3_lx4er")]
-collision_mask = 2
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(0, 2)
@@ -119,6 +127,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_71g63")
 
 [node name="CollectArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -268,6 +277,7 @@ columns = 10
 
 [node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
+visible = false
 self_modulate = Color(1, 1, 1, 0.392157)
 show_behind_parent = true
 layout_mode = 0
@@ -300,6 +310,11 @@ vertical_alignment = 1
 unique_name_in_owner = true
 stream = ExtResource("13_tlus2")
 volume_db = -10.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.83, 0.487625, 0.2075, 1)
+energy = 0.2
+texture = ExtResource("15_max4b")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]

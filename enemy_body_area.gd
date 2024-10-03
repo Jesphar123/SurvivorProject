@@ -1,6 +1,6 @@
-extends CharacterBody2D
+extends Area2D
 
-class_name EnemyBody
+class_name EnemyBodyArea
 
 @export var movement_speed: float = 20.0
 @export var hp: int = 10
@@ -12,13 +12,13 @@ var knockback: Vector2 = Vector2.ZERO
 var enemyHitstop: float = 0.3
 var timeFreeze: float = 0.07
 
-@onready var sprite: Sprite2D = $EnemyBase/Sprite2D
-@onready var anim: AnimationPlayer = $AnimationPlayer
-@onready var snd_enemy_hit: AudioStreamPlayer2D = $EnemyBase/snd_enemy_hit
-@onready var hitBox: Area2D = $EnemyBase/HitBox
-@onready var hurtBox: Area2D = $EnemyBase/HurtBox
-@onready var collision: CollisionShape2D = $CollisionShape2D
-@onready var hideTimer: Timer = $EnemyBase/HideTimer
+@onready var sprite = $EnemyBaseArea/Sprite2D
+@onready var anim = $AnimationPlayer
+@onready var snd_enemy_hit= $EnemyBaseArea/snd_enemy_hit
+@onready var hitBox = $EnemyBaseArea/HitBox
+@onready var hurtBox= $EnemyBaseArea/HurtBox
+@onready var collision = $CollisionShape2D
+@onready var hideTimer = $EnemyBaseArea/HideTimer
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
@@ -33,29 +33,25 @@ signal remove_from_array(object)
 var screen_size
 
 func _ready():
-	#Using this?
 	add_to_group("enemy")
-	
 	anim.play("walk")
 	hitBox.damage = enemy_damage
 	screen_size = get_viewport_rect().size
 	hurtBox.connect("hurt", Callable(self, "_on_hurt_box_hurt"))
 	hideTimer.connect("timeout", Callable(self, "_on_hide_timer_timeout"))
-	
-	movement_speed = randf_range(movement_speed - 5.0, movement_speed + 5.0)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * movement_speed
-	velocity += knockback
+	position = direction * movement_speed * delta
+	position += knockback
 	
-	var collider = move_and_collide(velocity * delta)
-	if collider:
-		if collider.get_collider() is TileMapLayer:
-			return
-		else:
-			collider.get_collider().knockback = (collider.get_collider().global_position - global_position).normalized() * 25
+#	var collider = move_and_collide(velocity * delta)
+#	if collider:
+#		if collider.get_collider() is TileMapLayer:
+#			return
+#		else:
+#			collider.get_collider().knockback = (collider.get_collider().global_position - global_position).normalized() * 25
 	
 	if direction.x > 0.1:
 		sprite.flip_h = false
@@ -90,7 +86,7 @@ func death():
 
 	
 func _on_hurt_box_hurt(damage, angle, knockback_amount):
-	print("HP: ", hp, " Damage: ", damage)
+	print("HP: ", hp, "Damage: ", damage)
 	hp -= damage
 	knockback = angle * knockback_amount
 	

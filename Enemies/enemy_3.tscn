@@ -1,33 +1,103 @@
-[gd_scene load_steps=5 format=3 uid="uid://btpove2gjt2u7"]
+[gd_scene load_steps=11 format=3 uid="uid://bme7swj6v7gka"]
 
-[ext_resource type="Script" path="res://Enemies/enemy_1.gd" id="1_l5yfb"]
-[ext_resource type="PackedScene" uid="uid://bwpdh1m5qq0hj" path="res://Enemies/enemy_base.tscn" id="2_e152v"]
-[ext_resource type="Texture2D" uid="uid://b6rg4ckeydytb" path="res://Textures/Enemy/enemy_3_ph.png" id="3_u6skw"]
+[ext_resource type="Script" path="res://Enemies/enemy_1.gd" id="1_4ct73"]
+[ext_resource type="PackedScene" uid="uid://bwpdh1m5qq0hj" path="res://Enemies/enemy_base.tscn" id="2_lfv0a"]
+[ext_resource type="Shader" path="res://Enemies/enemy_base_dissolve.gdshader" id="3_ymoef"]
+[ext_resource type="Texture2D" uid="uid://4nbq70bne8g3" path="res://Textures/Enemy/enemy_3_anim.png" id="4_xrsb4"]
+[ext_resource type="Texture2D" uid="uid://ysqs7b3kkmu0" path="res://Textures/Player/player_shadow_ph.png" id="5_dw7w4"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_22o1o"]
-height = 40.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1redc"]
+radius = 5.0
 
-[node name="enemy_3" type="CharacterBody2D"]
-scale = Vector2(0.5, 0.5)
+[sub_resource type="Animation" id="Animation_qq3tt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyBase/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pm5h1"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyBase/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n00o0"]
+_data = {
+"RESET": SubResource("Animation_qq3tt"),
+"walk": SubResource("Animation_pm5h1")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kel35"]
+resource_local_to_scene = true
+shader = ExtResource("3_ymoef")
+shader_parameter/hit = null
+shader_parameter/dying = true
+shader_parameter/dissolve_speed = 1.0
+shader_parameter/flash_color = null
+shader_parameter/flash_value = null
+
+[node name="enemy_3" type="CharacterBody2D" groups=["enemy"]]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
+scale = Vector2(2, 2)
 collision_layer = 5
 collision_mask = 5
 motion_mode = 1
-script = ExtResource("1_l5yfb")
-movement_speed = 16.0
-hp = 100
-knockback_recovery = 50.0
+script = ExtResource("1_4ct73")
+movement_speed = 70.0
+hp = 40
+knockback_recovery = 20.0
 experience = 5
 enemy_damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_22o1o")
+shape = SubResource("CircleShape2D_1redc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n00o0")
+}
 
-[node name="EnemyBase" parent="." instance=ExtResource("2_e152v")]
+[node name="EnemyBase" parent="." instance=ExtResource("2_lfv0a")]
+position = Vector2(0, -3)
 
 [node name="Sprite2D" parent="EnemyBase" index="0"]
-texture = ExtResource("3_u6skw")
+material = SubResource("ShaderMaterial_kel35")
+scale = Vector2(1, 1)
+texture = ExtResource("4_xrsb4")
+hframes = 2
+
+[node name="Shadow" parent="EnemyBase/Sprite2D" index="0"]
+position = Vector2(0, 6.66667)
+texture = ExtResource("5_dw7w4")
+
+[node name="CollisionShape2D" parent="EnemyBase/HurtBox" index="0"]
+position = Vector2(0, 2)
+
+[node name="CollisionShape2D" parent="EnemyBase/HitBox" index="0"]
+position = Vector2(0, 1)
 
 [editable path="EnemyBase"]
 [editable path="EnemyBase/HurtBox"]

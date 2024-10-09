@@ -11,6 +11,7 @@ var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
 @onready var player = get_tree().get_first_node_in_group("player")
+@onready var sprite = $Sprite2D
 @onready var snd_explosion = get_node("snd_explosion")
 #var spr_explosion = preload("res://Enemies/death_explosion.tscn")
 @onready var spr_explosion = get_node("spr_explosion")
@@ -29,28 +30,28 @@ func _ready() -> void:
 	rotation = angle.angle() + deg_to_rad(135)
 	match level:
 		1:
-			hp = 10
+			hp = 9999
 			speed = 200
-			damage = 10
+			damage = 5
 			knockback_amount = 50
 			attack_size = 1.0 * (1 + player.spell_size)
 		2:
 			hp = 9999
 			speed = 200
-			damage = 10
-			knockback_amount = 50
+			damage = 5
+			knockback_amount = 75
 			attack_size = 1.0 * (1 + player.spell_size)
 		3:
 			hp = 9999
 			speed = 200
-			damage = 20
+			damage = 10
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.spell_size)
 		4:
 			hp = 9999
 			speed = 200
 			damage = 20
-			knockback_amount = 100
+			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
 			
 	var tween = create_tween()
@@ -62,6 +63,7 @@ func _physics_process(delta: float) -> void:
 	if position == target:
 		grenade.set_deferred("disabled", false)
 		await get_tree().create_timer(0.1).timeout
+		sprite.visible = false
 		grenade.set_deferred("disabled", true)
 		if !snd_explosion.is_playing() and snd_may_play:
 			snd_explosion.play()

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name EnemyBody
+class_name EnemyBodyTest
 
 @export var movement_speed: float = 20.0
 @export var hp: int = 10
@@ -12,16 +12,16 @@ var knockback: Vector2 = Vector2.ZERO
 var enemyHitstop: float = 0.3
 var timeFreeze: float = 0.07
 
-@onready var sprite: Sprite2D = $EnemyBase/Sprite2D
+@onready var sprite: Sprite2D = $EnemyBaseTest/Sprite2D
 @onready var anim: AnimationPlayer = $AnimationPlayer
-@onready var snd_enemy_hit: AudioStreamPlayer2D = $EnemyBase/snd_enemy_hit
-@onready var snd_enemy_death = $EnemyBase/snd_enemy_death
-@onready var hitBox: Area2D = $EnemyBase/HitBox
-@onready var hurtBox: Area2D = $EnemyBase/HurtBox
-@onready var hurtBoxCollision: CollisionShape2D = $EnemyBase/HurtBox/CollisionShape2D
-@onready var hitBoxCollision: CollisionShape2D = $EnemyBase/HitBox/CollisionShape2D
-@onready var collision: CollisionShape2D = $CollisionShape2D
-@onready var hideTimer: Timer = $EnemyBase/HideTimer
+@onready var snd_enemy_hit: AudioStreamPlayer2D = $EnemyBaseTest/snd_enemy_hit
+@onready var snd_enemy_death = $EnemyBaseTest/snd_enemy_death
+@onready var hitBox: Area2D = $EnemyBaseTest/HitBox
+@onready var hurtBox: Area2D = $EnemyBaseTest/HurtBox
+@onready var hurtBoxCollision: CollisionShape2D = $EnemyBaseTest/HurtBox/CollisionShape2D
+@onready var hitBoxCollision: CollisionShape2D = $EnemyBaseTest/HitBox/CollisionShape2D
+#@onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var hideTimer: Timer = $EnemyBaseTest/HideTimer
 
 @onready var dissolve = 1.0
 @onready var dissolve_speed = 0.033
@@ -39,42 +39,40 @@ signal remove_from_array(object)
 @onready var dying: bool = false
 @onready var hit: bool = false
 
-#Performance
-var screen_size
-
 #Respawn
 var respawn_enemy = []
 
 func _ready():
 	#Using this?
-	add_to_group("enemy")
+	#add_to_group("enemy")
 	
-	anim.play("walk")
+	#anim.play("walk")
 	hitBox.damage = enemy_damage
-	screen_size = get_viewport_rect().size
 	hurtBox.connect("hurt", Callable(self, "_on_hurt_box_hurt"))
-	hideTimer.connect("timeout", Callable(self, "_on_hide_timer_timeout"))
 	
 	movement_speed = randf_range(movement_speed - 5.0, movement_speed + 5.0)
+
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	var direction = global_position.direction_to(player.global_position)
+
 	if dying == false:
-		velocity = direction * movement_speed
-		velocity += knockback
+		position += direction * movement_speed * delta
+		position += knockback
 		
-		var collider = move_and_collide(velocity * delta)
-		if collider:
-			if collider.get_collider() is TileMapLayer:
-				return
-			else:
-				collider.get_collider().knockback = (collider.get_collider().global_position - global_position).normalized() * 25
 		
-		if direction.x > 0.1:
-			sprite.flip_h = false
-		elif direction.x < -0.1:
-			sprite.flip_h = true
+		#var collider = move_and_collide(velocity * delta)
+		#if collider:
+		#	if collider.get_collider() is TileMapLayer:
+		#		return
+		#	else:
+		#		collider.get_collider().knockback = (collider.get_collider().global_position - global_position).normalized() * 25
+		
+		#if direction.x > 0.1:
+		#	sprite.flip_h = false
+		#elif direction.x < -0.1:
+		#	sprite.flip_h = true
 		
 	if dying == true:
 		dissolve -= dissolve_speed
@@ -87,13 +85,6 @@ func _physics_process(delta):
 		#sprite.material.set_shader_parameter("hit", false)
 	if hit == false:
 		sprite.material.set_shader_parameter("hit", false)
-		
-	#Optimization
-	#var separation = (player.position - position).length()
-	#if separation >= 500:
-		#queue_free()
-	#	respawn_enemy.append(Resource)
-	#	print(respawn_enemy)
 
 func death():
 	#Play death sound if its not already playing
@@ -139,15 +130,3 @@ func _on_hurt_box_hurt(damage, angle, knockback_amount):
 		hit = true
 		await get_tree().create_timer(0.1).timeout
 		hit = false
-		
-		#sprite.modulate = Color(10,10,10)
-		#await get_tree().create_timer(0.1).timeout
-		#sprite.modulate = Color.WHITE
-		
-	#Hit Flash
-
-	
-	#Hitstop
-	#Engine.time_scale = enemyHitstop
-	#await get_tree().create_timer(enemyHitstop * timeFreeze).timeout
-	#Engine.time_scale = 1

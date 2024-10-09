@@ -17,6 +17,8 @@ var direction: Vector2 = Vector2.ZERO
 @onready var sword1 = get_node("CollisionShape2D")
 @onready var sword2 = get_node("CollisionShape2D2")
 @onready var sword3 = get_node("CollisionShape2D3")
+@onready var anim = get_node("AnimationPlayer")
+@onready var snd_sword_swing = get_node("snd_sword_swing")
 
 @onready var walkTimer: Node = get_node("walkTimer")
 
@@ -29,7 +31,7 @@ func _ready() -> void:
 			hp = 1
 			speed = 0
 			damage = 5
-			knockback_amount = 10
+			knockback_amount = 2
 			attack_size = 1.0 * (1 + player.spell_size)
 		2:
 			hp = 1
@@ -55,26 +57,14 @@ func _ready() -> void:
 	var tween = create_tween()
 	tween.tween_property(self,"scale",Vector2(1,1) * attack_size, 1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
-	$AnimationPlayer.play("sword_slash")
+	anim.play("sword_slash")
+	snd_sword_swing.play()
+	
 	
 
 func _physics_process(_delta: float) -> void:
-	angle = -((sword1.global_position + sword2.global_position + sword3.global_position) / 3 - player.global_position)
+	angle = ((sword1.global_position + sword2.global_position + sword3.global_position) / 3 - player.global_position)
 	position = player_sword_position.global_position
 	#emit_signal("remove_from_array", self)
 	await get_tree().create_timer(0.1).timeout
 	queue_free()
-
-#func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-#		queue_free()
-#		print("animation finished")
-	
-#func enemy_hit(charge = 1):
-#	hp -= charge
-#	if hp <= 0:
-#		emit_signal("remove_from_array", self)
-#		queue_free()
-
-#func _on_timer_timeout() -> void:
-#	emit_signal("remove_from_array", self)
-#	queue_free()

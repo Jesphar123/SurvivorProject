@@ -1,0 +1,26 @@
+Ring doesn't apply extra weapon if you get it before getting the initial weapon upgrade.
+Flail is too strong, at 3:00 with level 4 flail I can just stand still. Still going at 4:15. This is even with just a single one.
+Grenade seems to fail to target something, sometimes. Its just throwing it at my feet.
+
+Leveling is too quick. I just obtained Flail level 4 (after lowering knockback), in 60 seconds.
+Flail is very strong until enemy_3 shows up.
+
+Ring doesn't seem to work on flail level 1 even if you get it after getting the flail.
+Ring does apply to grenade correctly, even if you get the grenade after.
+
+Orb doesn't seem worth it after level 1
+Enemy_2 doesn't have enough knockback resist
+Scroll and Tome don't seem worth it
+Grenade seems to break after level 3 or 4, doesn't target.
+Level curve could be smoother, after level 20 it gets quite slow. This is mainly because the enemies are harder to kill I think.
+Boots speed curve should be gentler, probably make it upgrade 8 times and set current level 4 as level 8 speed.
+Gun seems the most fun.
+Armor seems more worth it now the leveling curve is steeper.
+Im setting the level curve back to what it was, because there are too many enemies and I can't kill them fast enough.
+Grenade radius should scale with level
+Grenade seems fine at level 3 now?
+Grenade also fine at level 4?
+Level curve immediately gets too steep at level 20
+Gun seems the only way to carve a path where you want, at the moment.
+Flail level 4 still seems too strong, with a single one enemeis can't get to me at 6:30
+When you stand still with the overpowered flail, too many enemies spawn, as you don't kill them fast enough but they can't hurt you.

@@ -1,6 +1,6 @@
 extends Node2D
 
-var enemy_cap = 500
+var enemy_cap = 800
 var enemy_softcap = 600
 var enemies_to_spawn = []
 

@@ -78,6 +78,11 @@ click={
 2d_physics/layer_4="Loot"
 2d_physics/layer_5="SoftCollisions"
 
+[physics]
+
+2d/run_on_separate_thread=true
+common/max_physics_steps_per_frame=1
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

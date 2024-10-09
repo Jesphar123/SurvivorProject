@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var movement_speed = 100.0
+var movement_speed = 80.0
 
 #Used for Smooth Movement
 #var max_movement_speed = 100.0
@@ -20,8 +20,18 @@ var collected_experience = 0
 var playerHitstop = 0.3
 var timeFreeze = 0.07
 
+#Fast Forward
+func _on_fast_forward_pressed() -> void:
+	Engine.time_scale += 1.0
+
+func _on_fast_backward_pressed() -> void:
+	Engine.time_scale -= 1.0
+	
+var squashTimer = 0
+
 @onready var sprite = $CharacterSprite
 @onready var walkTimer = get_node("walkTimer")
+@onready var anim = $AnimationPlayer
 
 #GUI
 @onready var expBar = get_node("%ExperienceBar")
@@ -64,6 +74,7 @@ var grenade = preload("res://Player/Attack/grenade.tscn")
 @onready var flailBase = get_node("%FlailBase")
 @onready var grenadeTimer = get_node("%GrenadeTimer")
 @onready var grenadeAttackTimer = get_node("%GrenadeAttackTimer")
+@onready var swordAttach = $CharacterSprite/SwordAttach
 
 #Signal
 signal playerdeath
@@ -118,6 +129,7 @@ var random_enemy_target = []
 #Sword Positioning
 #var sword_position = Vector2.ZERO
 @onready var last_direction: int = 0
+@onready var last_direction_vec: Vector2 = Vector2.ZERO
 
 #Mouse Position
 var mouse_target = Vector2.ZERO
@@ -138,12 +150,16 @@ func movement():
 	var y_mov = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	var mov = Vector2(x_mov,y_mov)
 	if mov.x > 0:
-		sprite.scale.x = 1
+		#sprite.scale.x = 1
+		sprite.flip_h = false
 		last_direction = 0
+		last_direction_vec = Vector2(1,0)
+		
 	elif mov.x < 0:
-		sprite.scale.x = -1
+		#sprite.scale.x = -1
+		sprite.flip_h = true
 		last_direction = 180
-
+		last_direction_vec = Vector2(-1,0)
 	if mov != Vector2.ZERO:
 		last_movement = mov
 		if walkTimer.is_stopped():
@@ -168,6 +184,7 @@ func movement():
 	#Linear Movement
 	velocity = mov.normalized() * movement_speed
 	move_and_slide()
+	
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	#HP UI
@@ -186,9 +203,14 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 			sprite.modulate = Color.WHITE
 			
 			#Hitstop
-			Engine.time_scale = playerHitstop
-			await get_tree().create_timer(playerHitstop * timeFreeze).timeout
-			Engine.time_scale = 1
+			if damage <= 1:
+				Engine.time_scale = playerHitstop
+				await get_tree().create_timer(playerHitstop * timeFreeze).timeout
+				Engine.time_scale = 1
+			if damage >= 5:
+				Engine.time_scale = playerHitstop
+				await get_tree().create_timer(playerHitstop * timeFreeze * 2).timeout
+				Engine.time_scale = 1
 			
 			#Screen Shake signal
 			GlobalSignals.playerHit.emit()
@@ -198,12 +220,19 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 		death()
 	
 func _ready():
+	var squash_n_stretch: bool = true
 	attack()
 	set_exp_bar(experience, calculate_experience_cap())
 	_on_hurt_box_hurt(0,0,0)
 	GlobalSignals.change_character.connect(change_character)
 	z_index = 2
-	print("player z_index: ", z_index)
+	anim.play("squash_n_stretch")
+	
+func squash_n_stretch():
+	sprite.material.set_shader_parameter("deformation", Vector2(0.05, 0.0))
+	sprite.material.set_shader_parameter("deformation", Vector2(0.0, 0.05))
+	sprite.material.set_shader_parameter("deformation", Vector2(-0.05, 0.0))
+	sprite.material.set_shader_parameter("deformation", Vector2(0.0, -0.05))
 	
 func change_character(character):
 	if character == "maeve":
@@ -266,21 +295,29 @@ func _on_grenade_attack_timer_timeout() -> void:
 			grenadeAttackTimer.stop()
 
 func _on_sword_timer_timeout() -> void:
-	sword_ammo += sword_base_ammo + additional_attacks
+	sword_ammo += sword_base_ammo
 	swordAttackTimer.start()
 
 func _on_sword_attack_timer_timeout() -> void:
 	if sword_ammo > 0:
 		var sword_attack = sword.instantiate()
 		sword_attack.set_rotation_degrees(last_direction)
-		sword_attack.position = $CharacterSprite/SwordAttach.global_position
+		sword_attack.position = swordAttach.global_position
 		sword_attack.level = sword_level
-		$CharacterSprite/SwordAttach.add_child(sword_attack)
+		swordAttach.add_child(sword_attack)
 		sword_ammo -= 1
 		if sword_ammo > 0:
 			swordAttackTimer.start()
 		else:
 			swordAttackTimer.stop()
+	if additional_attacks == 1:
+		await get_tree().create_timer(0.2).timeout
+		var second_sword_attack = sword.instantiate()
+		second_sword_attack.set_rotation_degrees(last_direction + 180)
+		second_sword_attack.position = swordAttach.global_position
+		second_sword_attack.level = sword_level
+		swordAttach.add_child(second_sword_attack)
+	
 	
 func _on_ice_spear_timer_timeout() -> void:
 	ice_spear_ammo += ice_spear_base_ammo + additional_attacks
@@ -362,15 +399,22 @@ func get_random_target():
 	else:
 		return Vector2.UP
 
-func _on_enemy_detection_area_body_entered(body: Node2D) -> void:
-	if not random_enemy_target.has(body):
-		random_enemy_target.append(body)
+#func _on_enemy_detection_area_body_entered(body: Node2D) -> void:
+	#if not random_enemy_target.has(body):
+		#random_enemy_target.append(body)
+#
+#
+#func _on_enemy_detection_area_body_exited(body: Node2D) -> void:
+	#if random_enemy_target.has(body):
+		#random_enemy_target.erase(body)
 
+func _on_enemy_detection_area_area_entered(area: Area2D) -> void:
+	if not random_enemy_target.has(area):
+		random_enemy_target.append(area)
 
-func _on_enemy_detection_area_body_exited(body: Node2D) -> void:
-	if random_enemy_target.has(body):
-		random_enemy_target.erase(body)
-
+func _on_enemy_detection_area_area_exited(area: Area2D) -> void:
+	if random_enemy_target.has(area):
+		random_enemy_target.erase(area)
 
 func _on_grab_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
@@ -413,8 +457,8 @@ func set_exp_bar(set_value = 1, set_max_value = 100):
 	
 func levelup():
 	#Add HP
-	hp += 5
-	max_hp += 5
+	hp += 2
+	max_hp += 2
 	hp = clamp(hp,0,max_hp)
 	_on_hurt_box_hurt(0,0,0)
 	
@@ -512,6 +556,7 @@ func upgrade_character(upgrade):
 			grenade_base_ammo += 1
 		"grenade2":
 			grenade_level = 2
+			grenade_base_ammo += 1
 		"grenade3":
 			grenade_level = 3
 		"grenade4":

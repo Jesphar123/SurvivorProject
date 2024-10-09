@@ -30,18 +30,18 @@ func update_flail():
 			knockback_amount = 3
 			attack_size = 1.0 * (1 + player.spell_size)
 		2:
-			speed = 0.1
-			damage = 5
+			speed = 0.05
+			damage = 10
 			knockback_amount = 3
 			attack_size = 1.0 * (1 + player.spell_size)
 		3:
 			speed = 0.1
-			damage = 8
+			damage = 10
 			knockback_amount = 4
 			attack_size = 1.0 * (1 + player.spell_size)
 		4:
-			speed = 0.1
-			damage = 8
+			speed = 0.2
+			damage = 15
 			knockback_amount = 4
 			attack_size = 1.0 * (1 + player.spell_size)
 			

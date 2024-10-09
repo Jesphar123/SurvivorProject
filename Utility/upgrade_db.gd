@@ -297,7 +297,7 @@ const UPGRADES = {
 	"grenade2": {
 		"icon": WEAPON_PATH + "grenade_ph.png",
 		"displayname": "Grenade",
-		"details": "Throw a grenade at a random enemy target",
+		"details": "Throw an additional grenade at a random enemy target",
 		"level": "Level: 2",
 		"prerequisite": ["grenade1"],
 		"type": "weapon"
@@ -305,7 +305,7 @@ const UPGRADES = {
 	"grenade3": {
 		"icon": WEAPON_PATH + "grenade_ph.png",
 		"displayname": "Grenade",
-		"details": "Throw a grenade at a random enemy target",
+		"details": "Throw stronger grenades at a random enemy target",
 		"level": "Level: 3",
 		"prerequisite": ["grenade2"],
 		"type": "weapon"
@@ -313,7 +313,7 @@ const UPGRADES = {
 	"grenade4": {
 		"icon": WEAPON_PATH + "grenade_ph.png",
 		"displayname": "Grenade",
-		"details": "Throw a grenade at a random enemy target",
+		"details": "Throw even stronger grenades at a random enemy target",
 		"level": "Level: 4",
 		"prerequisite": ["grenade3"],
 		"type": "weapon"

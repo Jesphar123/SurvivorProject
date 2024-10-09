@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://cj8kgdhobdeem"]
+[gd_scene load_steps=28 format=3 uid="uid://cj8kgdhobdeem"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_bwmke"]
+[ext_resource type="Shader" path="res://Player/player.gdshader" id="2_twfkt"]
 [ext_resource type="Texture2D" uid="uid://k00a21oo548h" path="res://Textures/Player/player_test_anim_2.png" id="2_xbjqd"]
 [ext_resource type="PackedScene" uid="uid://dtbv2h63hij6" path="res://Utility/hurt_box.tscn" id="3_lx4er"]
 [ext_resource type="Texture2D" uid="uid://ysqs7b3kkmu0" path="res://Textures/Player/player_shadow_ph.png" id="3_y4byv"]
@@ -14,13 +15,59 @@
 [ext_resource type="PackedScene" uid="uid://cit578se8tcuh" path="res://Utility/basic_button.tscn" id="12_xxg8r"]
 [ext_resource type="Texture2D" uid="uid://dtm7x4pk5wa6a" path="res://Textures/GUI/spr_inventory.png" id="13_fu75y"]
 [ext_resource type="AudioStream" uid="uid://0mjm53885al" path="res://Audio/SoundEffect/player_hit.mp3" id="13_tlus2"]
+[ext_resource type="Script" path="res://Player/label.gd" id="14_3b4ik"]
 [ext_resource type="Texture2D" uid="uid://c8x64t6nwjohj" path="res://Textures/Lights/2d_lights_and_shadows_neutral_point_light.webp" id="15_max4b"]
+
+[sub_resource type="Animation" id="Animation_p1uck"]
+resource_name = "squash_n_stretch"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.95), Vector2(0.95, 1), Vector2(1, 1.05), Vector2(1.05, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bdgdu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.95)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wt4ob"]
+_data = {
+"RESET": SubResource("Animation_bdgdu"),
+"squash_n_stretch": SubResource("Animation_p1uck")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3aqax"]
+shader = ExtResource("2_twfkt")
+shader_parameter/deformation = Vector2(0, 0)
+shader_parameter/sideWaysDeformationFactor = 0.0
+shader_parameter/knockbackFactor = 0.4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nlf4"]
 radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5qeeb"]
-radius = 6.08276
+radius = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bktj6"]
 radius = 160.0
@@ -42,8 +89,15 @@ collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_bwmke")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wt4ob")
+}
+
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_3aqax")
+scale = Vector2(1, 0.95)
 texture = ExtResource("2_xbjqd")
 hframes = 2
 
@@ -63,6 +117,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="HurtBox" parent="." instance=ExtResource("3_lx4er")]
+collision_mask = 2
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(0, 2)
@@ -73,7 +128,7 @@ debug_color = Color(0.975249, 0.157658, 1.92523e-07, 0.42)
 
 [node name="IceSpearTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
-wait_time = 1.5
+wait_time = 0.75
 
 [node name="IceSpearAttackTimer" type="Timer" parent="Attack/IceSpearTimer"]
 unique_name_in_owner = true
@@ -127,7 +182,6 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_71g63")
 
 [node name="CollectArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -277,7 +331,6 @@ columns = 10
 
 [node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
-visible = false
 self_modulate = Color(1, 1, 1, 0.392157)
 show_behind_parent = true
 layout_mode = 0
@@ -306,6 +359,29 @@ theme_override_font_sizes/font_size = 6
 text = "20"
 vertical_alignment = 1
 
+[node name="Fast Forward" type="Button" parent="GUILayer"]
+top_level = true
+offset_right = 27.0
+offset_bottom = 24.0
+scale = Vector2(0.5, 0.5)
+size_flags_vertical = 0
+text = "+1"
+
+[node name="Fast Backward" type="Button" parent="GUILayer"]
+top_level = true
+offset_left = 14.0
+offset_right = 41.0
+offset_bottom = 24.0
+scale = Vector2(0.5, 0.5)
+size_flags_vertical = 0
+text = "-1"
+
+[node name="FPSLabel" type="Label" parent="GUILayer"]
+offset_left = 28.0
+offset_right = 68.0
+offset_bottom = 16.0
+script = ExtResource("14_3b4ik")
+
 [node name="PlayerHit" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("13_tlus2")
@@ -316,6 +392,10 @@ color = Color(0.83, 0.487625, 0.2075, 1)
 energy = 0.2
 texture = ExtResource("15_max4b")
 
+[node name="squashTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]
 [connection signal="timeout" from="Attack/IceSpearTimer/IceSpearAttackTimer" to="." method="_on_ice_spear_attack_timer_timeout"]
@@ -325,10 +405,15 @@ texture = ExtResource("15_max4b")
 [connection signal="timeout" from="Attack/SwordTimer/SwordAttackTimer" to="." method="_on_sword_attack_timer_timeout"]
 [connection signal="timeout" from="Attack/GrenadeTimer" to="." method="_on_grenade_timer_timeout"]
 [connection signal="timeout" from="Attack/GrenadeTimer/GrenadeAttackTimer" to="." method="_on_grenade_attack_timer_timeout"]
+[connection signal="area_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_area_entered"]
+[connection signal="area_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_area_exited"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 [connection signal="click_end" from="GUILayer/GUI/DeathPanel/btn_menu" to="." method="_on_btn_menu_click_end"]
+[connection signal="pressed" from="GUILayer/Fast Forward" to="." method="_on_fast_forward_pressed"]
+[connection signal="pressed" from="GUILayer/Fast Backward" to="." method="_on_fast_backward_pressed"]
+[connection signal="timeout" from="squashTimer" to="." method="_on_squash_timer_timeout"]
 
 [editable path="HurtBox"]

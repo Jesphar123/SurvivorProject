@@ -1,19 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwpdh1m5qq0hj"]
+[gd_scene load_steps=8 format=3 uid="uid://bwpdh1m5qq0hj"]
 
+[ext_resource type="Material" uid="uid://cvx0n8ay4g3ck" path="res://Enemies/enemy_base.tres" id="1_4srcy"]
 [ext_resource type="PackedScene" uid="uid://dtbv2h63hij6" path="res://Utility/hurt_box.tscn" id="2_vdb5f"]
 [ext_resource type="PackedScene" uid="uid://olluckrijwkt" path="res://Utility/hit_box.tscn" id="3_2s1cn"]
 [ext_resource type="AudioStream" uid="uid://dc4c87bp0l2px" path="res://Audio/SoundEffect/enemy_hit_2.ogg" id="3_wt2fh"]
+[ext_resource type="AudioStream" uid="uid://b3jmhjpy2gex2" path="res://Audio/SoundEffect/enemy_death_1.wav" id="5_j7rg6"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wkckk"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lmxim"]
 radius = 6.0
+height = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dm3ur"]
 radius = 5.0
 
 [node name="EnemyBase" type="CharacterBody2D" groups=["enemy"]]
-y_sort_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_4srcy")
 scale = Vector2(0.75, 0.75)
 
 [node name="Shadow" type="Sprite2D" parent="Sprite2D"]
@@ -24,7 +27,7 @@ collision_mask = 4
 HurtBoxType = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-shape = SubResource("CircleShape2D_wkckk")
+shape = SubResource("CapsuleShape2D_lmxim")
 debug_color = Color(0.993532, 0, 0.236171, 0.42)
 
 [node name="HitBox" parent="." instance=ExtResource("3_2s1cn")]
@@ -41,6 +44,9 @@ pitch_scale = 2.0
 [node name="HideTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="snd_enemy_death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_j7rg6")
 
 [editable path="HurtBox"]
 [editable path="HitBox"]

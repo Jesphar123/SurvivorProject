@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cj8kgdhobdeem" path="res://Player/player.tscn" id="1_btokp"]
 [ext_resource type="PackedScene" uid="uid://ueq3n0v7x54w" path="res://Utility/enemy_spawner.tscn" id="2_6wgb2"]
 [ext_resource type="Script" path="res://Utility/spawn_info.gd" id="3_hfoli"]
-[ext_resource type="PackedScene" uid="uid://bnv0mtpkeouh" path="res://Enemies/enemy_test.tscn" id="4_m5eh8"]
+[ext_resource type="PackedScene" uid="uid://bnv0mtpkeouh" path="res://Enemies/enemy_1_new.tscn" id="4_m5eh8"]
 [ext_resource type="AudioStream" uid="uid://ck6hxmmragp5s" path="res://Audio/Music/battleThemeA.mp3" id="9_ebsji"]
 [ext_resource type="Script" path="res://Audio/Music/snd_music.gd" id="10_p6w5b"]
 

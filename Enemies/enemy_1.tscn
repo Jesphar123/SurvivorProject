@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcswch0f7ylco"]
+[gd_scene load_steps=11 format=3 uid="uid://dcswch0f7ylco"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_1.gd" id="1_ng38a"]
 [ext_resource type="PackedScene" uid="uid://bwpdh1m5qq0hj" path="res://Enemies/enemy_base.tscn" id="2_7fno2"]
-[ext_resource type="Texture2D" uid="uid://bsnli5qvktoeq" path="res://Textures/Enemy/enemy_1_test_anim.png" id="3_su74q"]
+[ext_resource type="Shader" path="res://Enemies/enemy_base_dissolve.gdshader" id="3_n2vn4"]
 [ext_resource type="Texture2D" uid="uid://ysqs7b3kkmu0" path="res://Textures/Player/player_shadow_ph.png" id="4_gmw41"]
+[ext_resource type="Texture2D" uid="uid://dyng0l5luw3ya" path="res://Textures/Enemy/enemy_1_anim.png" id="4_l6e1e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1redc"]
 radius = 5.0
@@ -47,6 +48,15 @@ _data = {
 "walk": SubResource("Animation_pm5h1")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kel35"]
+resource_local_to_scene = true
+shader = ExtResource("3_n2vn4")
+shader_parameter/hit = false
+shader_parameter/dying = false
+shader_parameter/dissolve_speed = 1.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 1.0
+
 [node name="enemy_1" type="CharacterBody2D" groups=["enemy"]]
 z_index = 2
 z_as_relative = false
@@ -55,10 +65,10 @@ collision_layer = 5
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_ng38a")
-movement_speed = 25.0
+movement_speed = 50.0
+hp = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_1redc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -67,15 +77,20 @@ libraries = {
 }
 
 [node name="EnemyBase" parent="." instance=ExtResource("2_7fno2")]
-y_sort_enabled = false
+position = Vector2(0, -3)
 
 [node name="Sprite2D" parent="EnemyBase" index="0"]
-texture = ExtResource("3_su74q")
+material = SubResource("ShaderMaterial_kel35")
+scale = Vector2(1, 1)
+texture = ExtResource("4_l6e1e")
 hframes = 2
 
 [node name="Shadow" parent="EnemyBase/Sprite2D" index="0"]
 position = Vector2(0, 6.66667)
 texture = ExtResource("4_gmw41")
+
+[node name="CollisionShape2D" parent="EnemyBase/HurtBox" index="0"]
+position = Vector2(0, 1)
 
 [node name="CollisionShape2D" parent="EnemyBase/HitBox" index="0"]
 position = Vector2(0, 1)

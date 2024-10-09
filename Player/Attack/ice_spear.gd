@@ -24,28 +24,28 @@ func _ready() -> void:
 	rotation = angle.angle() + deg_to_rad(135)
 	match level:
 		1:
-			hp = 1
+			hp = 2
 			speed = 400
 			damage = 5
-			knockback_amount = 50
+			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.spell_size)
 		2:
-			hp = 1
+			hp = 3
 			speed = 400
 			damage = 5
-			knockback_amount = 50
+			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.spell_size)
 		3:
-			hp = 2
+			hp = 4
 			speed = 400
-			damage = 8
-			knockback_amount = 100
+			damage = 10
+			knockback_amount = 125
 			attack_size = 1.0 * (1 + player.spell_size)
 		4:
-			hp = 2
+			hp = 10
 			speed = 400
-			damage = 8
-			knockback_amount = 100
+			damage = 20
+			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
 			
 	var tween = create_tween()

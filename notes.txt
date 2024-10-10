@@ -1,3 +1,4 @@
+9/10/2024
 Ring doesn't apply extra weapon if you get it before getting the initial weapon upgrade.
 Flail is too strong, at 3:00 with level 4 flail I can just stand still. Still going at 4:15. This is even with just a single one.
 Grenade seems to fail to target something, sometimes. Its just throwing it at my feet.
@@ -24,3 +25,20 @@ Level curve immediately gets too steep at level 20
 Gun seems the only way to carve a path where you want, at the moment.
 Flail level 4 still seems too strong, with a single one enemeis can't get to me at 6:30
 When you stand still with the overpowered flail, too many enemies spawn, as you don't kill them fast enough but they can't hurt you.
+
+10/10/2024
+
+Adjusted orb range by increments of 32 instead of 16
+
+I assume ring does work with flail, they just get spawned in the same position. Lets test that. Confirmed.
+Hitstop is still large when hit by 5+ damage, even if it does 1 damage because of armor.
+Added a radius modifier to the grenade, increasing by 8 per level.
+Fixed the issue where flails would spawn ontop of each other, but if you get a ring before getting a flail it still only spawns 1.
+Grenade particles should scale with explosion radius
+Enemy shadows should fade out as the dissolve shader fades out.
+Maybe make ring more rare.
+Flail works now, caps out at 4, but won't break if ammo + additional attacks go above 4 somehow.
+Flail needs sound.
+Grenade particles now scale linearly with radius.
+Need fix sword tomorrow. Or think of alternative.
+Should change enemy death sound, its annoying. Use something simpler like a big OOF.

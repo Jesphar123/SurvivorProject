@@ -203,11 +203,11 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 			sprite.modulate = Color.WHITE
 			
 			#Hitstop
-			if damage <= 1:
+			if clamp(damage - armor, 1.0, 999.0) <= 1:
 				Engine.time_scale = playerHitstop
 				await get_tree().create_timer(playerHitstop * timeFreeze).timeout
 				Engine.time_scale = 1
-			if damage >= 5:
+			if clamp(damage - armor, 1.0, 999.0) >= 5:
 				Engine.time_scale = playerHitstop
 				await get_tree().create_timer(playerHitstop * timeFreeze * 2).timeout
 				Engine.time_scale = 1
@@ -228,12 +228,6 @@ func _ready():
 	z_index = 2
 	anim.play("squash_n_stretch")
 	
-func squash_n_stretch():
-	sprite.material.set_shader_parameter("deformation", Vector2(0.05, 0.0))
-	sprite.material.set_shader_parameter("deformation", Vector2(0.0, 0.05))
-	sprite.material.set_shader_parameter("deformation", Vector2(-0.05, 0.0))
-	sprite.material.set_shader_parameter("deformation", Vector2(0.0, -0.05))
-	
 func change_character(character):
 	if character == "maeve":
 		$CharacterSprite.texture = load("res://Textures/Player/player_test_anim_2.png")
@@ -244,6 +238,7 @@ func change_character(character):
 	if character == "avery":
 		$CharacterSprite.texture = load("res://Textures/Player/avery_anim.png")
 		upgrade_character("icespear1")
+		#upgrade_character("ring1")
 	if character == "augbert":
 		upgrade_character("grenade1")
 		$CharacterSprite.texture = load("res://Textures/Player/augbert_anim.png")
@@ -275,11 +270,9 @@ func attack():
 		if grenadeTimer.is_stopped():
 			grenadeTimer.start()
 			
-		
 func _on_grenade_timer_timeout() -> void:
 	grenade_ammo += grenade_base_ammo + additional_attacks
 	grenadeAttackTimer.start()
-
 
 func _on_grenade_attack_timer_timeout() -> void:
 	if grenade_ammo > 0:
@@ -317,8 +310,7 @@ func _on_sword_attack_timer_timeout() -> void:
 		second_sword_attack.position = swordAttach.global_position
 		second_sword_attack.level = sword_level
 		swordAttach.add_child(second_sword_attack)
-	
-	
+
 func _on_ice_spear_timer_timeout() -> void:
 	ice_spear_ammo += ice_spear_base_ammo + additional_attacks
 	iceSpearAttackTimer.start()
@@ -335,50 +327,119 @@ func _on_ice_spear_attack_timer_timeout() -> void:
 			iceSpearAttackTimer.start()
 		else:
 			iceSpearAttackTimer.stop()
-			
-			
-			
+
 func _on_tornado_timer_timeout() -> void:
 	tornado_ammo += tornado_base_ammo + additional_attacks
 	tornadoAttackTimer.start()
-	
-func _on_tornado_attack_timer_timeout() -> void:
-	if tornado_ammo > 0:
-		var tornado_attack = tornado.instantiate()
-		tornado_attack.position = position
-		tornado_attack.last_movement = last_movement
-		tornado_attack.level = tornado_level
-		add_child(tornado_attack)
-		tornado_ammo -= 1
-		if tornado_ammo > 0:
-			tornadoAttackTimer.start()
-		else:
-			tornadoAttackTimer.stop()
-
-func spawn_javelin():
-	var get_javelin_total = javelinBase.get_child_count()
-	var calc_spawns = (javelin_ammo + additional_attacks) - get_javelin_total
-	while calc_spawns > 0:
-		var javelin_spawn = javelin.instantiate()
-		javelin_spawn.global_position = global_position
-		javelinBase.add_child(javelin_spawn)
-		calc_spawns -= 1
-	#Update Javelin
-	var get_javelins = javelinBase.get_children()
-	for i in get_javelins:
-		if i.has_method("update_javelin"):
-			i.update_javelin()
-			
-			
 
 func spawn_flail():
 	var get_flail_total = flailBase.get_child_count()
 	var calc_spawns = (flail_ammo + additional_attacks) - get_flail_total
 	while calc_spawns > 0:
-		var flail_spawn = flail.instantiate()
-		flail_spawn.position = position
-		flailBase.add_child(flail_spawn)
-		calc_spawns -= 1
+		get_flail_total = flailBase.get_child_count()
+		if calc_spawns == 1:
+			
+			if get_flail_total == 0:
+				var flail_spawn = flail.instantiate()
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+				
+			elif get_flail_total == 1:
+				var flail_spawn = flail.instantiate()
+				var first_flail = flailBase.get_child(0)
+				flail_spawn.set_rotation_degrees(first_flail.get_rotation_degrees() + 180)
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+				
+			elif get_flail_total == 2:
+				var flail_spawn = flail.instantiate()
+				var first_flail = flailBase.get_child(0)
+				flail_spawn.set_rotation_degrees(first_flail.get_rotation_degrees() + 90)
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+				
+			elif get_flail_total == 3:
+				var flail_spawn = flail.instantiate()
+				var first_flail = flailBase.get_child(0)
+				flail_spawn.set_rotation_degrees(first_flail.get_rotation_degrees() + 270)
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+				
+			elif get_flail_total > 3:
+				return
+				
+		if calc_spawns == 2:
+			get_flail_total = flailBase.get_child_count()
+			
+			if get_flail_total == 0:
+				var flail_spawn = flail.instantiate()
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+				
+			elif get_flail_total == 1:
+				var flail_spawn = flail.instantiate()
+				flail_spawn = flail.instantiate()
+				var first_flail = flailBase.get_child(0)
+				flail_spawn.set_rotation_degrees(180)
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+			
+			elif get_flail_total == 3:
+				var flail_spawn = flail.instantiate()
+				flail_spawn = flail.instantiate()
+				var first_flail = flailBase.get_child(0)
+				flail_spawn.set_rotation_degrees(90)
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+		
+		if calc_spawns == 3:
+			var flail_spawn = flail.instantiate()
+			if get_flail_total == 0:
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+		
+			elif get_flail_total == 1:
+				var first_flail = flailBase.get_child(0)
+				flail_spawn.set_rotation_degrees(first_flail.get_rotation_degrees() + 180)
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+				
+			elif get_flail_total == 2:
+				var first_flail = flailBase.get_child(0)
+				flail_spawn.set_rotation_degrees(first_flail.get_rotation_degrees() + 90)
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+				
+		if calc_spawns == 4:
+			var flail_spawn = flail.instantiate()
+			if get_flail_total == 0:
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+			elif get_flail_total == 1:
+				var first_flail = flailBase.get_child(0)
+				flail_spawn.set_rotation_degrees(first_flail.get_rotation_degrees() + 180)
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+				
+		if calc_spawns == 5:
+			var flail_spawn = flail.instantiate()
+			if get_flail_total == 0:
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+
 	var get_flails = flailBase.get_children()
 	for i in get_flails:
 		if i.has_method("update_flail"):
@@ -490,6 +551,17 @@ func upgrade_character(upgrade):
 		"icespear4":
 			ice_spear_level = 4
 			ice_spear_base_ammo += 2
+		"icespear5":
+			ice_spear_level = 5
+			ice_spear_base_ammo += 1
+		"icespear6":
+			ice_spear_level = 6
+			ice_spear_base_ammo += 1
+		"icespear7":
+			ice_spear_level = 7
+		"icespear8":
+			ice_spear_level = 8
+			ice_spear_base_ammo += 2
 #		"tornado1":
 			tornado_level = 1
 			tornado_base_ammo += 1
@@ -510,29 +582,29 @@ func upgrade_character(upgrade):
 #		"javelin3":
 			javelin_level = 3
 #		"javelin4":
-			javelin_level = 4
-		"armor1","armor2","armor3","armor4":
+#			javelin_level = 4
+		"armor1","armor2","armor3","armor4","armor5","armor6","armor7","armor8":
 			armor += 1
-		"speed1","speed2","speed3","speed4":
-			movement_speed += 20.0
+		"speed1","speed2","speed3","speed4","speed5","speed6","speed7","speed8":
+			movement_speed += 10.0
 		"tome1","tome2","tome3","tome4":
 			spell_size += 0.10
 		"scroll1","scroll2","scroll3","scroll4":
 			spell_cooldown += 0.05
-		"ring1","ring2":
+		"ring1","ring2","ring3","ring4":
 			additional_attacks += 1
 		"food":
 			hp += 20
 			hp = clamp(hp,0,max_hp)
 			_on_hurt_box_hurt(0,0,0)
 		"orb1":
-			$GrabArea/CollisionShape2D.shape.radius = 32
-		"orb2":
 			$GrabArea/CollisionShape2D.shape.radius = 48
+		"orb2":
+			$GrabArea/CollisionShape2D.shape.radius = 60
 		"orb3":
-			$GrabArea/CollisionShape2D.shape.radius = 64
+			$GrabArea/CollisionShape2D.shape.radius = 92
 		"orb4":
-			$GrabArea/CollisionShape2D.shape.radius = 80
+			$GrabArea/CollisionShape2D.shape.radius = 124
 		"sword1":
 			sword_level = 1
 			sword_base_ammo += 1
@@ -542,6 +614,15 @@ func upgrade_character(upgrade):
 			sword_level = 3
 		"sword4":
 			sword_level = 4
+		"sword5":
+			sword_level = 5
+			sword_base_ammo += 1
+		"sword6":
+			sword_level = 6
+		"sword7":
+			sword_level = 7
+		"sword8":
+			sword_level = 8
 		"flail1":
 			flail_level = 1
 			flail_ammo += 1
@@ -551,6 +632,14 @@ func upgrade_character(upgrade):
 			flail_level = 3
 		"flail4":
 			flail_level = 4
+		"flail5":
+			flail_level = 5
+		"flail6":
+			flail_level = 6
+		"flail7":
+			flail_level = 7
+		"flail8":
+			flail_level = 8
 		"grenade1":
 			grenade_level = 1
 			grenade_base_ammo += 1
@@ -561,6 +650,16 @@ func upgrade_character(upgrade):
 			grenade_level = 3
 		"grenade4":
 			grenade_level = 4
+		"grenade5":
+			grenade_level = 5
+			grenade_base_ammo += 1
+		"grenade6":
+			grenade_level = 6
+			grenade_base_ammo += 1
+		"grenade7":
+			grenade_level = 7
+		"grenade8":
+			grenade_level = 8
 			
 	adjust_gui_collection(upgrade)
 	attack()
@@ -625,7 +724,6 @@ func adjust_gui_collection(upgrade):
 				"upgrade":
 					collectedUpgrades.add_child(new_item)
 
-
 func death():
 	deathPanel.visible = true
 	emit_signal("playerdeath")
@@ -639,7 +737,6 @@ func death():
 	else: 
 		lblResult.text = "You Lose"
 		sndLose.play()
-
 
 func _on_btn_menu_click_end() -> void:
 	get_tree().paused = false

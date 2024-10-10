@@ -12,7 +12,7 @@ void vertex() {
 		VERTEX.x += sideWaysDeformation * sideWaysDeformationFactor * spriteWidth * sign(deformation.x);
 	}
 	vec2 scale = 1.0 - deformationStrength;
-	
+
 	VERTEX.x *= scale.x / scale.y;
 	VERTEX.y *= scale.y / scale.x;
 	VERTEX.xy += deformation * spriteWidth * knockbackFactor;

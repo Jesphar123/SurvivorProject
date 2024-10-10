@@ -36,6 +36,38 @@ const UPGRADES = {
 		"prerequisite": ["icespear3"],
 		"type": "weapon"
 	},
+		"icespear5": {
+		"icon": WEAPON_PATH + "ice_spear.png",
+		"displayname": "Ice Spear",
+		"details": "A spear of ice is thrown at a random enemy",
+		"level": "Level: 5",
+		"prerequisite": ["icespear4"],
+		"type": "weapon"
+	},
+	"icespear6": {
+		"icon": WEAPON_PATH + "ice_spear.png",
+		"displayname": "Ice Spear",
+		"details": "An addition Ice Spear is thrown",
+		"level": "Level: 6",
+		"prerequisite": ["icespear5"],
+		"type": "weapon"
+	},
+	"icespear7": {
+		"icon": WEAPON_PATH + "ice_spear.png",
+		"displayname": "Ice Spear",
+		"details": "Ice Spears now pass through another enemy and do + 3 damage",
+		"level": "Level: 7",
+		"prerequisite": ["icespear6"],
+		"type": "weapon"
+	},
+	"icespear8": {
+		"icon": WEAPON_PATH + "ice_spear.png",
+		"displayname": "Ice Spear",
+		"details": "An additional 2 Ice Spears are thrown",
+		"level": "Level: 8",
+		"prerequisite": ["icespear7"],
+		"type": "weapon"
+	},
 	"armor1": {
 		"icon": ICON_PATH + "helmet_1.png",
 		"displayname": "Armor",
@@ -68,6 +100,38 @@ const UPGRADES = {
 		"prerequisite": ["armor3"],
 		"type": "upgrade"
 	},
+	"armor5": {
+		"icon": ICON_PATH + "helmet_1.png",
+		"displayname": "Armor",
+		"details": "Reduces Damage By 1 point",
+		"level": "Level: 5",
+		"prerequisite": ["armor4"],
+		"type": "upgrade"
+	},
+	"armor6": {
+		"icon": ICON_PATH + "helmet_1.png",
+		"displayname": "Armor",
+		"details": "Reduces Damage By an additional 1 point",
+		"level": "Level: 6",
+		"prerequisite": ["armor5"],
+		"type": "upgrade"
+	},
+	"armor7": {
+		"icon": ICON_PATH + "helmet_1.png",
+		"displayname": "Armor",
+		"details": "Reduces Damage By an additional 1 point",
+		"level": "Level: 7",
+		"prerequisite": ["armor6"],
+		"type": "upgrade"
+	},
+	"armor8": {
+		"icon": ICON_PATH + "helmet_1.png",
+		"displayname": "Armor",
+		"details": "Reduces Damage By an additional 1 point",
+		"level": "Level: 8",
+		"prerequisite": ["armor7"],
+		"type": "upgrade"
+	},
 	"speed1": {
 		"icon": ICON_PATH + "boots_4_green.png",
 		"displayname": "Speed",
@@ -98,6 +162,38 @@ const UPGRADES = {
 		"details": "Movement Speed Increased an additional 50% of base speed",
 		"level": "Level: 4",
 		"prerequisite": ["speed3"],
+		"type": "upgrade"
+	},
+	"speed5": {
+		"icon": ICON_PATH + "boots_4_green.png",
+		"displayname": "Speed",
+		"details": "Movement Speed Increased by 50% of base speed",
+		"level": "Level: 5",
+		"prerequisite": ["speed4"],
+		"type": "upgrade"
+	},
+	"speed6": {
+		"icon": ICON_PATH + "boots_4_green.png",
+		"displayname": "Speed",
+		"details": "Movement Speed Increased by an additional 50% of base speed",
+		"level": "Level: 6",
+		"prerequisite": ["speed5"],
+		"type": "upgrade"
+	},
+	"speed7": {
+		"icon": ICON_PATH + "boots_4_green.png",
+		"displayname": "Speed",
+		"details": "Movement Speed Increased by an additional 50% of base speed",
+		"level": "Level: 7",
+		"prerequisite": ["speed6"],
+		"type": "upgrade"
+	},
+	"speed8": {
+		"icon": ICON_PATH + "boots_4_green.png",
+		"displayname": "Speed",
+		"details": "Movement Speed Increased an additional 50% of base speed",
+		"level": "Level: 8",
+		"prerequisite": ["speed7"],
 		"type": "upgrade"
 	},
 	"tome1": {
@@ -180,6 +276,22 @@ const UPGRADES = {
 		"prerequisite": ["ring1"],
 		"type": "upgrade"
 	},
+	"ring3": {
+		"icon": ICON_PATH + "urand_mage.png",
+		"displayname": "Ring",
+		"details": "Your spells now spawn 1 more additional attack",
+		"level": "Level: 3",
+		"prerequisite": ["ring2"],
+		"type": "upgrade"
+	},
+	"ring4": {
+		"icon": ICON_PATH + "urand_mage.png",
+		"displayname": "Ring",
+		"details": "Your spells now spawn an additional attack",
+		"level": "Level: 4",
+		"prerequisite": ["ring3"],
+		"type": "upgrade"
+	},
 	"food": {
 		"icon": ICON_PATH + "chunk.png",
 		"displayname": "Food",
@@ -252,7 +364,38 @@ const UPGRADES = {
 		"prerequisite": ["sword3"],
 		"type": "weapon"
 	},
-	
+	"sword5": {
+		"icon": WEAPON_PATH + "sword_ph.png",
+		"displayname": "Sword",
+		"details": "Sword slashes in front of you",
+		"level": "Level: 5",
+		"prerequisite": ["sword4"],
+		"type": "weapon"
+	},
+	"sword6": {
+		"icon": WEAPON_PATH + "sword_ph.png",
+		"displayname": "Sword",
+		"details": "Sword slashes in front of you",
+		"level": "Level: 6",
+		"prerequisite": ["sword5"],
+		"type": "weapon"
+	},
+	"sword7": {
+		"icon": WEAPON_PATH + "sword_ph.png",
+		"displayname": "Sword",
+		"details": "Sword slashes in front of you",
+		"level": "Level: 7",
+		"prerequisite": ["sword6"],
+		"type": "weapon"
+	},
+	"sword8": {
+		"icon": WEAPON_PATH + "sword_ph.png",
+		"displayname": "Sword",
+		"details": "Sword slashes in front of you",
+		"level": "Level: 8",
+		"prerequisite": ["sword7"],
+		"type": "weapon"
+	},
 	"flail1": {
 		"icon": WEAPON_PATH + "flail_ph.png",
 		"displayname": "Flail",
@@ -285,7 +428,38 @@ const UPGRADES = {
 		"prerequisite": ["flail3"],
 		"type": "weapon"
 	},
-	
+	"flail5": {
+		"icon": WEAPON_PATH + "flail_ph.png",
+		"displayname": "Flail",
+		"details": "Flail swings around you for a short time",
+		"level": "Level: 5",
+		"prerequisite": ["flail4"],
+		"type": "weapon"
+	},
+	"flail6": {
+		"icon": WEAPON_PATH + "flail_ph.png",
+		"displayname": "Flail",
+		"details": "Flail swings around you for a short time",
+		"level": "Level: 6",
+		"prerequisite": ["flail5"],
+		"type": "weapon"
+	},
+	"flail7": {
+		"icon": WEAPON_PATH + "flail_ph.png",
+		"displayname": "Flail",
+		"details": "Flail swings around you for a short time",
+		"level": "Level: 7",
+		"prerequisite": ["flail6"],
+		"type": "weapon"
+	},
+	"flail8": {
+		"icon": WEAPON_PATH + "flail_ph.png",
+		"displayname": "Flail",
+		"details": "Flail swings around you for a short time",
+		"level": "Level: 8",
+		"prerequisite": ["flail7"],
+		"type": "weapon"
+	},
 	"grenade1": {
 		"icon": WEAPON_PATH + "grenade_ph.png",
 		"displayname": "Grenade",
@@ -316,6 +490,38 @@ const UPGRADES = {
 		"details": "Throw even stronger grenades at a random enemy target",
 		"level": "Level: 4",
 		"prerequisite": ["grenade3"],
+		"type": "weapon"
+},
+	"grenade5": {
+		"icon": WEAPON_PATH + "grenade_ph.png",
+		"displayname": "Grenade",
+		"details": "Throw a grenade at a random enemy target",
+		"level": "Level: 5",
+		"prerequisite": ["grenade4"],
+		"type": "weapon"
+	},
+	"grenade6": {
+		"icon": WEAPON_PATH + "grenade_ph.png",
+		"displayname": "Grenade",
+		"details": "Throw an additional grenade at a random enemy target",
+		"level": "Level: 6",
+		"prerequisite": ["grenade5"],
+		"type": "weapon"
+	},
+	"grenade7": {
+		"icon": WEAPON_PATH + "grenade_ph.png",
+		"displayname": "Grenade",
+		"details": "Throw stronger grenades at a random enemy target",
+		"level": "Level: 7",
+		"prerequisite": ["grenade6"],
+		"type": "weapon"
+	},
+	"grenade8": {
+		"icon": WEAPON_PATH + "grenade_ph.png",
+		"displayname": "Grenade",
+		"details": "Throw even stronger grenades at a random enemy target",
+		"level": "Level: 8",
+		"prerequisite": ["grenade7"],
 		"type": "weapon"
 },
 #	"javelin1": {

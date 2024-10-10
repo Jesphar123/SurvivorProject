@@ -37,12 +37,32 @@ func update_flail():
 		3:
 			speed = 0.1
 			damage = 10
-			knockback_amount = 4
+			knockback_amount = 5
 			attack_size = 1.0 * (1 + player.spell_size)
 		4:
-			speed = 0.2
+			speed = 0.1
 			damage = 15
-			knockback_amount = 4
+			knockback_amount = 5
+			attack_size = 1.0 * (1 + player.spell_size)
+		5:
+			speed = 0.15
+			damage = 15
+			knockback_amount = 5
+			attack_size = 1.0 * (1 + player.spell_size)
+		6:
+			speed = 0.15
+			damage = 15
+			knockback_amount = 8
+			attack_size = 1.0 * (1 + player.spell_size)
+		7:
+			speed = 0.2
+			damage = 20
+			knockback_amount = 8
+			attack_size = 1.0 * (1 + player.spell_size)
+		8:
+			speed = 0.2
+			damage = 30
+			knockback_amount = 16
 			attack_size = 1.0 * (1 + player.spell_size)
 			
 	var tween = create_tween()

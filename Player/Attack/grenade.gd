@@ -6,6 +6,8 @@ var speed = 100
 var damage = 10
 var knockback_amount = 100
 var attack_size = 1.0
+var radius = 32
+var particle_scale = Vector2(1, 1)
 
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
@@ -18,6 +20,7 @@ var angle = Vector2.ZERO
 @onready var anim_explosion = get_node("spr_explosion/AnimationPlayer")
 @onready var grenade = get_node("CollisionShape2D")
 @onready var grenade_particles = get_node("ExplosionParticles")
+@onready var grenadeRadius = get_node("CollisionShape2D")
 
 signal remove_from_array(object)
 
@@ -34,24 +37,64 @@ func _ready() -> void:
 			speed = 200
 			damage = 5
 			knockback_amount = 50
+			radius = 32
+			particle_scale = Vector2(1, 1)
 			attack_size = 1.0 * (1 + player.spell_size)
 		2:
 			hp = 9999
 			speed = 200
-			damage = 5
+			damage = 10
 			knockback_amount = 75
+			radius = 40
+			particle_scale = Vector2(1.25, 1.25)
 			attack_size = 1.0 * (1 + player.spell_size)
 		3:
 			hp = 9999
 			speed = 200
-			damage = 10
+			damage = 15
 			knockback_amount = 100
+			radius = 48
+			particle_scale = Vector2(1.5, 1.5)
 			attack_size = 1.0 * (1 + player.spell_size)
 		4:
 			hp = 9999
 			speed = 200
 			damage = 20
 			knockback_amount = 150
+			radius = 56
+			particle_scale = Vector2(1.75, 1.75)
+			attack_size = 1.0 * (1 + player.spell_size)
+		5:
+			hp = 9999
+			speed = 200
+			damage = 25
+			knockback_amount = 50
+			radius = 64
+			particle_scale = Vector2(2, 2)
+			attack_size = 1.0 * (1 + player.spell_size)
+		6:
+			hp = 9999
+			speed = 200
+			damage = 30
+			knockback_amount = 75
+			radius = 72
+			particle_scale = Vector2(2.25, 2.25)
+			attack_size = 1.0 * (1 + player.spell_size)
+		7:
+			hp = 9999
+			speed = 200
+			damage = 35
+			knockback_amount = 100
+			radius = 80
+			particle_scale = Vector2(2.5, 2.5)
+			attack_size = 1.0 * (1 + player.spell_ssize)
+		8:
+			hp = 9999
+			speed = 200
+			damage = 50
+			knockback_amount = 150
+			radius = 104
+			particle_scale = Vector2(3.25, 3.25)
 			attack_size = 1.0 * (1 + player.spell_size)
 			
 	var tween = create_tween()
@@ -59,9 +102,11 @@ func _ready() -> void:
 	tween.play()
 
 func _physics_process(delta: float) -> void:
-	position =  global_position.move_toward(target, speed * delta)
+	position = global_position.move_toward(target, speed * delta)
 	if position == target:
 		grenade.set_deferred("disabled", false)
+		grenadeRadius.shape.radius = radius
+		grenade_particles.scale = particle_scale
 		await get_tree().create_timer(0.1).timeout
 		sprite.visible = false
 		grenade.set_deferred("disabled", true)

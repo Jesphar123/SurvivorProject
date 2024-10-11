@@ -71,6 +71,12 @@ func _ready() -> void:
 			damage = 30
 			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
+		9:
+			hp = 20
+			speed = 500
+			damage = 50
+			knockback_amount = 250
+			attack_size = 1.0 * (1 + player.spell_size)
 			
 	var tween = create_tween()
 	tween.tween_property(self,"scale",Vector2(1,1) * attack_size, 1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)

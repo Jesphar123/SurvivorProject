@@ -42,3 +42,5 @@ Flail needs sound.
 Grenade particles now scale linearly with radius.
 Need fix sword tomorrow. Or think of alternative.
 Should change enemy death sound, its annoying. Use something simpler like a big OOF.
+Normalized flail knockback, still need to adjust the knockback amounts accordingly.
+Need to fix knockback, it should always push enemies away from the player.

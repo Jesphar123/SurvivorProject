@@ -68,6 +68,15 @@ const UPGRADES = {
 		"prerequisite": ["icespear7"],
 		"type": "weapon"
 	},
+	"icespear9": {
+		"icon": WEAPON_PATH + "ice_spear.png",
+		"displayname": "Ice Spear",
+		"details": "An additional 2 Ice Spears are thrown",
+		"level": "Ultimate",
+		"prerequisite": ["icespear8"],
+		"type": "weapon"
+	},
+	
 	"armor1": {
 		"icon": ICON_PATH + "helmet_1.png",
 		"displayname": "Armor",
@@ -396,6 +405,14 @@ const UPGRADES = {
 		"prerequisite": ["sword7"],
 		"type": "weapon"
 	},
+	"sword9": {
+		"icon": WEAPON_PATH + "sword_ph.png",
+		"displayname": "Sword",
+		"details": "Ultimate Sword. Slash now travels.",
+		"level": "Ultimate",
+		"prerequisite": ["sword8"],
+		"type": "weapon"
+	},
 	"flail1": {
 		"icon": WEAPON_PATH + "flail_ph.png",
 		"displayname": "Flail",
@@ -458,6 +475,14 @@ const UPGRADES = {
 		"details": "Flail swings around you for a short time",
 		"level": "Level: 8",
 		"prerequisite": ["flail7"],
+		"type": "weapon"
+	},
+	"flail9": {
+		"icon": WEAPON_PATH + "flail_ph.png",
+		"displayname": "Flail",
+		"details": "Ultimate Flail. Now swings around you for a short time",
+		"level": "Ultimate",
+		"prerequisite": ["flail8"],
 		"type": "weapon"
 	},
 	"grenade1": {
@@ -523,68 +548,13 @@ const UPGRADES = {
 		"level": "Level: 8",
 		"prerequisite": ["grenade7"],
 		"type": "weapon"
+	},
+	"grenade9": {
+		"icon": WEAPON_PATH + "grenade_ph.png",
+		"displayname": "Grenade",
+		"details": "Ultimate Grenade. Throw even stronger grenades at a random enemy target",
+		"level": "Ultimate",
+		"prerequisite": ["grenade8"],
+		"type": "weapon"
 },
-#	"javelin1": {
-#		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
-#		"displayname": "Javelin",
-#		"details": "A magical javelin will follow you attacking enemies in a straight line",
-#		"level": "Level: 1",
-#		"prerequisite": [],
-#		"type": "weapon"
-#	},
-#	"javelin2": {
-#		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
-#		"displayname": "Javelin",
-#		"details": "The javelin will now attack an additional enemy per attack",
-#		"level": "Level: 2",
-#		"prerequisite": ["javelin1"],
-#		"type": "weapon"
-#	},
-#	"javelin3": {
-#		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
-#		"displayname": "Javelin",
-#		"details": "The javelin will attack another additional enemy per attack",
-#		"level": "Level: 3",
-#		"prerequisite": ["javelin2"],
-#		"type": "weapon"
-#	},
-#	"javelin4": {
-#		"icon": WEAPON_PATH + "javelin_3_new_attack.png",
-#		"displayname": "Javelin",
-#		"details": "The javelin now does + 5 damage per attack and causes 20% additional knockback",
-#		"level": "Level: 4",
-#		"prerequisite": ["javelin3"],
-#		"type": "weapon"
-#	},
-#	"tornado1": {
-#		"icon": WEAPON_PATH + "tornado.png",
-#		"displayname": "Tornado",
-#		"details": "A tornado is created and random heads somewhere in the players direction",
-#		"level": "Level: 1",
-#		"prerequisite": [],
-#		"type": "weapon"
-#	},
-#	"tornado2": {
-#		"icon": WEAPON_PATH + "tornado.png",
-#		"displayname": "Tornado",
-#		"details": "An additional Tornado is created",
-#		"level": "Level: 2",
-#		"prerequisite": ["tornado1"],
-#		"type": "weapon"
-#	},
-#	"tornado3": {
-#		"icon": WEAPON_PATH + "tornado.png",
-#		"displayname": "Tornado",
-#		"details": "The Tornado cooldown is reduced by 0.5 seconds",
-#		"level": "Level: 3",
-#		"prerequisite": ["tornado2"],
-#		"type": "weapon"
-#	},
-#	"tornado4": {
-#		"icon": WEAPON_PATH + "tornado.png",
-#		"displayname": "Tornado",
-#		"details": "An additional tornado is created and the knockback is increased by 25%",
-#		"level": "Level: 4",
-#		"prerequisite": ["tornado3"],
-#		"type": "weapon"
 }

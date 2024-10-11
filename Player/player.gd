@@ -95,16 +95,6 @@ var ice_spear_base_ammo = 0
 var ice_spear_attackspeed = 1
 var ice_spear_level = 0
 
-#Tornado
-var tornado_ammo = 0
-var tornado_base_ammo = 0
-var tornado_attackspeed = 3
-var tornado_level = 0
-
-#Javelin
-var javelin_ammo = 0
-var javelin_level = 0
-
 #Sword
 var sword_ammo = 0
 var sword_base_ammo = 0
@@ -160,6 +150,14 @@ func movement():
 		sprite.flip_h = true
 		last_direction = 180
 		last_direction_vec = Vector2(-1,0)
+		
+	if mov.y < 0:
+		last_direction = 270
+		last_direction_vec = Vector2(0,-1)
+	elif mov.y > 0:
+		last_direction = 90
+		last_direction_vec = Vector2(0,1)
+	
 	if mov != Vector2.ZERO:
 		last_movement = mov
 		if walkTimer.is_stopped():
@@ -232,6 +230,7 @@ func change_character(character):
 	if character == "maeve":
 		$CharacterSprite.texture = load("res://Textures/Player/player_test_anim_2.png")
 		upgrade_character("sword1")
+		upgrade_character(("sword9"))
 	if character == "princess":
 		$CharacterSprite.texture = load("res://Textures/Player/princess_anim.png")
 		upgrade_character("flail1")
@@ -248,15 +247,7 @@ func attack():
 		iceSpearTimer.wait_time = ice_spear_attackspeed * (1 - spell_cooldown)
 		if iceSpearTimer.is_stopped():
 			iceSpearTimer.start()
-			
-#	if tornado_level > 0:
-#		tornadoTimer.wait_time = tornado_attackspeed * (1 - spell_cooldown)
-#		if tornadoTimer.is_stopped():
-#			tornadoTimer.start()
-			
-#	if javelin_level > 0:
-#		spawn_javelin()
-		
+
 	if sword_level > 0:
 		swordTimer.wait_time = sword_attackspeed * (1 - spell_cooldown)
 		if swordTimer.is_stopped():
@@ -288,7 +279,7 @@ func _on_grenade_attack_timer_timeout() -> void:
 			grenadeAttackTimer.stop()
 
 func _on_sword_timer_timeout() -> void:
-	sword_ammo += sword_base_ammo
+	sword_ammo += sword_base_ammo #+ additional_attacks
 	swordAttackTimer.start()
 
 func _on_sword_attack_timer_timeout() -> void:
@@ -296,6 +287,7 @@ func _on_sword_attack_timer_timeout() -> void:
 		var sword_attack = sword.instantiate()
 		sword_attack.set_rotation_degrees(last_direction)
 		sword_attack.position = swordAttach.global_position
+		sword_attack.direction = last_direction_vec
 		sword_attack.level = sword_level
 		swordAttach.add_child(sword_attack)
 		sword_ammo -= 1
@@ -303,11 +295,12 @@ func _on_sword_attack_timer_timeout() -> void:
 			swordAttackTimer.start()
 		else:
 			swordAttackTimer.stop()
-	if additional_attacks == 1:
-		await get_tree().create_timer(0.2).timeout
+	if additional_attacks >= 1:
+		await get_tree().create_timer(0.1).timeout
 		var second_sword_attack = sword.instantiate()
 		second_sword_attack.set_rotation_degrees(last_direction + 180)
 		second_sword_attack.position = swordAttach.global_position
+		second_sword_attack.direction = last_direction_vec * -1
 		second_sword_attack.level = sword_level
 		swordAttach.add_child(second_sword_attack)
 
@@ -327,10 +320,6 @@ func _on_ice_spear_attack_timer_timeout() -> void:
 			iceSpearAttackTimer.start()
 		else:
 			iceSpearAttackTimer.stop()
-
-func _on_tornado_timer_timeout() -> void:
-	tornado_ammo += tornado_base_ammo + additional_attacks
-	tornadoAttackTimer.start()
 
 func spawn_flail():
 	var get_flail_total = flailBase.get_child_count()
@@ -445,7 +434,8 @@ func spawn_flail():
 		if i.has_method("update_flail"):
 			i.update_flail()
 			
-			
+
+#Targetting functions
 func get_closest_target():
 	var enemy_closest = %EnemyDetectionArea.get_overlapping_bodies()
 	if enemy_closest.size() > 0:
@@ -562,27 +552,9 @@ func upgrade_character(upgrade):
 		"icespear8":
 			ice_spear_level = 8
 			ice_spear_base_ammo += 2
-#		"tornado1":
-			tornado_level = 1
-			tornado_base_ammo += 1
-#		"tornado2":
-			tornado_level = 2
-			tornado_base_ammo += 1
-#		"tornado3":
-			tornado_level = 3
-			tornado_attackspeed -= 0.5
-#		"tornado4":
-			tornado_level = 4
-			tornado_base_ammo += 1
-#		"javelin1":
-			javelin_level = 1
-			javelin_ammo = 1
-#		"javelin2":
-			javelin_level = 2
-#		"javelin3":
-			javelin_level = 3
-#		"javelin4":
-#			javelin_level = 4
+		"icespear9":
+			ice_spear_level = 9
+			ice_spear_base_ammo += 2
 		"armor1","armor2","armor3","armor4","armor5","armor6","armor7","armor8":
 			armor += 1
 		"speed1","speed2","speed3","speed4","speed5","speed6","speed7","speed8":
@@ -610,19 +582,28 @@ func upgrade_character(upgrade):
 			sword_base_ammo += 1
 		"sword2":
 			sword_level = 2
+			sword_attackspeed = 0.95
 		"sword3":
 			sword_level = 3
+			sword_attackspeed = 0.90
 		"sword4":
 			sword_level = 4
+			sword_attackspeed = 0.85
 		"sword5":
 			sword_level = 5
-			sword_base_ammo += 1
+			sword_attackspeed = 0.80
 		"sword6":
 			sword_level = 6
+			sword_attackspeed = 0.75
 		"sword7":
 			sword_level = 7
+			sword_attackspeed = 0.70
 		"sword8":
 			sword_level = 8
+			sword_attackspeed = 0.50
+		"sword9":
+			sword_level = 9
+			sword_attackspeed = 0.50
 		"flail1":
 			flail_level = 1
 			flail_ammo += 1
@@ -640,6 +621,8 @@ func upgrade_character(upgrade):
 			flail_level = 7
 		"flail8":
 			flail_level = 8
+		"flail9":
+			flail_level = 9
 		"grenade1":
 			grenade_level = 1
 			grenade_base_ammo += 1
@@ -660,6 +643,8 @@ func upgrade_character(upgrade):
 			grenade_level = 7
 		"grenade8":
 			grenade_level = 8
+		"grenade9":
+			grenade_level = 9
 			
 	adjust_gui_collection(upgrade)
 	attack()

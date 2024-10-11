@@ -15,7 +15,6 @@ var angle = Vector2.ZERO
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var sprite = $Sprite2D
 @onready var snd_explosion = get_node("snd_explosion")
-#var spr_explosion = preload("res://Enemies/death_explosion.tscn")
 @onready var spr_explosion = get_node("spr_explosion")
 @onready var anim_explosion = get_node("spr_explosion/AnimationPlayer")
 @onready var grenade = get_node("CollisionShape2D")
@@ -93,6 +92,14 @@ func _ready() -> void:
 			speed = 200
 			damage = 50
 			knockback_amount = 150
+			radius = 88
+			particle_scale = Vector2(2.75, 2.75)
+			attack_size = 1.0 * (1 + player.spell_size)
+		9:
+			hp = 9999
+			speed = 200
+			damage = 100
+			knockback_amount = 350
 			radius = 104
 			particle_scale = Vector2(3.25, 3.25)
 			attack_size = 1.0 * (1 + player.spell_size)
@@ -117,25 +124,11 @@ func _physics_process(delta: float) -> void:
 			
 			#Screenshake signal
 			GlobalSignals.grenade_explosion.emit()
-			
-		#if !anim_explosion.is_playing() and anim_may_play:
-		#	spr_explosion.visible = true
-		#	anim_explosion.play("anim_explosion")
-		#	anim_may_play = false
-			
-	#var enemy_death = death_anim.instantiate()
-	#enemy_death.scale = sprite.scale
-	#enemy_death.global_position = global_position
-	#get_parent().call_deferred("add_child",enemy_death)
 	
 func enemy_hit(charge = 1):
 	hp -= charge
 	if hp <= 0:
 		emit_signal("remove_from_array", self)
-
-#func _on_timer_timeout() -> void:
-#	emit_signal("remove_from_array", self)
-#	queue_free()
 
 
 func _on_snd_explosion_finished() -> void:

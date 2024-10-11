@@ -1,11 +1,10 @@
 extends Area2D
 
 var level: int = 1
-var hp: int = 1
-var speed: int = 0
 var damage: int = 5
 var knockback_amount: int = 2
 var attack_size: float = 1.0
+var speed: int = 0
 
 var target: Vector2 = Vector2.ZERO
 var angle: Vector2 = Vector2.ZERO
@@ -14,13 +13,10 @@ var direction: Vector2 = Vector2.ZERO
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var player_sword_position = get_tree().get_first_node_in_group("sword_position")
 @onready var sprite = $Sprite2D
-@onready var sword1 = get_node("CollisionShape2D")
-@onready var sword2 = get_node("CollisionShape2D2")
-@onready var sword3 = get_node("CollisionShape2D3")
 @onready var anim = get_node("AnimationPlayer")
 @onready var snd_sword_swing = get_node("snd_sword_swing")
-
-@onready var walkTimer: Node = get_node("walkTimer")
+@onready var hitBox = get_node("CollisionShape2D2")
+@onready var timer = get_node("Timer")
 
 signal remove_from_array(object)
 
@@ -28,66 +24,84 @@ func _ready() -> void:
 	
 	match level:
 		1:
-			hp = 1
-			speed = 0
 			damage = 5
-			knockback_amount = 2
+			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
+			speed = 0
+			timer.wait_time = 0.1
+			anim.speed_scale = 2.0
 		2:
-			hp = 1
+			damage = 10
+			knockback_amount = 150
+			attack_size = 1.0 * (1.05 + player.spell_size)
 			speed = 0
-			damage = 5
-			knockback_amount = 10
-			attack_size = 1.0 * (1 + player.spell_size)
+			timer.wait_time = 0.2
+			anim.speed_scale = 2.0
 		3:
-			hp = 2
+			damage = 10
+			knockback_amount = 200
+			attack_size = 1.0 * (1.1 + player.spell_size)
 			speed = 0
-			damage = 8
-			knockback_amount = 15
-			attack_size = 1.0 * (1 + player.spell_size)
+			timer.wait_time = 0.1
+			anim.speed_scale = 2.0
 		4:
-			hp = 2
+			damage = 15
+			knockback_amount = 200
+			attack_size = 1.0 * (1.15 + player.spell_size)
 			speed = 0
-			damage = 8
-			knockback_amount = 15
-			attack_size = 1.0 * (1 + player.spell_size)
+			timer.wait_time = 0.1
+			anim.speed_scale = 2.0
 		5:
-			hp = 1
+			damage = 15
+			knockback_amount = 250
+			attack_size = 1.0 * (1.2 + player.spell_size)
 			speed = 0
-			damage = 5
-			knockback_amount = 2
-			attack_size = 1.0 * (1 + player.spell_size)
+			timer.wait_time = 0.1
+			anim.speed_scale = 2.0
 		6:
-			hp = 1
+			damage = 20
+			knockback_amount = 250
+			attack_size = 1.0 * (1.25 + player.spell_size)
 			speed = 0
-			damage = 5
-			knockback_amount = 10
-			attack_size = 1.0 * (1 + player.spell_size)
+			timer.wait_time = 0.1
+			anim.speed_scale = 2.0
 		7:
-			hp = 2
+			damage = 20
+			knockback_amount = 300
+			attack_size = 1.0 * (1.3 + player.spell_size)
 			speed = 0
-			damage = 8
-			knockback_amount = 15
-			attack_size = 1.0 * (1 + player.spell_size)
+			timer.wait_time = 0.1
+			anim.speed_scale = 2.0
 		8:
-			hp = 2
+			damage = 30
+			knockback_amount = 350
+			attack_size = 1.0 * (1.35 + player.spell_size)
 			speed = 0
-			damage = 8
-			knockback_amount = 15
-			attack_size = 1.0 * (1 + player.spell_size)
+			timer.wait_time = 0.1
+			anim.speed_scale = 2.0
+		9:
+			damage = 30
+			knockback_amount = 350
+			attack_size = 1.0 * (1.5 + player.spell_size)
+			speed = 200
+			timer.wait_time = 0.4
+			anim.speed_scale = 0.5
 	
-			
+	timer.start()
 	var tween = create_tween()
 	tween.tween_property(self,"scale",Vector2(1,1) * attack_size, 1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
 	anim.play("sword_slash")
 	snd_sword_swing.play()
 	
+func _physics_process(delta: float) -> void:
+	angle = (hitBox.global_position - player.global_position).normalized()
 	
+	if level == 9:
+		position += direction * speed * delta
+	else:
+		position = player_sword_position.global_position
 
-func _physics_process(_delta: float) -> void:
-	angle = ((sword1.global_position + sword2.global_position + sword3.global_position) / 3 - player.global_position)
-	position = player_sword_position.global_position
-	#emit_signal("remove_from_array", self)
-	await get_tree().create_timer(0.1).timeout
+func _on_timer_timeout() -> void:
+	emit_signal("remove_from_array", self)
 	queue_free()

@@ -22,6 +22,7 @@ var knockback: Vector2 = Vector2.ZERO
 @onready var hitBoxCollision: CollisionShape2D = $HitBox/CollisionShape2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var hideTimer: Timer = $HideTimer
+@onready var bloodSplatter: CPUParticles2D = $BloodSplatter
 
 @onready var dissolve = 1.0
 @onready var dissolve_speed = 0.033
@@ -140,6 +141,9 @@ func death():
 func _on_hurt_box_hurt(damage, angle, knockback_amount):
 	hp -= damage
 	knockback = angle * knockback_amount
+	if bloodSplatter != null:
+		bloodSplatter.direction = (global_position - player.global_position).normalized()
+		bloodSplatter.emitting = true
 	
 	if hp <= 0:
 		death()

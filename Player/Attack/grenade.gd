@@ -15,11 +15,10 @@ var angle = Vector2.ZERO
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var sprite = $Sprite2D
 @onready var snd_explosion = get_node("snd_explosion")
-@onready var spr_explosion = get_node("spr_explosion")
-@onready var anim_explosion = get_node("spr_explosion/AnimationPlayer")
 @onready var grenade = get_node("CollisionShape2D")
 @onready var grenade_particles = get_node("ExplosionParticles")
 @onready var grenadeRadius = get_node("CollisionShape2D")
+@onready var anim = get_node("AnimationPlayer")
 
 signal remove_from_array(object)
 
@@ -27,7 +26,6 @@ var snd_may_play = true
 var anim_may_play = true
 
 func _ready() -> void:
-	spr_explosion.visible = false
 	angle = global_position.direction_to(target)
 	rotation = angle.angle() + deg_to_rad(135)
 	match level:
@@ -86,7 +84,7 @@ func _ready() -> void:
 			knockback_amount = 100
 			radius = 80
 			particle_scale = Vector2(2.5, 2.5)
-			attack_size = 1.0 * (1 + player.spell_ssize)
+			attack_size = 1.0 * (1 + player.spell_size)
 		8:
 			hp = 9999
 			speed = 200
@@ -119,17 +117,20 @@ func _physics_process(delta: float) -> void:
 		grenade.set_deferred("disabled", true)
 		if !snd_explosion.is_playing() and snd_may_play:
 			snd_explosion.play()
+			
+			#anim.play("shockwave") # Shockwave shader goes here, not working yet
 			grenade_particles.emitting = true
 			snd_may_play = false
 			
 			#Screenshake signal
 			GlobalSignals.grenade_explosion.emit()
 	
-func enemy_hit(charge = 1):
-	hp -= charge
-	if hp <= 0:
-		emit_signal("remove_from_array", self)
+#func enemy_hit(charge = 1):
+	#hp -= charge
+	#if hp <= 0:
+		#emit_signal("remove_from_array", self)
 
 
 func _on_snd_explosion_finished() -> void:
+	emit_signal("remove_from_array", self)
 	queue_free()

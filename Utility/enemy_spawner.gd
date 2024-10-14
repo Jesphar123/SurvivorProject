@@ -40,7 +40,6 @@ func _on_timer_timeout() -> void:
 						#Separation counter
 						separationTime += randf_range(0.8,1.2)
 						if separationTime >= separationDelay:
-						#	check_separation(e)
 							separationTime = 0.0
 						
 							var separation: int = (player.position - e.position).length()

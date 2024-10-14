@@ -218,7 +218,6 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 		death()
 	
 func _ready():
-	var squash_n_stretch: bool = true
 	attack()
 	set_exp_bar(experience, calculate_experience_cap())
 	_on_hurt_box_hurt(0,0,0)
@@ -230,7 +229,6 @@ func change_character(character):
 	if character == "maeve":
 		$CharacterSprite.texture = load("res://Textures/Player/player_test_anim_2.png")
 		upgrade_character("sword1")
-		upgrade_character(("sword9"))
 	if character == "princess":
 		$CharacterSprite.texture = load("res://Textures/Player/princess_anim.png")
 		upgrade_character("flail1")
@@ -533,28 +531,37 @@ func upgrade_character(upgrade):
 		"icespear1":
 			ice_spear_level = 1
 			ice_spear_base_ammo += 1
+			ice_spear_attackspeed = 1
 		"icespear2":
 			ice_spear_level = 2
 			ice_spear_base_ammo += 1
+			ice_spear_attackspeed = 0.99
 		"icespear3":
 			ice_spear_level = 3
+			ice_spear_attackspeed = 0.98
 		"icespear4":
 			ice_spear_level = 4
 			ice_spear_base_ammo += 2
+			ice_spear_attackspeed = 0.97
 		"icespear5":
 			ice_spear_level = 5
 			ice_spear_base_ammo += 1
+			ice_spear_attackspeed = 0.96
 		"icespear6":
 			ice_spear_level = 6
 			ice_spear_base_ammo += 1
+			ice_spear_attackspeed = 0.95
 		"icespear7":
 			ice_spear_level = 7
+			ice_spear_attackspeed = 0.94
 		"icespear8":
 			ice_spear_level = 8
 			ice_spear_base_ammo += 2
+			ice_spear_attackspeed = 0.93
 		"icespear9":
 			ice_spear_level = 9
 			ice_spear_base_ammo += 2
+			ice_spear_attackspeed = 0.90
 		"armor1","armor2","armor3","armor4","armor5","armor6","armor7","armor8":
 			armor += 1
 		"speed1","speed2","speed3","speed4","speed5","speed6","speed7","speed8":
@@ -600,7 +607,7 @@ func upgrade_character(upgrade):
 			sword_attackspeed = 0.70
 		"sword8":
 			sword_level = 8
-			sword_attackspeed = 0.50
+			sword_attackspeed = 0.65
 		"sword9":
 			sword_level = 9
 			sword_attackspeed = 0.50

@@ -93,6 +93,7 @@ script = ExtResource("1_bwmke")
 libraries = {
 "": SubResource("AnimationLibrary_wt4ob")
 }
+speed_scale = 1.2
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 texture_filter = 1

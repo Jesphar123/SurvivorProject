@@ -25,65 +25,65 @@ func _ready() -> void:
 	match level:
 		1:
 			damage = 5
-			knockback_amount = 150
+			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.spell_size)
-			speed = 0
+			speed = 200
 			timer.wait_time = 0.1
 			anim.speed_scale = 2.0
 		2:
 			damage = 10
 			knockback_amount = 150
 			attack_size = 1.0 * (1.05 + player.spell_size)
-			speed = 0
-			timer.wait_time = 0.2
+			speed = 200
+			timer.wait_time = 0.1
 			anim.speed_scale = 2.0
 		3:
 			damage = 10
 			knockback_amount = 200
 			attack_size = 1.0 * (1.1 + player.spell_size)
-			speed = 0
-			timer.wait_time = 0.1
-			anim.speed_scale = 2.0
+			speed = 200
+			timer.wait_time = 0.15
+			anim.speed_scale = 2.5
 		4:
 			damage = 15
 			knockback_amount = 200
 			attack_size = 1.0 * (1.15 + player.spell_size)
-			speed = 0
-			timer.wait_time = 0.1
-			anim.speed_scale = 2.0
+			speed = 200
+			timer.wait_time = 0.15
+			anim.speed_scale = 2.5
 		5:
 			damage = 15
 			knockback_amount = 250
 			attack_size = 1.0 * (1.2 + player.spell_size)
-			speed = 0
+			speed = 250
 			timer.wait_time = 0.1
 			anim.speed_scale = 2.0
 		6:
 			damage = 20
 			knockback_amount = 250
 			attack_size = 1.0 * (1.25 + player.spell_size)
-			speed = 0
-			timer.wait_time = 0.1
-			anim.speed_scale = 2.0
+			speed = 250
+			timer.wait_time = 0.2
+			anim.speed_scale = 1.0
 		7:
 			damage = 20
 			knockback_amount = 300
 			attack_size = 1.0 * (1.3 + player.spell_size)
-			speed = 0
-			timer.wait_time = 0.1
-			anim.speed_scale = 2.0
+			speed = 300
+			timer.wait_time = 0.2
+			anim.speed_scale = 1.0
 		8:
-			damage = 30
+			damage = 25
 			knockback_amount = 350
 			attack_size = 1.0 * (1.35 + player.spell_size)
-			speed = 0
-			timer.wait_time = 0.1
-			anim.speed_scale = 2.0
+			speed = 300
+			timer.wait_time = 0.2
+			anim.speed_scale = 1.0
 		9:
-			damage = 30
-			knockback_amount = 350
+			damage = 40
+			knockback_amount = 400
 			attack_size = 1.0 * (1.5 + player.spell_size)
-			speed = 200
+			speed = 400
 			timer.wait_time = 0.4
 			anim.speed_scale = 0.5
 	
@@ -96,11 +96,11 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	angle = (hitBox.global_position - player.global_position).normalized()
-	
-	if level == 9:
-		position += direction * speed * delta
-	else:
-		position = player_sword_position.global_position
+	position += direction * speed * delta
+	#if level == 9:
+		#position += direction * speed * delta
+	#else:
+		#position = player_sword_position.global_position
 
 func _on_timer_timeout() -> void:
 	emit_signal("remove_from_array", self)

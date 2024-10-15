@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bh4fc7i6x1g53"]
 
 [ext_resource type="Script" path="res://Player/Attack/flail.gd" id="1_igp25"]
-[ext_resource type="Texture2D" uid="uid://cp4d2nu38v0h6" path="res://Textures/Items/Weapons/flail_16_ph.png" id="2_e6jwd"]
-[ext_resource type="Texture2D" uid="uid://sdhl87jpfyey" path="res://Textures/Items/Weapons/flail_chain_ph.png" id="3_w5f23"]
+[ext_resource type="Texture2D" uid="uid://dls0bl3tcrwa4" path="res://Textures/Items/Weapons/flail5.png" id="2_pkt2k"]
+[ext_resource type="Texture2D" uid="uid://bwob6ctve3xdb" path="res://Textures/Items/Weapons/flail_chain.png" id="3_4vrav"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8x5m6"]
 radius = 8.0
@@ -25,13 +25,17 @@ wait_time = 0.1
 autostart = true
 
 [node name="Ball" type="Sprite2D" parent="."]
+z_index = 2
+y_sort_enabled = true
 position = Vector2(0, -48)
-texture = ExtResource("2_e6jwd")
+rotation = 0.785398
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_pkt2k")
 
 [node name="Chain" type="Sprite2D" parent="."]
 show_behind_parent = true
 position = Vector2(0, -24)
-texture = ExtResource("3_w5f23")
+texture = ExtResource("3_4vrav")
 
 [node name="UpdateTimer" type="Timer" parent="."]
 wait_time = 0.5

@@ -97,7 +97,7 @@ func _ready() -> void:
 			hp = 9999
 			speed = 200
 			damage = 100
-			knockback_amount = 350
+			knockback_amount = 150
 			radius = 104
 			particle_scale = Vector2(3.25, 3.25)
 			attack_size = 1.0 * (1 + player.spell_size)

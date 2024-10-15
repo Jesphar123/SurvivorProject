@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsnhyksyadhvq"]
+[gd_scene load_steps=17 format=3 uid="uid://dsnhyksyadhvq"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_body_new.gd" id="1_7p0gj"]
 [ext_resource type="Material" uid="uid://cvx0n8ay4g3ck" path="res://Enemies/enemy_base.tres" id="2_3nh5g"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://ysqs7b3kkmu0" path="res://Textures/Player/player_shadow_ph.png" id="4_0aw6p"]
 [ext_resource type="PackedScene" uid="uid://dtbv2h63hij6" path="res://Utility/hurt_box.tscn" id="5_xukvb"]
 [ext_resource type="PackedScene" uid="uid://olluckrijwkt" path="res://Utility/hit_box.tscn" id="6_feait"]
-[ext_resource type="AudioStream" uid="uid://dc4c87bp0l2px" path="res://Audio/SoundEffect/enemy_hit_2.ogg" id="7_ltdnt"]
+[ext_resource type="AudioStream" uid="uid://d3v0fbgvxj1y" path="res://Audio/SoundEffect/hitHurt4.wav" id="7_h10g8"]
+[ext_resource type="AudioStream" uid="uid://cu1nnh1d4tvfx" path="res://Audio/SoundEffect/hitHurt5.wav" id="8_5fmvs"]
 
 [sub_resource type="Animation" id="Animation_sgtpq"]
 length = 0.001
@@ -92,6 +93,8 @@ colors = PackedColorArray(0.67, 0, 0, 1, 0.49, 0, 0, 1, 0.49, 0, 0, 0)
 z_index = 2
 y_sort_enabled = true
 scale = Vector2(2.5, 2.5)
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_7p0gj")
 speed = 80.0
 min_separation_distance = 160.0
@@ -119,10 +122,6 @@ texture = ExtResource("4_0aw6p")
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_bvglu")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0.5, -6.85453e-07)
-scale = Vector2(0.55, 0.8)
-
 [node name="HurtBox" parent="." instance=ExtResource("5_xukvb")]
 collision_mask = 4
 
@@ -140,13 +139,12 @@ position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_ikh7p")
 
 [node name="snd_enemy_hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_ltdnt")
-pitch_scale = 2.0
+stream = ExtResource("7_h10g8")
+volume_db = -5.0
 
 [node name="snd_enemy_death" type="AudioStreamPlayer2D" parent="."]
-scale = Vector2(1, 1)
-stream = ExtResource("7_ltdnt")
-pitch_scale = 1.5
+stream = ExtResource("8_5fmvs")
+volume_db = -5.0
 
 [node name="HideTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -154,6 +152,7 @@ autostart = true
 
 [node name="BloodSplatter" type="CPUParticles2D" parent="."]
 emitting = false
+amount = 16
 lifetime = 0.3
 one_shot = true
 speed_scale = 0.8

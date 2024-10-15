@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://co4cmv7y5m16l"]
+[gd_scene load_steps=14 format=3 uid="uid://co4cmv7y5m16l"]
 
 [ext_resource type="Shader" path="res://Player/Attack/grenade.gdshader" id="1_2de6b"]
 [ext_resource type="Script" path="res://Player/Attack/grenade.gd" id="1_guu7k"]
-[ext_resource type="Texture2D" uid="uid://d07r1atqqn1ny" path="res://Textures/Items/Weapons/grenade_ph.png" id="1_j874c"]
+[ext_resource type="Texture2D" uid="uid://rwcftn6bycy0" path="res://Textures/Items/Weapons/grenade2.png" id="2_ba73k"]
 [ext_resource type="AudioStream" uid="uid://d2y8cf5uuggnx" path="res://Audio/SoundEffect/synthetic_bomb.ogg" id="3_egurs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s2y3d"]
@@ -51,6 +51,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
 
 [sub_resource type="Animation" id="Animation_vgyck"]
 resource_name = "shockwave"
@@ -81,9 +93,26 @@ tracks/1/keys = {
 "values": [0.0, 0.5]
 }
 
+[sub_resource type="Animation" id="Animation_d4lwd"]
+resource_name = "scale"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.2, 0.2), Vector2(0.4, 0.4), Vector2(0.6, 0.6), Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_08tge"]
 _data = {
 "RESET": SubResource("Animation_mm6dw"),
+"scale": SubResource("Animation_d4lwd"),
 "shockwave": SubResource("Animation_vgyck")
 }
 
@@ -95,8 +124,8 @@ script = ExtResource("1_guu7k")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_s2y3d")
-scale = Vector2(2, 2)
-texture = ExtResource("1_j874c")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_ba73k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_uoj56")

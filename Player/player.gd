@@ -421,11 +421,12 @@ func spawn_flail():
 				continue
 				
 		if calc_spawns == 5:
-			var flail_spawn = flail.instantiate()
-			if get_flail_total == 0:
-				flailBase.add_child(flail_spawn)
-				calc_spawns -= 1
-				continue
+			#var flail_spawn = flail.instantiate()
+			#if get_flail_total == 0:
+				#flailBase.add_child(flail_spawn)
+				#calc_spawns -= 1
+				#continue
+				return
 
 	var get_flails = flailBase.get_children()
 	for i in get_flails:
@@ -447,15 +448,6 @@ func get_random_target():
 		return random_enemy_target.pick_random().global_position
 	else:
 		return Vector2.UP
-
-#func _on_enemy_detection_area_body_entered(body: Node2D) -> void:
-	#if not random_enemy_target.has(body):
-		#random_enemy_target.append(body)
-#
-#
-#func _on_enemy_detection_area_body_exited(body: Node2D) -> void:
-	#if random_enemy_target.has(body):
-		#random_enemy_target.erase(body)
 
 func _on_enemy_detection_area_area_entered(area: Area2D) -> void:
 	if not random_enemy_target.has(area):
@@ -492,12 +484,14 @@ func calculate_experience(gem_exp):
 	
 func calculate_experience_cap():
 	var exp_cap = experience_level
-	if experience_level < 20:
-		exp_cap = experience_level * 5
-	elif experience_level < 40:
-		exp_cap = 95 + experience_level * (experience_level - 19) * 8
-	else:
-		exp_cap = 255 + (experience_level - 39) * 12
+	#exp_cap = experience_level * 5
+	exp_cap = pow(experience_level, 2) + 4
+	#if experience_level < 20:
+		#exp_cap = experience_level * 5
+	#elif experience_level < 40:
+		#exp_cap = 95 + experience_level * (experience_level - 19) * 8
+	#else:
+		#exp_cap = 255 + (experience_level - 39) * 12
 	return exp_cap
 
 func set_exp_bar(set_value = 1, set_max_value = 100):

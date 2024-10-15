@@ -5,73 +5,73 @@ const ICON_PATH = "res://Textures/Items/Upgrades/"
 const WEAPON_PATH = "res://Textures/Items/Weapons/"
 const UPGRADES = {
 	"icespear1": {
-		"icon": WEAPON_PATH + "ice_spear.png",
-		"displayname": "Ice Spear",
-		"details": "A spear of ice is thrown at a random enemy",
+		"icon": WEAPON_PATH + "gun.png",
+		"displayname": "Pistol",
+		"details": "A semi-automatic pistol. Fires piercing bullets. Point and shoot!",
 		"level": "Level: 1",
 		"prerequisite": [],
 		"type": "weapon"
 	},
 	"icespear2": {
-		"icon": WEAPON_PATH + "ice_spear.png",
-		"displayname": "Ice Spear",
-		"details": "An addition Ice Spear is thrown",
+		"icon": WEAPON_PATH + "gun.png",
+		"displayname": "Pistol",
+		"details": "Fire an additional bullet",
 		"level": "Level: 2",
 		"prerequisite": ["icespear1"],
 		"type": "weapon"
 	},
 	"icespear3": {
-		"icon": WEAPON_PATH + "ice_spear.png",
-		"displayname": "Ice Spear",
-		"details": "Ice Spears now pass through another enemy and do + 3 damage",
+		"icon": WEAPON_PATH + "gun.png",
+		"displayname": "Pistol",
+		"details": "Bullets now pierce another enemy, and do more damage",
 		"level": "Level: 3",
 		"prerequisite": ["icespear2"],
 		"type": "weapon"
 	},
 	"icespear4": {
-		"icon": WEAPON_PATH + "ice_spear.png",
-		"displayname": "Ice Spear",
-		"details": "An additional 2 Ice Spears are thrown",
+		"icon": WEAPON_PATH + "gun.png",
+		"displayname": "Pistol",
+		"details": "Fire two more bullets",
 		"level": "Level: 4",
 		"prerequisite": ["icespear3"],
 		"type": "weapon"
 	},
 		"icespear5": {
-		"icon": WEAPON_PATH + "ice_spear.png",
-		"displayname": "Ice Spear",
-		"details": "A spear of ice is thrown at a random enemy",
+		"icon": WEAPON_PATH + "gun.png",
+		"displayname": "Pistol",
+		"details": "Placeholder text",
 		"level": "Level: 5",
 		"prerequisite": ["icespear4"],
 		"type": "weapon"
 	},
 	"icespear6": {
-		"icon": WEAPON_PATH + "ice_spear.png",
-		"displayname": "Ice Spear",
-		"details": "An addition Ice Spear is thrown",
+		"icon": WEAPON_PATH + "gun.png",
+		"displayname": "Pistol",
+		"details": "Placeholder text",
 		"level": "Level: 6",
 		"prerequisite": ["icespear5"],
 		"type": "weapon"
 	},
 	"icespear7": {
-		"icon": WEAPON_PATH + "ice_spear.png",
-		"displayname": "Ice Spear",
-		"details": "Ice Spears now pass through another enemy and do + 3 damage",
+		"icon": WEAPON_PATH + "gun.png",
+		"displayname": "Pistol",
+		"details": "Placeholder text",
 		"level": "Level: 7",
 		"prerequisite": ["icespear6"],
 		"type": "weapon"
 	},
 	"icespear8": {
-		"icon": WEAPON_PATH + "ice_spear.png",
-		"displayname": "Ice Spear",
-		"details": "An additional 2 Ice Spears are thrown",
+		"icon": WEAPON_PATH + "gun.png",
+		"displayname": "Pistol",
+		"details": "Placeholder text",
 		"level": "Level: 8",
 		"prerequisite": ["icespear7"],
 		"type": "weapon"
 	},
 	"icespear9": {
-		"icon": WEAPON_PATH + "ice_spear.png",
-		"displayname": "Ice Spear",
-		"details": "An additional 2 Ice Spears are thrown",
+		"icon": WEAPON_PATH + "gun.png",
+		"displayname": "Pistol",
+		"details": "Placeholder text",
 		"level": "Ultimate",
 		"prerequisite": ["icespear8"],
 		"type": "weapon"
@@ -414,7 +414,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"flail1": {
-		"icon": WEAPON_PATH + "flail_ph.png",
+		"icon": WEAPON_PATH + "flail.png",
 		"displayname": "Flail",
 		"details": "Flail swings around you for a short time",
 		"level": "Level: 1",
@@ -422,7 +422,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"flail2": {
-		"icon": WEAPON_PATH + "flail_ph.png",
+		"icon": WEAPON_PATH + "flail.png",
 		"displayname": "Flail",
 		"details": "Flail swings around you for a short time",
 		"level": "Level: 2",
@@ -430,7 +430,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"flail3": {
-		"icon": WEAPON_PATH + "flail_ph.png",
+		"icon": WEAPON_PATH + "flail.png",
 		"displayname": "Flail",
 		"details": "Flail swings around you for a short time",
 		"level": "Level: 3",
@@ -438,7 +438,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"flail4": {
-		"icon": WEAPON_PATH + "flail_ph.png",
+		"icon": WEAPON_PATH + "flail.png",
 		"displayname": "Flail",
 		"details": "Flail swings around you for a short time",
 		"level": "Level: 4",
@@ -446,7 +446,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"flail5": {
-		"icon": WEAPON_PATH + "flail_ph.png",
+		"icon": WEAPON_PATH + "flail.png",
 		"displayname": "Flail",
 		"details": "Flail swings around you for a short time",
 		"level": "Level: 5",
@@ -454,7 +454,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"flail6": {
-		"icon": WEAPON_PATH + "flail_ph.png",
+		"icon": WEAPON_PATH + "flail.png",
 		"displayname": "Flail",
 		"details": "Flail swings around you for a short time",
 		"level": "Level: 6",
@@ -462,7 +462,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"flail7": {
-		"icon": WEAPON_PATH + "flail_ph.png",
+		"icon": WEAPON_PATH + "flail.png",
 		"displayname": "Flail",
 		"details": "Flail swings around you for a short time",
 		"level": "Level: 7",
@@ -470,7 +470,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"flail8": {
-		"icon": WEAPON_PATH + "flail_ph.png",
+		"icon": WEAPON_PATH + "flail.png",
 		"displayname": "Flail",
 		"details": "Flail swings around you for a short time",
 		"level": "Level: 8",
@@ -478,7 +478,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"flail9": {
-		"icon": WEAPON_PATH + "flail_ph.png",
+		"icon": WEAPON_PATH + "flail.png",
 		"displayname": "Flail",
 		"details": "Ultimate Flail. Now swings around you for a short time",
 		"level": "Ultimate",
@@ -486,7 +486,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"grenade1": {
-		"icon": WEAPON_PATH + "grenade_ph.png",
+		"icon": WEAPON_PATH + "grenade.png",
 		"displayname": "Grenade",
 		"details": "Throw a grenade at a random enemy target",
 		"level": "Level: 1",
@@ -494,7 +494,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"grenade2": {
-		"icon": WEAPON_PATH + "grenade_ph.png",
+		"icon": WEAPON_PATH + "grenade.png",
 		"displayname": "Grenade",
 		"details": "Throw an additional grenade at a random enemy target",
 		"level": "Level: 2",
@@ -502,7 +502,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"grenade3": {
-		"icon": WEAPON_PATH + "grenade_ph.png",
+		"icon": WEAPON_PATH + "grenade.png",
 		"displayname": "Grenade",
 		"details": "Throw stronger grenades at a random enemy target",
 		"level": "Level: 3",
@@ -510,7 +510,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"grenade4": {
-		"icon": WEAPON_PATH + "grenade_ph.png",
+		"icon": WEAPON_PATH + "grenade.png",
 		"displayname": "Grenade",
 		"details": "Throw even stronger grenades at a random enemy target",
 		"level": "Level: 4",
@@ -518,7 +518,7 @@ const UPGRADES = {
 		"type": "weapon"
 },
 	"grenade5": {
-		"icon": WEAPON_PATH + "grenade_ph.png",
+		"icon": WEAPON_PATH + "grenade.png",
 		"displayname": "Grenade",
 		"details": "Throw a grenade at a random enemy target",
 		"level": "Level: 5",
@@ -526,7 +526,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"grenade6": {
-		"icon": WEAPON_PATH + "grenade_ph.png",
+		"icon": WEAPON_PATH + "grenade.png",
 		"displayname": "Grenade",
 		"details": "Throw an additional grenade at a random enemy target",
 		"level": "Level: 6",
@@ -534,7 +534,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"grenade7": {
-		"icon": WEAPON_PATH + "grenade_ph.png",
+		"icon": WEAPON_PATH + "grenade.png",
 		"displayname": "Grenade",
 		"details": "Throw stronger grenades at a random enemy target",
 		"level": "Level: 7",
@@ -542,7 +542,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"grenade8": {
-		"icon": WEAPON_PATH + "grenade_ph.png",
+		"icon": WEAPON_PATH + "grenade.png",
 		"displayname": "Grenade",
 		"details": "Throw even stronger grenades at a random enemy target",
 		"level": "Level: 8",
@@ -550,7 +550,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"grenade9": {
-		"icon": WEAPON_PATH + "grenade_ph.png",
+		"icon": WEAPON_PATH + "grenade.png",
 		"displayname": "Grenade",
 		"details": "Ultimate Grenade. Throw even stronger grenades at a random enemy target",
 		"level": "Ultimate",

@@ -44,3 +44,8 @@ Need fix sword tomorrow. Or think of alternative.
 Should change enemy death sound, its annoying. Use something simpler like a big OOF.
 Normalized flail knockback, still need to adjust the knockback amounts accordingly.
 Need to fix knockback, it should always push enemies away from the player.
+
+16/10/2024
+get_random_target function often picks the same target (because its random) should fix with an array or something.
+Level 42, maxed out pistol, picked flail but didnt get any.
+AA12 doesn't replace the gun item_container. Might be related with ^

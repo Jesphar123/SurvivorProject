@@ -113,8 +113,23 @@ var grenade_base_ammo = 0
 var grenade_attackspeed = 4
 var grenade_level = 0
 
+#Magnet
+var orb_level = 0
+
+#Ammo Box
+var ring_level = 0
+
+#Boots
+var speed_level = 0
+
+#Armor
+var armor_level = 0
+
 #Enemy Related
 var random_enemy_target = []
+
+#Item container stuff
+var container = null
 
 #Sword Positioning
 #var sword_position = Vector2.ZERO
@@ -183,13 +198,16 @@ func movement():
 	velocity = mov.normalized() * movement_speed
 	move_and_slide()
 	
-
-func _on_hurt_box_hurt(damage, _angle, _knockback):
-	#HP UI
+func calc_hp(damage):
+	if damage != null:
+		hp -= clamp(damage - armor, 1.0, 999.0)
+		print("Armor: ", armor)
 	healthBar.max_value = max_hp
 	healthBar.value = hp
 	healthBarText.text = str(hp)
-	hp -= clamp(damage - armor, 1.0, 999.0)
+
+func _on_hurt_box_hurt(damage, _angle, _knockback):
+	calc_hp(damage)
 	
 	if damage > 0:
 			#Audio
@@ -205,7 +223,11 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 				Engine.time_scale = playerHitstop
 				await get_tree().create_timer(playerHitstop * timeFreeze).timeout
 				Engine.time_scale = 1
-			if clamp(damage - armor, 1.0, 999.0) >= 5:
+			elif clamp(damage - armor, 1.0, 999.0) == 3:
+				Engine.time_scale = playerHitstop
+				await get_tree().create_timer(playerHitstop * timeFreeze * 1.5).timeout
+				Engine.time_scale = 1
+			elif clamp(damage - armor, 1.0, 999.0) >= 5:
 				Engine.time_scale = playerHitstop
 				await get_tree().create_timer(playerHitstop * timeFreeze * 2).timeout
 				Engine.time_scale = 1
@@ -220,10 +242,10 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 func _ready():
 	attack()
 	set_exp_bar(experience, calculate_experience_cap())
-	_on_hurt_box_hurt(0,0,0)
 	GlobalSignals.change_character.connect(change_character)
 	z_index = 2
 	anim.play("squash_n_stretch")
+	hp = 20
 	
 func change_character(character):
 	if character == "maeve":
@@ -235,7 +257,6 @@ func change_character(character):
 	if character == "avery":
 		$CharacterSprite.texture = load("res://Textures/Player/avery_anim.png")
 		upgrade_character("icespear1")
-		#upgrade_character("ring1")
 	if character == "augbert":
 		upgrade_character("grenade1")
 		$CharacterSprite.texture = load("res://Textures/Player/augbert_anim.png")
@@ -305,6 +326,8 @@ func _on_sword_attack_timer_timeout() -> void:
 func _on_ice_spear_timer_timeout() -> void:
 	ice_spear_ammo += ice_spear_base_ammo + additional_attacks
 	iceSpearAttackTimer.start()
+	print("Max HP: ", max_hp)
+	print("HP: ", hp)
 	
 func _on_ice_spear_attack_timer_timeout() -> void:
 	if ice_spear_ammo > 0:
@@ -318,6 +341,17 @@ func _on_ice_spear_attack_timer_timeout() -> void:
 			iceSpearAttackTimer.start()
 		else:
 			iceSpearAttackTimer.stop()
+		if ice_spear_level == 9:
+			var ice_spear_ult1 = iceSpear.instantiate()
+			ice_spear_ult1.position =  position
+			ice_spear_ult1.target = mouse_target + Vector2(15,15)
+			ice_spear_ult1.level = ice_spear_level
+			add_child(ice_spear_ult1)
+			var ice_spear_ult2 = iceSpear.instantiate()
+			ice_spear_ult2.position =  position
+			ice_spear_ult2.target = mouse_target + Vector2(-15,-15)
+			ice_spear_ult2.level = ice_spear_level
+			add_child(ice_spear_ult2)
 
 func spawn_flail():
 	var get_flail_total = flailBase.get_child_count()
@@ -421,12 +455,11 @@ func spawn_flail():
 				continue
 				
 		if calc_spawns == 5:
-			#var flail_spawn = flail.instantiate()
-			#if get_flail_total == 0:
-				#flailBase.add_child(flail_spawn)
-				#calc_spawns -= 1
-				#continue
-				return
+			var flail_spawn = flail.instantiate()
+			if get_flail_total == 0:
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
 
 	var get_flails = flailBase.get_children()
 	for i in get_flails:
@@ -485,7 +518,7 @@ func calculate_experience(gem_exp):
 func calculate_experience_cap():
 	var exp_cap = experience_level
 	#exp_cap = experience_level * 5
-	exp_cap = pow(experience_level, 2) + 4
+	exp_cap = (pow(experience_level, 2) * 0.8) + 4
 	#if experience_level < 20:
 		#exp_cap = experience_level * 5
 	#elif experience_level < 40:
@@ -499,11 +532,11 @@ func set_exp_bar(set_value = 1, set_max_value = 100):
 	expBar.max_value = set_max_value
 	
 func levelup():
+	var damage
 	#Add HP
 	hp += 2
 	max_hp += 2
-	hp = clamp(hp,0,max_hp)
-	_on_hurt_box_hurt(0,0,0)
+	calc_hp(damage)
 	
 	sndLevelUp.play()
 	lblLevel.text = str("Level: ",experience_level)
@@ -556,27 +589,86 @@ func upgrade_character(upgrade):
 			ice_spear_level = 9
 			ice_spear_base_ammo += 2
 			ice_spear_attackspeed = 0.90
-		"armor1","armor2","armor3","armor4","armor5","armor6","armor7","armor8":
+		"armor1":
+			armor_level = 1
 			armor += 1
-		"speed1","speed2","speed3","speed4","speed5","speed6","speed7","speed8":
+		"armor2":
+			armor_level = 2
+			armor += 1
+		"armor3":
+			armor_level = 3
+			armor += 1
+		"armor4":
+			armor_level = 4
+			armor += 1
+		"armor5":
+			armor_level = 5
+			armor += 1
+		"armor6":
+			armor_level = 6
+			armor += 1
+		"armor7":
+			armor_level = 7
+			armor += 1
+		"armor8":
+			armor_level = 8
+			armor += 1
+		"speed1":
+			speed_level = 1
+			movement_speed += 10.0
+		"speed2":
+			speed_level = 2
+			movement_speed += 10.0
+		"speed3":
+			speed_level = 3
+			movement_speed += 10.0
+		"speed4":
+			speed_level = 4
+			movement_speed += 10.0
+		"speed5":
+			speed_level = 5
+			movement_speed += 10.0
+		"speed6":
+			speed_level = 6
+			movement_speed += 10.0
+		"speed7":
+			speed_level = 7
+			movement_speed += 10.0
+		"speed8":
+			speed_level = 8
 			movement_speed += 10.0
 		"tome1","tome2","tome3","tome4":
 			spell_size += 0.10
 		"scroll1","scroll2","scroll3","scroll4":
 			spell_cooldown += 0.05
-		"ring1","ring2","ring3","ring4":
+		"ring1":
+			ring_level = 1
+			additional_attacks += 1
+		"ring2":
+			ring_level = 2
+			additional_attacks += 1
+		"ring3":
+			ring_level = 3
+			additional_attacks += 1
+		"ring4":
+			ring_level = 4
 			additional_attacks += 1
 		"food":
-			hp += 20
+			var damage
+			hp += 5
 			hp = clamp(hp,0,max_hp)
-			_on_hurt_box_hurt(0,0,0)
+			calc_hp(damage)
 		"orb1":
+			orb_level = 1
 			$GrabArea/CollisionShape2D.shape.radius = 48
 		"orb2":
+			orb_level = 1
 			$GrabArea/CollisionShape2D.shape.radius = 60
 		"orb3":
+			orb_level = 1
 			$GrabArea/CollisionShape2D.shape.radius = 92
 		"orb4":
+			orb_level = 1
 			$GrabArea/CollisionShape2D.shape.radius = 124
 		"sword1":
 			sword_level = 1
@@ -695,7 +787,7 @@ func change_time(argtime = 0):
 	lblTimer.text = str(get_m, ":", get_s)
 	
 func adjust_gui_collection(upgrade):
-	var get_upgraded_displayname= UpgradeDb.UPGRADES[upgrade]["displayname"]
+	var get_upgraded_displayname= UpgradeDb.UPGRADES[upgrade]["name"]
 	var get_type = UpgradeDb.UPGRADES[upgrade]["type"]
 	if get_type != "item":
 		var get_collected_displaynames = []
@@ -727,3 +819,7 @@ func death():
 func _on_btn_menu_click_end() -> void:
 	get_tree().paused = false
 	var _level = get_tree().change_scene_to_file("res://TitleScreen/menu.tscn")
+
+
+func _on__exp_pressed() -> void:
+	calculate_experience(100)

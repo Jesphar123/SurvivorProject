@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dikqwve6ynnvs"]
+[gd_scene load_steps=4 format=3 uid="uid://dikqwve6ynnvs"]
 
 [ext_resource type="Texture2D" uid="uid://bwnv5a6fsct1k" path="res://Textures/GUI/EmptyItem2.png" id="1_hsngf"]
 [ext_resource type="Script" path="res://Player/GUI/item_container.gd" id="2_un4ak"]
+[ext_resource type="FontFile" uid="uid://cwe8jnjf3hsna" path="res://Font/MinimalPixel v2.ttf" id="3_tpjnu"]
 
 [node name="ItemContainer" type="TextureRect"]
 offset_right = 24.0
@@ -24,3 +25,20 @@ offset_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.33, 0.33)
+expand_mode = 2
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.0
+offset_right = 22.0
+offset_bottom = 22.0
+theme_override_fonts/font = ExtResource("3_tpjnu")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

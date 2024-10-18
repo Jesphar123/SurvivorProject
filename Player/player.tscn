@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cj8kgdhobdeem"]
+[gd_scene load_steps=29 format=3 uid="uid://cj8kgdhobdeem"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_bwmke"]
 [ext_resource type="Shader" path="res://Player/player.gdshader" id="2_twfkt"]
@@ -9,13 +9,14 @@
 [ext_resource type="FontFile" uid="uid://cwe8jnjf3hsna" path="res://Font/MinimalPixel v2.ttf" id="6_koqwi"]
 [ext_resource type="FontFile" uid="uid://blcib142glkuk" path="res://Font/tenderness.otf" id="6_t10r3"]
 [ext_resource type="AudioStream" uid="uid://b8ugummetnmt1" path="res://Audio/SoundEffect/levelup.ogg" id="7_yvmkx"]
-[ext_resource type="Texture2D" uid="uid://f5osrhimy2jh" path="res://Textures/GUI/health_ph.png" id="9_1ugr4"]
 [ext_resource type="AudioStream" uid="uid://c8cmlvijoyqs" path="res://Audio/SoundEffect/Victory.wav" id="10_1htku"]
 [ext_resource type="AudioStream" uid="uid://cjxopjqru5jpx" path="res://Audio/SoundEffect/Lose.ogg" id="11_2ofpb"]
 [ext_resource type="PackedScene" uid="uid://cit578se8tcuh" path="res://Utility/basic_button.tscn" id="12_xxg8r"]
 [ext_resource type="Texture2D" uid="uid://dtm7x4pk5wa6a" path="res://Textures/GUI/spr_inventory.png" id="13_fu75y"]
 [ext_resource type="AudioStream" uid="uid://0mjm53885al" path="res://Audio/SoundEffect/player_hit.mp3" id="13_tlus2"]
 [ext_resource type="Script" path="res://Player/label.gd" id="14_3b4ik"]
+[ext_resource type="Texture2D" uid="uid://bywoo784x45gw" path="res://Textures/GUI/health_bar_ph4.png" id="14_cdb3v"]
+[ext_resource type="Texture2D" uid="uid://bvrjndwiuvq03" path="res://Textures/GUI/health_ph2.png" id="15_lxl5b"]
 [ext_resource type="Texture2D" uid="uid://c8x64t6nwjohj" path="res://Textures/Lights/2d_lights_and_shadows_neutral_point_light.webp" id="15_max4b"]
 
 [sub_resource type="Animation" id="Animation_bdgdu"]
@@ -93,7 +94,6 @@ script = ExtResource("1_bwmke")
 libraries = {
 "": SubResource("AnimationLibrary_wt4ob")
 }
-speed_scale = 1.2
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -163,7 +163,7 @@ wait_time = 2.0
 
 [node name="GrenadeAttackTimer" type="Timer" parent="Attack/GrenadeTimer"]
 unique_name_in_owner = true
-wait_time = 0.1
+wait_time = 0.4
 
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -332,15 +332,19 @@ columns = 10
 
 [node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
-self_modulate = Color(1, 1, 1, 0.392157)
 show_behind_parent = true
+texture_filter = 1
 layout_mode = 0
-offset_left = 304.0
+offset_left = 308.0
 offset_top = 190.0
-offset_right = 336.0
-offset_bottom = 198.0
+offset_right = 340.0
+offset_bottom = 196.0
+scale = Vector2(0.75, 0.75)
 value = 100.0
-texture_progress = ExtResource("9_1ugr4")
+rounded = true
+texture_over = ExtResource("14_cdb3v")
+texture_progress = ExtResource("15_lxl5b")
+texture_progress_offset = Vector2(9, 3)
 
 [node name="HealthBarText" type="Label" parent="GUILayer/GUI/HealthBar"]
 unique_name_in_owner = true
@@ -350,14 +354,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -23.0
-offset_top = -7.0
-offset_right = 9.0
-offset_bottom = 9.0
+offset_left = -16.0
+offset_top = -2.0
+offset_right = -11.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 4
 text = "20"
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Fast Forward" type="Button" parent="GUILayer"]
@@ -377,6 +382,17 @@ scale = Vector2(0.5, 0.5)
 size_flags_vertical = 0
 text = "-1"
 
+[node name="+100 EXP" type="Button" parent="GUILayer"]
+top_level = true
+offset_left = 524.0
+offset_top = 2.0
+offset_right = 567.0
+offset_bottom = 26.0
+scale = Vector2(0.5, 0.5)
+size_flags_vertical = 0
+text = "+XP
+"
+
 [node name="FPSLabel" type="Label" parent="GUILayer"]
 offset_left = 28.0
 offset_right = 68.0
@@ -392,10 +408,6 @@ volume_db = -10.0
 color = Color(0.83, 0.487625, 0.2075, 1)
 energy = 0.2
 texture = ExtResource("15_max4b")
-
-[node name="squashTimer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]
@@ -413,6 +425,6 @@ autostart = true
 [connection signal="click_end" from="GUILayer/GUI/DeathPanel/btn_menu" to="." method="_on_btn_menu_click_end"]
 [connection signal="pressed" from="GUILayer/Fast Forward" to="." method="_on_fast_forward_pressed"]
 [connection signal="pressed" from="GUILayer/Fast Backward" to="." method="_on_fast_backward_pressed"]
-[connection signal="timeout" from="squashTimer" to="." method="_on_squash_timer_timeout"]
+[connection signal="pressed" from="GUILayer/+100 EXP" to="." method="_on__exp_pressed"]
 
 [editable path="HurtBox"]

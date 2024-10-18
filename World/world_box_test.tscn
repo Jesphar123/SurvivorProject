@@ -1,16 +1,17 @@
-[gd_scene load_steps=29 format=4 uid="uid://b72xn6jrea6d3"]
+[gd_scene load_steps=30 format=4 uid="uid://bk07l7ndnkpm4"]
 
-[ext_resource type="PackedScene" uid="uid://cj8kgdhobdeem" path="res://Player/player.tscn" id="1_kpha1"]
-[ext_resource type="Script" path="res://World/world_box.gd" id="1_p6xtg"]
-[ext_resource type="Texture2D" uid="uid://yw1om8qvoyfh" path="res://Textures/background_test.png" id="2_tkxlt"]
-[ext_resource type="PackedScene" uid="uid://ueq3n0v7x54w" path="res://Utility/enemy_spawner.tscn" id="5_7qc2d"]
-[ext_resource type="Script" path="res://Utility/spawn_info.gd" id="6_1tgxi"]
-[ext_resource type="PackedScene" uid="uid://bnv0mtpkeouh" path="res://Enemies/enemy_1_new.tscn" id="7_8gqea"]
-[ext_resource type="AudioStream" uid="uid://ck6hxmmragp5s" path="res://Audio/Music/battleThemeA.mp3" id="8_00rl2"]
-[ext_resource type="PackedScene" uid="uid://cs8yw5t2j2ws6" path="res://Enemies/enemy_2_new.tscn" id="8_5ri34"]
-[ext_resource type="Script" path="res://Audio/Music/snd_music.gd" id="9_gg42c"]
-[ext_resource type="PackedScene" uid="uid://cr5qj1w526oki" path="res://Enemies/enemy_3_new.tscn" id="9_vkabp"]
-[ext_resource type="PackedScene" uid="uid://dsnhyksyadhvq" path="res://Enemies/enemy_4_new.tscn" id="10_dghmk"]
+[ext_resource type="Script" path="res://World/world_box.gd" id="1_206bf"]
+[ext_resource type="PackedScene" uid="uid://cj8kgdhobdeem" path="res://Player/player.tscn" id="2_7st4f"]
+[ext_resource type="AudioStream" uid="uid://ck6hxmmragp5s" path="res://Audio/Music/battleThemeA.mp3" id="3_nl4y6"]
+[ext_resource type="Script" path="res://Audio/Music/snd_music.gd" id="4_11vfq"]
+[ext_resource type="PackedScene" uid="uid://ueq3n0v7x54w" path="res://Utility/enemy_spawner.tscn" id="5_e0ake"]
+[ext_resource type="Script" path="res://Utility/spawn_info.gd" id="6_dris4"]
+[ext_resource type="PackedScene" uid="uid://bnv0mtpkeouh" path="res://Enemies/enemy_1_new.tscn" id="7_wjk4h"]
+[ext_resource type="PackedScene" uid="uid://cs8yw5t2j2ws6" path="res://Enemies/enemy_2_new.tscn" id="8_gp25v"]
+[ext_resource type="PackedScene" uid="uid://cr5qj1w526oki" path="res://Enemies/enemy_3_new.tscn" id="9_3wgp3"]
+[ext_resource type="PackedScene" uid="uid://dsnhyksyadhvq" path="res://Enemies/enemy_4_new.tscn" id="10_lle0q"]
+[ext_resource type="Texture2D" uid="uid://yw1om8qvoyfh" path="res://Textures/background_test.png" id="11_wud8a"]
+[ext_resource type="PackedScene" uid="uid://c4gaqjwe3xi88" path="res://Objects/experience_gem.tscn" id="12_rrx48"]
 
 [sub_resource type="Curve2D" id="Curve2D_mjfpk"]
 _data = {
@@ -19,119 +20,119 @@ _data = {
 point_count = 25
 
 [sub_resource type="Resource" id="Resource_3dte7"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 0
 time_end = 30
-enemy = ExtResource("7_8gqea")
+enemy = ExtResource("7_wjk4h")
 enemy_num = 4
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_endhj"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 30
 time_end = 60
-enemy = ExtResource("7_8gqea")
+enemy = ExtResource("7_wjk4h")
 enemy_num = 8
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_qpj5g"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 60
 time_end = 180
-enemy = ExtResource("7_8gqea")
+enemy = ExtResource("7_wjk4h")
 enemy_num = 8
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_omw75"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 60
 time_end = 90
-enemy = ExtResource("8_5ri34")
+enemy = ExtResource("8_gp25v")
 enemy_num = 1
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_da7f4"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 90
 time_end = 150
-enemy = ExtResource("8_5ri34")
+enemy = ExtResource("8_gp25v")
 enemy_num = 4
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_7gttp"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 150
 time_end = 180
-enemy = ExtResource("9_vkabp")
+enemy = ExtResource("9_3wgp3")
 enemy_num = 1
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_g1cil"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 150
 time_end = 210
-enemy = ExtResource("8_5ri34")
+enemy = ExtResource("8_gp25v")
 enemy_num = 8
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_4yvc3"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 180
 time_end = 210
-enemy = ExtResource("9_vkabp")
+enemy = ExtResource("9_3wgp3")
 enemy_num = 2
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_o6btf"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 210
 time_end = 270
-enemy = ExtResource("8_5ri34")
+enemy = ExtResource("8_gp25v")
 enemy_num = 16
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_ic8lt"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 210
 time_end = 270
-enemy = ExtResource("9_vkabp")
+enemy = ExtResource("9_3wgp3")
 enemy_num = 4
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_mlw4h"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 270
 time_end = 540
-enemy = ExtResource("8_5ri34")
+enemy = ExtResource("8_gp25v")
 enemy_num = 16
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_plhcb"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 270
 time_end = 540
-enemy = ExtResource("9_vkabp")
+enemy = ExtResource("9_3wgp3")
 enemy_num = 6
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_3cgiw"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 540
 time_end = 720
-enemy = ExtResource("9_vkabp")
+enemy = ExtResource("9_3wgp3")
 enemy_num = 20
 enemy_spawn_delay = 0
 
 [sub_resource type="Resource" id="Resource_6a8uj"]
-script = ExtResource("6_1tgxi")
+script = ExtResource("6_dris4")
 time_start = 540
 time_end = 720
-enemy = ExtResource("10_dghmk")
+enemy = ExtResource("10_lle0q")
 enemy_num = 12
 enemy_spawn_delay = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bwy50"]
-texture = ExtResource("2_tkxlt")
+texture = ExtResource("11_wud8a")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -143,9 +144,9 @@ sources/1 = SubResource("TileSetAtlasSource_bwy50")
 
 [node name="WorldBox" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_p6xtg")
+script = ExtResource("1_206bf")
 
-[node name="Player" parent="." instance=ExtResource("1_kpha1")]
+[node name="Player" parent="." instance=ExtResource("2_7st4f")]
 z_index = 1
 position = Vector2(320, 360)
 
@@ -162,16 +163,16 @@ rotation = 0.128323
 
 [node name="snd_music" type="AudioStreamPlayer" parent="."]
 process_mode = 4
-stream = ExtResource("8_00rl2")
+stream = ExtResource("3_nl4y6")
 volume_db = -15.0
 autoplay = true
-script = ExtResource("9_gg42c")
+script = ExtResource("4_11vfq")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 
-[node name="EnemySpawner" parent="." instance=ExtResource("5_7qc2d")]
+[node name="EnemySpawner" parent="." instance=ExtResource("5_e0ake")]
 y_sort_enabled = true
-spawns = Array[ExtResource("6_1tgxi")]([SubResource("Resource_3dte7"), SubResource("Resource_endhj"), SubResource("Resource_qpj5g"), SubResource("Resource_omw75"), SubResource("Resource_da7f4"), SubResource("Resource_7gttp"), SubResource("Resource_g1cil"), SubResource("Resource_4yvc3"), SubResource("Resource_o6btf"), SubResource("Resource_ic8lt"), SubResource("Resource_mlw4h"), SubResource("Resource_plhcb"), SubResource("Resource_3cgiw"), SubResource("Resource_6a8uj")])
+spawns = Array[ExtResource("6_dris4")]([SubResource("Resource_3dte7"), SubResource("Resource_endhj"), SubResource("Resource_qpj5g"), SubResource("Resource_omw75"), SubResource("Resource_da7f4"), SubResource("Resource_7gttp"), SubResource("Resource_g1cil"), SubResource("Resource_4yvc3"), SubResource("Resource_o6btf"), SubResource("Resource_ic8lt"), SubResource("Resource_mlw4h"), SubResource("Resource_plhcb"), SubResource("Resource_3cgiw"), SubResource("Resource_6a8uj")])
 
 [node name="SpawnTimer" type="Timer" parent="."]
 autostart = true
@@ -184,6 +185,246 @@ tile_map_data = PackedByteArray("AADs//X/AQAAAAAAAADs//b/AQAAAAAAAADs//f/AQAAAAA
 tile_set = SubResource("TileSet_oh7r0")
 
 [node name="Decoration" type="TileMapLayer" parent="Parallax2D"]
+
+[node name="ExperienceGem" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(305, 332)
+experience = 100
+
+[node name="ExperienceGem2" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(291, 342)
+experience = 100
+
+[node name="ExperienceGem3" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(318, 334)
+experience = 100
+
+[node name="ExperienceGem4" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(332, 339)
+experience = 100
+
+[node name="ExperienceGem5" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(291, 327)
+experience = 100
+
+[node name="ExperienceGem6" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(310, 307)
+experience = 100
+
+[node name="ExperienceGem7" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(296, 317)
+experience = 100
+
+[node name="ExperienceGem8" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(323, 309)
+experience = 100
+
+[node name="ExperienceGem9" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(337, 314)
+experience = 100
+
+[node name="ExperienceGem10" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(296, 302)
+experience = 100
+
+[node name="ExperienceGem11" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(305, 332)
+experience = 100
+
+[node name="ExperienceGem12" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(291, 342)
+experience = 100
+
+[node name="ExperienceGem13" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(318, 334)
+experience = 100
+
+[node name="ExperienceGem14" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(332, 339)
+experience = 100
+
+[node name="ExperienceGem15" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(291, 327)
+experience = 100
+
+[node name="ExperienceGem16" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(249, 302)
+experience = 100
+
+[node name="ExperienceGem17" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(235, 312)
+experience = 100
+
+[node name="ExperienceGem18" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(262, 304)
+experience = 100
+
+[node name="ExperienceGem19" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(276, 309)
+experience = 100
+
+[node name="ExperienceGem20" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(235, 297)
+experience = 100
+
+[node name="ExperienceGem21" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(249, 329)
+experience = 100
+
+[node name="ExperienceGem22" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(235, 339)
+experience = 100
+
+[node name="ExperienceGem23" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(262, 331)
+experience = 100
+
+[node name="ExperienceGem24" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(276, 336)
+experience = 100
+
+[node name="ExperienceGem25" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(235, 324)
+experience = 100
+
+[node name="ExperienceGem26" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(261, 352)
+experience = 100
+
+[node name="ExperienceGem27" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(247, 362)
+experience = 100
+
+[node name="ExperienceGem28" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(274, 354)
+experience = 100
+
+[node name="ExperienceGem29" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(288, 359)
+experience = 100
+
+[node name="ExperienceGem30" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(247, 347)
+experience = 100
+
+[node name="ExperienceGem31" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(318, 283)
+experience = 100
+
+[node name="ExperienceGem32" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(304, 293)
+experience = 100
+
+[node name="ExperienceGem33" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(331, 285)
+experience = 100
+
+[node name="ExperienceGem34" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(345, 290)
+experience = 100
+
+[node name="ExperienceGem35" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(304, 278)
+experience = 100
+
+[node name="ExperienceGem36" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(323, 258)
+experience = 100
+
+[node name="ExperienceGem37" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(309, 268)
+experience = 100
+
+[node name="ExperienceGem38" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(336, 260)
+experience = 100
+
+[node name="ExperienceGem39" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(350, 265)
+experience = 100
+
+[node name="ExperienceGem40" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(309, 253)
+experience = 100
+
+[node name="ExperienceGem41" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(318, 283)
+experience = 100
+
+[node name="ExperienceGem42" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(304, 293)
+experience = 100
+
+[node name="ExperienceGem43" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(331, 285)
+experience = 100
+
+[node name="ExperienceGem44" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(345, 290)
+experience = 100
+
+[node name="ExperienceGem45" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(304, 278)
+experience = 100
+
+[node name="ExperienceGem46" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(262, 253)
+experience = 100
+
+[node name="ExperienceGem47" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(248, 263)
+experience = 100
+
+[node name="ExperienceGem48" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(275, 255)
+experience = 100
+
+[node name="ExperienceGem49" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(289, 260)
+experience = 100
+
+[node name="ExperienceGem50" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(248, 248)
+experience = 100
+
+[node name="ExperienceGem51" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(262, 280)
+experience = 100
+
+[node name="ExperienceGem52" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(248, 290)
+experience = 100
+
+[node name="ExperienceGem53" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(275, 282)
+experience = 100
+
+[node name="ExperienceGem54" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(289, 287)
+experience = 100
+
+[node name="ExperienceGem55" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(248, 275)
+experience = 100
+
+[node name="ExperienceGem56" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(274, 303)
+experience = 100
+
+[node name="ExperienceGem57" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(260, 313)
+experience = 100
+
+[node name="ExperienceGem58" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(287, 305)
+experience = 100
+
+[node name="ExperienceGem59" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(301, 310)
+experience = 100
+
+[node name="ExperienceGem60" parent="." instance=ExtResource("12_rrx48")]
+position = Vector2(260, 298)
+experience = 100
 
 [connection signal="current_position" from="Player" to="." method="track_camera_to"]
 [connection signal="timeout" from="SpawnTimer" to="EnemySpawner" method="_on_timer_timeout"]

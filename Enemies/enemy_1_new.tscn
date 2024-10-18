@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bnv0mtpkeouh"]
+[gd_scene load_steps=19 format=3 uid="uid://bnv0mtpkeouh"]
 
 [ext_resource type="Material" uid="uid://cvx0n8ay4g3ck" path="res://Enemies/enemy_base.tres" id="1_cwvd1"]
 [ext_resource type="Script" path="res://Enemies/enemy_body_new.gd" id="1_llh25"]
 [ext_resource type="Texture2D" uid="uid://dyng0l5luw3ya" path="res://Textures/Enemy/enemy_1_anim.png" id="2_ofjbd"]
 [ext_resource type="Texture2D" uid="uid://ysqs7b3kkmu0" path="res://Textures/Player/player_shadow_ph.png" id="3_80775"]
+[ext_resource type="Shader" path="res://Enemies/enemy_base_dissolve.gdshader" id="4_jb1es"]
 [ext_resource type="PackedScene" uid="uid://dtbv2h63hij6" path="res://Utility/hurt_box.tscn" id="4_t6fd2"]
 [ext_resource type="PackedScene" uid="uid://olluckrijwkt" path="res://Utility/hit_box.tscn" id="5_lsvuq"]
 [ext_resource type="AudioStream" uid="uid://d3v0fbgvxj1y" path="res://Audio/SoundEffect/hitHurt4.wav" id="7_5mjt2"]
@@ -72,6 +73,15 @@ _data = {
 "walk": SubResource("Animation_jv1lk")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4pqhx"]
+resource_local_to_scene = true
+shader = ExtResource("4_jb1es")
+shader_parameter/hit = null
+shader_parameter/dying = null
+shader_parameter/dissolve_speed = 1.0
+shader_parameter/flash_color = null
+shader_parameter/flash_value = null
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvglu"]
 radius = 6.0
 
@@ -110,6 +120,7 @@ texture = ExtResource("2_ofjbd")
 hframes = 2
 
 [node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+material = SubResource("ShaderMaterial_4pqhx")
 position = Vector2(0, 8)
 texture = ExtResource("3_80775")
 

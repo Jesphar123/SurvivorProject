@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://cr5qj1w526oki"]
+[gd_scene load_steps=20 format=3 uid="uid://cr5qj1w526oki"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_body_new.gd" id="1_2vgdp"]
+[ext_resource type="Shader" path="res://Enemies/enemy_base_dissolve.gdshader" id="1_a17t8"]
 [ext_resource type="Material" uid="uid://cvx0n8ay4g3ck" path="res://Enemies/enemy_base.tres" id="2_12ckh"]
 [ext_resource type="Texture2D" uid="uid://4nbq70bne8g3" path="res://Textures/Enemy/enemy_3_anim.png" id="3_ijqwq"]
 [ext_resource type="Texture2D" uid="uid://ysqs7b3kkmu0" path="res://Textures/Player/player_shadow_ph.png" id="4_6ellq"]
@@ -8,6 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://olluckrijwkt" path="res://Utility/hit_box.tscn" id="6_ppjay"]
 [ext_resource type="AudioStream" uid="uid://d3v0fbgvxj1y" path="res://Audio/SoundEffect/hitHurt4.wav" id="7_pf2wy"]
 [ext_resource type="AudioStream" uid="uid://cu1nnh1d4tvfx" path="res://Audio/SoundEffect/hitHurt5.wav" id="8_fi5xr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h1eqg"]
+resource_local_to_scene = true
+shader = ExtResource("1_a17t8")
+shader_parameter/hit = null
+shader_parameter/dying = null
+shader_parameter/dissolve_speed = 1.0
+shader_parameter/flash_color = null
+shader_parameter/flash_value = null
 
 [sub_resource type="Animation" id="Animation_sgtpq"]
 length = 0.001
@@ -72,6 +82,14 @@ _data = {
 "walk": SubResource("Animation_jv1lk")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ufjmw"]
+shader = ExtResource("1_a17t8")
+shader_parameter/hit = null
+shader_parameter/dying = null
+shader_parameter/dissolve_speed = 1.0
+shader_parameter/flash_color = null
+shader_parameter/flash_value = null
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvglu"]
 radius = 6.0
 
@@ -92,6 +110,7 @@ colors = PackedColorArray(0.67, 0, 0, 1, 0.49, 0, 0, 1, 0.49, 0, 0, 0)
 [node name="enemy_3_new" type="Area2D" groups=["enemy"]]
 z_index = 2
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_h1eqg")
 scale = Vector2(2, 2)
 collision_layer = 5
 collision_mask = 5
@@ -115,6 +134,7 @@ texture = ExtResource("3_ijqwq")
 hframes = 2
 
 [node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+material = SubResource("ShaderMaterial_ufjmw")
 position = Vector2(0, 8)
 texture = ExtResource("4_6ellq")
 

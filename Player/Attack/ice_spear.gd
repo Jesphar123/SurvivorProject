@@ -72,9 +72,9 @@ func _ready() -> void:
 			knockback_amount = 150
 			attack_size = 1.0 * (1 + player.spell_size)
 		9:
-			hp = 20
+			hp = 15
 			speed = 500
-			damage = 30
+			damage = 25
 			knockback_amount = 250
 			attack_size = 1.0 * (1 + player.spell_size)
 			

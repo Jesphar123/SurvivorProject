@@ -13,6 +13,7 @@ extends Area2D
 var knockback: Vector2 = Vector2.ZERO
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var shadow_sprite: Sprite2D = $Sprite2D/Shadow
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var snd_enemy_hit: AudioStreamPlayer2D = $snd_enemy_hit
 @onready var snd_enemy_death = $snd_enemy_death
@@ -102,6 +103,8 @@ func _physics_process(delta: float) -> void:
 		dissolve -= dissolve_speed
 		sprite.material.set_shader_parameter("dying", true)
 		sprite.material.set_shader_parameter("dissolve_speed", dissolve)
+		shadow_sprite.material.set_shader_parameter("dying", true)
+		shadow_sprite.material.set_shader_parameter("dissolve_speed", dissolve)
 		
 	if hit == true:
 		sprite.material.set_shader_parameter("hit", true)

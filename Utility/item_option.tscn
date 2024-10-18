@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bjlm4stw1ipq2" path="res://Textures/GUI/spr_inventory_bg.png" id="1_5aecb"]
 [ext_resource type="Script" path="res://Utility/item_option.gd" id="1_p8e38"]
-[ext_resource type="Texture2D" uid="uid://bv3bxe5n83hm4" path="res://Textures/Items/Weapons/flail.png" id="2_vm61q"]
+[ext_resource type="Texture2D" uid="uid://bjklh2svewvvv" path="res://Textures/Items/Weapons/sword4.png" id="2_bkn0t"]
 [ext_resource type="FontFile" uid="uid://cwe8jnjf3hsna" path="res://Font/MinimalPixel v2.ttf" id="3_3rqwb"]
 
 [node name="ItemOption" type="ColorRect"]
@@ -37,14 +37,14 @@ offset_right = 16.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_vm61q")
+texture = ExtResource("2_bkn0t")
 
 [node name="lbl_name" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 62.0
+offset_left = 45.0
 offset_top = 5.0
-offset_right = 111.0
+offset_right = 94.0
 offset_bottom = 28.0
 theme_override_fonts/font = ExtResource("3_3rqwb")
 text = "Name"

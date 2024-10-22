@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cmfgvq138huio"]
+[gd_scene load_steps=17 format=3 uid="uid://cmfgvq138huio"]
 
 [ext_resource type="Texture2D" uid="uid://cbx1ueim7rot1" path="res://Textures/GUI/spr_menu.png" id="1_bu82q"]
 [ext_resource type="Theme" uid="uid://c4jwct4haixft" path="res://TitleScreen/Menu/ui.tres" id="1_v7giw"]
@@ -6,29 +6,27 @@
 [ext_resource type="Texture2D" uid="uid://dtm7x4pk5wa6a" path="res://Textures/GUI/spr_inventory.png" id="5_xuibi"]
 [ext_resource type="PackedScene" uid="uid://dn7fnvvgslidf" path="res://TitleScreen/slot.tscn" id="7_5x48t"]
 [ext_resource type="Texture2D" uid="uid://bjlm4stw1ipq2" path="res://Textures/GUI/spr_inventory_bg.png" id="8_fffau"]
-[ext_resource type="Resource" uid="uid://c2muq8lnh3y6j" path="res://Utility/ItemResources/pistol.tres" id="8_xq2yd"]
-[ext_resource type="PackedScene" uid="uid://dgy2cmecso72k" path="res://TitleScreen/character_slot.tscn" id="9_7xn0f"]
 [ext_resource type="Resource" uid="uid://c7hoxj5qtu6ou" path="res://Utility/ItemResources/spear.tres" id="9_8p3jn"]
-[ext_resource type="Resource" uid="uid://bfx1d6lavye2o" path="res://Utility/ItemResources/maeve.tres" id="12_332ys"]
+[ext_resource type="Texture2D" uid="uid://mb3qmua47u0c" path="res://Textures/GUI/spr_menu_clean_thick.png" id="9_r17i8"]
 
 [sub_resource type="Animation" id="Animation_0gtio"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Characters:position")
+tracks/0/path = NodePath("Inventory:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(90, 43)]
+"values": [Vector2(153, -263)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Characters:visible")
+tracks/1/path = NodePath("Inventory:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -40,19 +38,19 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Inventory:position")
+tracks/2/path = NodePath("Menu:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(153, 74)]
+"values": [Vector2(274, -113)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Inventory:visible")
+tracks/3/path = NodePath("Menu:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -64,55 +62,26 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Menu:position")
+tracks/4/path = NodePath("Settings:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(274, 132)]
+"values": [Vector2(244, 395)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Menu:visible")
+tracks/5/path = NodePath("Settings:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_81060"]
-resource_name = "hide_character_menu"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Characters:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(2, 2),
-"update": 0,
-"values": [Vector2(90, 43), Vector2(710, 43)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Characters:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_p7o1i"]
@@ -173,33 +142,32 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_52eru"]
-resource_name = "show_character_menu"
+[sub_resource type="Animation" id="Animation_ikphc"]
+resource_name = "hide_settings"
 length = 0.5
-step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Characters:position")
+tracks/0/path = NodePath("Settings:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.5, 0.5),
+"transitions": PackedFloat32Array(2, 2),
 "update": 0,
-"values": [Vector2(710, 43), Vector2(90, 43)]
+"values": [Vector2(244, 57), Vector2(244, 387)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Characters:visible")
+tracks/1/path = NodePath("Settings:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, true]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_u3u15"]
@@ -260,18 +228,46 @@ tracks/1/keys = {
 "values": [true, true]
 }
 
+[sub_resource type="Animation" id="Animation_bq0c7"]
+resource_name = "show_settings"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Settings:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Vector2(244, 395), Vector2(244, 57)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Settings:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jjj2a"]
 _data = {
 "RESET": SubResource("Animation_0gtio"),
-"hide_character_menu": SubResource("Animation_81060"),
 "hide_inventory": SubResource("Animation_p7o1i"),
 "hide_menu": SubResource("Animation_u15rc"),
-"show_character_menu": SubResource("Animation_52eru"),
+"hide_settings": SubResource("Animation_ikphc"),
 "show_inventory": SubResource("Animation_u3u15"),
-"show_menu": SubResource("Animation_c6ws7")
+"show_menu": SubResource("Animation_c6ws7"),
+"show_settings": SubResource("Animation_bq0c7")
 }
 
-[node name="UI" type="Control" node_paths=PackedStringArray("menu", "inventory", "characters", "animation_player", "item_description", "character_description")]
+[node name="UI" type="Control" node_paths=PackedStringArray("menu", "inventory", "animation_player", "item_description")]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -283,12 +279,11 @@ theme = ExtResource("1_v7giw")
 script = ExtResource("4_e7owi")
 menu = NodePath("Menu")
 inventory = NodePath("Inventory")
-characters = NodePath("Characters")
 animation_player = NodePath("AnimationPlayer")
 item_description = NodePath("Inventory/Description")
-character_description = NodePath("Characters/CharacterDescription")
 
 [node name="Menu" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -296,9 +291,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -46.0
-offset_top = -48.0
+offset_top = -293.0
 offset_right = 46.0
-offset_bottom = 48.0
+offset_bottom = -213.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_bu82q")
@@ -317,10 +312,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -34.0
-offset_top = -22.0
-offset_right = 34.0
-offset_bottom = 22.0
+offset_left = -35.0
+offset_top = -21.5
+offset_right = 35.0
+offset_bottom = 21.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -328,9 +323,9 @@ grow_vertical = 2
 layout_mode = 2
 text = "Inventory"
 
-[node name="Characters" type="Button" parent="Menu/VBoxContainer"]
+[node name="Settings" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
-text = "Characters"
+text = "Settings"
 
 [node name="Quit" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
@@ -345,9 +340,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -167.0
-offset_top = -106.0
+offset_top = -443.0
 offset_right = 245.0
-offset_bottom = 112.0
+offset_bottom = -225.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_xuibi")
@@ -358,19 +353,14 @@ patch_margin_bottom = 5
 
 [node name="GridContainer" type="GridContainer" parent="Inventory"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 24.5
-offset_top = -77.0
-offset_right = 224.5
-offset_bottom = -13.0
-grow_vertical = 2
+offset_left = 21.0
+offset_top = 39.0
+offset_right = 221.0
+offset_bottom = 103.0
 columns = 6
 
 [node name="Slot" parent="Inventory/GridContainer" instance=ExtResource("7_5x48t")]
 layout_mode = 2
-item = ExtResource("8_xq2yd")
 
 [node name="Slot2" parent="Inventory/GridContainer" instance=ExtResource("7_5x48t")]
 layout_mode = 2
@@ -462,7 +452,7 @@ offset_right = -23.0
 offset_bottom = 49.0
 grow_horizontal = 2
 
-[node name="Characters" type="NinePatchRect" parent="."]
+[node name="Settings" type="NinePatchRect" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -470,75 +460,124 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -230.0
-offset_top = -137.0
-offset_right = 230.0
-offset_bottom = 137.0
+offset_left = -76.0
+offset_top = 215.0
+offset_right = 76.0
+offset_bottom = 461.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_xuibi")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 5
+texture = ExtResource("9_r17i8")
+region_rect = Rect2(1, 1, 42, 42)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Characters"]
+[node name="Label" type="Label" parent="Settings"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 25.0
-offset_top = -106.0
-offset_right = 185.0
-offset_bottom = 106.0
-grow_vertical = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -33.0
+offset_top = 15.0
+offset_right = 34.0
+offset_bottom = 31.0
+grow_horizontal = 2
+text = "Settings"
 
-[node name="CharacterSlot" parent="Characters/VBoxContainer" instance=ExtResource("9_7xn0f")]
-layout_mode = 2
-character = ExtResource("12_332ys")
+[node name="ResolutionLabel" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 46.0
+offset_right = 53.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 8
+text = "Resolution:"
 
-[node name="CharacterSlot2" parent="Characters/VBoxContainer" instance=ExtResource("9_7xn0f")]
-layout_mode = 2
+[node name="Resolution" type="OptionButton" parent="Settings"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 42.0
+offset_right = 144.0
+offset_bottom = 62.0
+theme_override_font_sizes/font_size = 10
+alignment = 1
+selected = 2
+item_count = 3
+popup/item_0/text = "640x360"
+popup/item_1/text = "1280x720"
+popup/item_1/id = 1
+popup/item_2/text = "1920x1080"
+popup/item_2/id = 2
 
-[node name="CharacterSlot3" parent="Characters/VBoxContainer" instance=ExtResource("9_7xn0f")]
-layout_mode = 2
+[node name="FullscreenToggle" type="CheckButton" parent="Settings"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 70.0
+offset_right = 143.0
+offset_bottom = 94.0
+theme_override_font_sizes/font_size = 8
+text = "Fullscreen"
 
-[node name="CharacterSlot4" parent="Characters/VBoxContainer" instance=ExtResource("9_7xn0f")]
-layout_mode = 2
+[node name="VsyncToggle" type="CheckButton" parent="Settings"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 101.0
+offset_right = 130.0
+offset_bottom = 125.0
+theme_override_font_sizes/font_size = 8
+text = "      V-Sync"
 
-[node name="CharacterDescription" type="NinePatchRect" parent="Characters"]
+[node name="VolumeLabel" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 137.0
+offset_right = 45.0
+offset_bottom = 147.0
+theme_override_font_sizes/font_size = 8
+text = "Volume:"
+
+[node name="Volume" type="HSlider" parent="Settings"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 153.0
+offset_right = 141.0
+offset_bottom = 169.0
+min_value = -50.0
+max_value = 50.0
+
+[node name="ResetLabel" type="Label" parent="Settings"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -223.0
-offset_top = -114.0
-offset_right = -26.0
-offset_bottom = 116.0
-grow_horizontal = 0
-grow_vertical = 2
-texture = ExtResource("8_fffau")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -55.0
+offset_right = 37.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 6
+text = "Reset to default settings"
 
-[node name="CharacterIcon" type="TextureRect" parent="Characters/CharacterDescription"]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 19.0
-offset_right = 168.0
-offset_bottom = 167.0
-stretch_mode = 5
-
-[node name="CharacterDescription" type="RichTextLabel" parent="Characters/CharacterDescription"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 168.0
-offset_right = 186.0
-offset_bottom = 217.0
+[node name="Reset" type="Button" parent="Settings"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -42.0
+offset_right = 21.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Reset"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -546,5 +585,10 @@ libraries = {
 }
 
 [connection signal="pressed" from="Menu/VBoxContainer/Inventory" to="." method="_on_inventory_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Characters" to="." method="_on_characters_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="item_selected" from="Settings/Resolution" to="." method="_on_resolution_item_selected"]
+[connection signal="toggled" from="Settings/FullscreenToggle" to="." method="_on_fullscreen_toggle_toggled"]
+[connection signal="toggled" from="Settings/VsyncToggle" to="." method="_on_vsync_toggle_toggled"]
+[connection signal="value_changed" from="Settings/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="pressed" from="Settings/Reset" to="." method="_on_reset_pressed"]

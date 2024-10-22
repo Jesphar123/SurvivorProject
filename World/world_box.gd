@@ -8,10 +8,7 @@ var rand_shake_strength: float = 5.0
 var shake_decay: float = 10.0
 var shake_strength: float = 0.0
 
-
 @onready var rand = RandomNumberGenerator.new()
-
-
 
 func track_camera_to(target_pos):
 	if target_pos == null:

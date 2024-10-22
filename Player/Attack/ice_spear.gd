@@ -25,7 +25,7 @@ func _ready() -> void:
 	match level:
 		1:
 			hp = 2
-			speed = 400
+			speed = 600
 			damage = 5
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.spell_size)

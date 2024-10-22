@@ -12,3 +12,8 @@ signal playerHit
 
 #Screenshake Grenade Explosion
 signal grenade_explosion
+
+#Pause Menu
+signal menu_trigger
+signal pause
+signal unpause

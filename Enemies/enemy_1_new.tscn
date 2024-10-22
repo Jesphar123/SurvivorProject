@@ -125,12 +125,10 @@ position = Vector2(0, 8)
 texture = ExtResource("3_80775")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
-visible = false
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_bvglu")
 
 [node name="HurtBox" parent="." instance=ExtResource("4_t6fd2")]
-visible = false
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
@@ -139,7 +137,6 @@ shape = SubResource("CircleShape2D_6orw7")
 debug_color = Color(0.984314, 0.129412, 0, 0.247059)
 
 [node name="HitBox" parent="." instance=ExtResource("5_lsvuq")]
-visible = false
 position = Vector2(0, 2)
 collision_layer = 2
 
@@ -156,8 +153,7 @@ stream = ExtResource("8_y0k1n")
 volume_db = -5.0
 
 [node name="HideTimer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
+wait_time = 0.8
 
 [node name="BloodSplatter" type="CPUParticles2D" parent="."]
 emitting = false
@@ -180,6 +176,7 @@ color_ramp = SubResource("Gradient_uvogu")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="timeout" from="HideTimer" to="." method="_on_hide_timer_timeout"]
 
 [editable path="HurtBox"]
 [editable path="HitBox"]

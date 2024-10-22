@@ -142,11 +142,10 @@ var mouse_target = Vector2.ZERO
 func _physics_process(_delta):
 	movement()
 	emit_signal("current_position", self.global_position)
-	#get_sword_position()
 	
-#func get_sword_position():
-#	sword_position = $CharacterSprite/SwordAttach.global_position
-#	return sword_position
+	#Pause Menu
+	if Input.is_action_just_pressed("menu"):
+		GlobalSignals.menu_trigger.emit(input_event)
 	
 func movement():
 	mouse_target = get_global_mouse_position()
@@ -201,7 +200,6 @@ func movement():
 func calc_hp(damage):
 	if damage != null:
 		hp -= clamp(damage - armor, 1.0, 999.0)
-		print("Armor: ", armor)
 	healthBar.max_value = max_hp
 	healthBar.value = hp
 	healthBarText.text = str(hp)
@@ -326,8 +324,6 @@ func _on_sword_attack_timer_timeout() -> void:
 func _on_ice_spear_timer_timeout() -> void:
 	ice_spear_ammo += ice_spear_base_ammo + additional_attacks
 	iceSpearAttackTimer.start()
-	print("Max HP: ", max_hp)
-	print("HP: ", hp)
 	
 func _on_ice_spear_attack_timer_timeout() -> void:
 	if ice_spear_ammo > 0:
@@ -357,6 +353,7 @@ func spawn_flail():
 	var get_flail_total = flailBase.get_child_count()
 	var calc_spawns = (flail_ammo + additional_attacks) - get_flail_total
 	while calc_spawns > 0:
+		calc_spawns = (flail_ammo + additional_attacks) - get_flail_total
 		get_flail_total = flailBase.get_child_count()
 		if calc_spawns == 1:
 			
@@ -394,7 +391,7 @@ func spawn_flail():
 				return
 				
 		if calc_spawns == 2:
-			get_flail_total = flailBase.get_child_count()
+			#get_flail_total = flailBase.get_child_count()
 			
 			if get_flail_total == 0:
 				var flail_spawn = flail.instantiate()
@@ -411,6 +408,14 @@ func spawn_flail():
 				calc_spawns -= 1
 				continue
 			
+			elif get_flail_total == 2:
+				var flail_spawn = flail.instantiate()
+				var first_flail = flailBase.get_child(0)
+				flail_spawn.set_rotation_degrees(first_flail.get_rotation_degrees() + 90)
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+				
 			elif get_flail_total == 3:
 				var flail_spawn = flail.instantiate()
 				flail_spawn = flail.instantiate()
@@ -450,6 +455,12 @@ func spawn_flail():
 			elif get_flail_total == 1:
 				var first_flail = flailBase.get_child(0)
 				flail_spawn.set_rotation_degrees(first_flail.get_rotation_degrees() + 180)
+				flailBase.add_child(flail_spawn)
+				calc_spawns -= 1
+				continue
+			elif get_flail_total == 2:
+				var first_flail = flailBase.get_child(0)
+				flail_spawn.set_rotation_degrees(first_flail.get_rotation_degrees() + 90)
 				flailBase.add_child(flail_spawn)
 				calc_spawns -= 1
 				continue
@@ -820,6 +831,6 @@ func _on_btn_menu_click_end() -> void:
 	get_tree().paused = false
 	var _level = get_tree().change_scene_to_file("res://TitleScreen/menu.tscn")
 
-
 func _on__exp_pressed() -> void:
 	calculate_experience(100)
+	

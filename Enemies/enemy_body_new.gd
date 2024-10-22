@@ -56,7 +56,6 @@ func _ready() -> void:
 	anim.play("walk")
 	hitBox.damage = enemy_damage
 	hurtBox.connect("hurt", Callable(self, "_on_hurt_box_hurt"))
-	hideTimer.connect("timeout", Callable(self, "_on_hide_timer_timeout"))
 
 func _physics_process(delta: float) -> void:
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
@@ -119,6 +118,7 @@ func death():
 		
 	hurtBoxCollision.set_deferred("disabled", true)
 	hitBoxCollision.set_deferred("disabled", true)
+	collision.set_deferred("disabled", true)
 	emit_signal("remove_from_array",self)
 	
 	#Drop EXP gem
@@ -130,7 +130,7 @@ func death():
 		loot_base.call_deferred("add_child",new_gem)
 	
 	#Drop Exp Magnet
-	var rand_num = randi() % 10000
+	var rand_num = randi() % 5000
 	if rand_num == 1:
 		var new_magnet = exp_magnet.instantiate()
 		new_magnet.global_position = global_position
@@ -138,8 +138,8 @@ func death():
 		
 	#Set dying to true for dissolve shader, and wait before removing object
 	dying = true
-	await get_tree().create_timer(0.8).timeout
-	queue_free()
+	hideTimer.start()
+	
 	
 func _on_hurt_box_hurt(damage, angle, knockback_amount):
 	hp -= damage
@@ -162,3 +162,7 @@ func _on_hurt_box_hurt(damage, angle, knockback_amount):
 	#Engine.time_scale = enemyHitstop
 	#await get_tree().create_timer(enemyHitstop * timeFreeze).timeout
 	#Engine.time_scale = 1
+
+
+func _on_hide_timer_timeout() -> void:
+	queue_free()
